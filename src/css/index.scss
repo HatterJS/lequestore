@@ -1,0 +1,14 @@
+$textColor: rgba(64, 64, 64);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    color: $textColor;
+}
+li {
+    list-style: none;
+    color: $textColor;
+}

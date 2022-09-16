@@ -1,0 +1,83 @@
+.wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.topBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  fill: rgb(64, 64, 64);
+  background-color: rgba(64, 64, 64, 0.02);
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  height: 40px;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.topBar__mainMenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.topBar__mainMenu li {
+  margin-right: 25px;
+}
+
+.topBar__social {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.topBar__social li {
+  margin-right: 10px;
+}
+
+.dropdownMenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+}
+.dropdownMenu ul {
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  visibility: hidden;
+  opacity: 0%;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.dropdownMenu ul li {
+  text-align: center;
+  padding: 0 10px;
+  line-height: 1.5;
+  background-color: rgba(64, 64, 64, 0.02);
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.dropdownMenu ul li:hover {
+  background-color: rgba(64, 64, 64, 0.2);
+}
+.dropdownMenu:hover ul {
+  visibility: visible;
+  opacity: 100%;
+}

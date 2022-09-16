@@ -1,0 +1,85 @@
+$borderBar: 1px solid rgba(64, 64, 64, 0.2);
+$textColor: rgba(64, 64, 64);
+$borderColor: rgba(64, 64, 64, 0.2);
+$transition:  all 0.3s ease-in-out;
+
+@mixin bgColor ($transparancy: 0.5) {
+    background-color: rgba(64, 64, 64, $transparancy);
+}
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+@mixin barStyle {
+    background-color: rgba(64, 64, 64, 0.02);
+    border: $borderBar;
+    height: 40px;
+    width: 100%;
+    align-items: center;
+}
+
+@mixin dropdownMenu {
+    @include flexCenter();
+    cursor: pointer;
+    height: 100%;
+    ul {
+        border: $borderBar;
+        visibility: hidden;
+        opacity: 0%;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        transition: $transition;
+
+        li {            
+            text-align: center;
+            padding: 0 10px;
+            line-height: 1.5;
+            @include bgColor(0.02);
+            cursor: pointer;
+            transition: $transition;
+            &:hover {
+                @include bgColor(0.2);
+            }
+        }
+    }
+    &:hover ul {
+        visibility: visible;
+        opacity: 100%;
+    }
+}
+
+.wrapper {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    fill: $textColor;
+
+    @include barStyle();
+}
+.topBar__mainMenu {
+    display: flex;
+
+    li {
+        margin-right: 25px;
+    }
+}
+.topBar__social {
+    display: flex;
+    align-items: center;
+
+    li {
+        margin-right: 10px;
+    }
+}
+
+.dropdownMenu {
+    @include dropdownMenu();
+}
