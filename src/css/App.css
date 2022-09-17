@@ -10,7 +10,6 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  fill: rgb(64, 64, 64);
   background-color: rgba(64, 64, 64, 0.02);
   border: 1px solid rgba(64, 64, 64, 0.2);
   height: 40px;
@@ -18,6 +17,56 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+.topBar ul.dropdown {
+  height: 100%;
+}
+.topBar ul.dropdown li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+  padding: 0 10px;
+}
+.topBar ul.dropdown li ul {
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  visibility: hidden;
+  opacity: 0%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  min-width: 100%;
+  z-index: 999;
+  background-color: white;
+}
+.topBar ul.dropdown li ul li {
+  line-height: 1.8;
+  background-color: rgba(64, 64, 64, 0.02);
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.topBar ul.dropdown li ul li:hover {
+  background-color: rgba(64, 64, 64, 0.1);
+}
+.topBar ul.dropdown li:hover {
+  background-color: rgba(64, 64, 64, 0.1);
+  -webkit-box-shadow: 1px 1px 2px rgba(64, 64, 64, 0.2) inset;
+          box-shadow: 1px 1px 2px rgba(64, 64, 64, 0.2) inset;
+}
+.topBar ul.dropdown li:hover ul {
+  visibility: visible;
+  opacity: 100%;
+}
+.topBar svg {
+  fill: rgb(64, 64, 64);
 }
 
 .topBar__mainMenu {
@@ -41,43 +90,113 @@
   margin-right: 10px;
 }
 
-.dropdownMenu {
+.addressBlock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  padding: 5px 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.addressBlock img {
+  height: 80px;
+}
+.addressBlock p:first-child {
+  font-weight: 500;
+}
+
+.navBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: rgba(64, 64, 64, 0.02);
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  height: 40px;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.navBar ul.dropdown {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 500;
+}
+.navBar ul.dropdown li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   position: relative;
   cursor: pointer;
   height: 100%;
+  padding: 0 10px;
 }
-.dropdownMenu ul {
+.navBar ul.dropdown li ul {
   border: 1px solid rgba(64, 64, 64, 0.2);
   visibility: hidden;
   opacity: 0%;
   position: absolute;
   top: 100%;
-  right: 0;
+  left: 0;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  min-width: 100%;
+  z-index: 999;
+  background-color: white;
 }
-.dropdownMenu ul li {
-  text-align: center;
-  padding: 0 10px;
-  line-height: 1.5;
+.navBar ul.dropdown li ul li {
+  line-height: 1.8;
   background-color: rgba(64, 64, 64, 0.02);
   cursor: pointer;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.dropdownMenu ul li:hover {
-  background-color: rgba(64, 64, 64, 0.2);
+.navBar ul.dropdown li ul li:hover {
+  background-color: rgba(64, 64, 64, 0.1);
 }
-.dropdownMenu:hover ul {
+.navBar ul.dropdown li:hover {
+  background-color: rgba(64, 64, 64, 0.1);
+  -webkit-box-shadow: 1px 1px 2px rgba(64, 64, 64, 0.2) inset;
+          box-shadow: 1px 1px 2px rgba(64, 64, 64, 0.2) inset;
+}
+.navBar ul.dropdown li:hover ul {
   visibility: visible;
   opacity: 100%;
+}
+
+.navBar__searchForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+.navBar__searchForm input {
+  height: 25px;
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  border-radius: 5px;
+}
+.navBar__searchForm button {
+  height: 25px;
+  width: 25px;
+  background-color: rgb(64, 64, 64);
+  border-radius: 20%;
+  border: none;
 }

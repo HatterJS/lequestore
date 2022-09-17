@@ -9,12 +9,13 @@ $transition:  all 0.3s ease-in-out;
 
 @mixin flexCenter {
     display: flex;
-    justify-content: center;
     align-items: center;
     position: relative;
 }
 
 @mixin barStyle {
+    display: flex;
+    justify-content: space-between;
     background-color: rgba(64, 64, 64, 0.02);
     border: $borderBar;
     height: 40px;
@@ -26,26 +27,32 @@ $transition:  all 0.3s ease-in-out;
     @include flexCenter();
     cursor: pointer;
     height: 100%;
+    padding: 0 10px;
     ul {
         border: $borderBar;
         visibility: hidden;
         opacity: 0%;
         position: absolute;
         top: 100%;
-        right: 0;
+        left: 0;
         transition: $transition;
+        min-width: 100%;
+        z-index: 999;
+        background-color: white;
 
-        li {            
-            text-align: center;
-            padding: 0 10px;
-            line-height: 1.5;
+        li {
+            line-height: 1.8;
             @include bgColor(0.02);
             cursor: pointer;
             transition: $transition;
             &:hover {
-                @include bgColor(0.2);
+                @include bgColor(0.1);
             }
         }
+    }
+    &:hover {
+        @include bgColor(0.1);
+        box-shadow: 1px 1px 2px $borderColor inset;
     }
     &:hover ul {
         visibility: visible;
@@ -57,29 +64,78 @@ $transition:  all 0.3s ease-in-out;
     max-width: 1080px;
     margin: 0 auto;
 }
-.topBar {
-    display: flex;
-    justify-content: space-between;
-    fill: $textColor;
 
+// HEADER
+.topBar {
     @include barStyle();
+    ul.dropdown {
+        height: 100%;
+        li {
+            @include dropdownMenu();
+        }
+    }
+    svg {
+        fill: $textColor;
+    }
 }
+
 .topBar__mainMenu {
     display: flex;
-
     li {
         margin-right: 25px;
     }
 }
+
 .topBar__social {
     display: flex;
     align-items: center;
-
     li {
         margin-right: 10px;
     }
 }
 
-.dropdownMenu {
-    @include dropdownMenu();
+// ADDRESS BLOCK
+.addressBlock {
+    @include flexCenter();
+    padding: 5px 0;
+    justify-content: space-between;
+    img {
+        height: 80px;
+    }
+    & p:first-child {
+        font-weight: 500;
+    }
 }
+
+// NAVIGATION BAR
+.navBar {
+    @include barStyle();
+    ul.dropdown {
+        height: 100%;
+        display: flex;
+        font-weight: 500;
+        li {
+            @include dropdownMenu();
+        }
+    }
+}
+
+.navBar__searchForm {
+    @include flexCenter();
+    input {
+        height: 25px;
+        padding: 5px;
+        margin-right: 10px;
+        border: $borderBar;
+        border-radius: 5px;
+    }
+    button {
+        height: 25px;
+        width: 25px;
+        @include bgColor(1);
+        border-radius: 20%;
+        border: none;
+    }
+}
+
+
