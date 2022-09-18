@@ -1,12 +1,13 @@
 import './css/App.css';
 import logo from './img/logo.webp';
+import banner from './img/banner-slider/banner_01.jpg'
 
 const arrowSVG = <svg width="12" height="7" viewBox="0 0 12 7">
 <path d="M1 1L6.26316 6L11 1" stroke="#404040" fill="none"/></svg>
 
 function App() {
   return (
-    <div>
+    <div className='wrapper'>
       <header>
         <div className='topBar'>
           <ul className='topBar__mainMenu'>
@@ -63,7 +64,7 @@ function App() {
                 <mask id="path-1-inside-1_34_8" fill="white">
                   <path d="M0 15C0 14.4477 0.447715 14 1 14H36C36.5523 14 37 14.4477 37 15V46C37 48.7614 34.7614 51 32 51H5C2.23858 51 0 48.7614 0 46V15Z"/>
                 </mask>
-                <path d="M0 15C0 14.4477 0.447715 14 1 14H36C36.5523 14 37 14.4477 37 15V46C37 48.7614 34.7614 51 32 51H5C2.23858 51 0 48.7614 0 46V15Z" fill="#FFE500" stroke="#404040" stroke-width="6" mask="url(#path-1-inside-1_34_8)"/>
+                <path d="M0 15C0 14.4477 0.447715 14 1 14H36C36.5523 14 37 14.4477 37 15V46C37 48.7614 34.7614 51 32 51H5C2.23858 51 0 48.7614 0 46V15Z" stroke="#404040" stroke-width="6" mask="url(#path-1-inside-1_34_8)"/>
                 <path d="M10 18.5V11C10 6.02944 14.0294 2 19 2C23.9706 2 28 6.02944 28 11V18.5" stroke="#404040" stroke-width="3" stroke-linecap="round"/>
                 <line x1="9.5" y1="43.5" x2="28.5" y2="43.5" stroke="#404040" stroke-width="3" stroke-linecap="round"/>
               </svg>
@@ -127,6 +128,18 @@ function App() {
           </form>
         </div>
       </nav>
+      <div className="content">
+        <div className="content__banner-slider">
+          <img src={banner} alt="banner" />
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

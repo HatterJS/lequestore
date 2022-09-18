@@ -2,17 +2,16 @@ $borderBar: 1px solid rgba(64, 64, 64, 0.2);
 $textColor: rgba(64, 64, 64);
 $borderColor: rgba(64, 64, 64, 0.2);
 $transition:  all 0.3s ease-in-out;
+$maxWidth: 1080px;
 
 @mixin bgColor ($transparancy: 0.5) {
     background-color: rgba(64, 64, 64, $transparancy);
 }
-
 @mixin flexCenter {
     display: flex;
     align-items: center;
     position: relative;
 }
-
 @mixin barStyle {
     display: flex;
     background-color: rgba(64, 64, 64, 0.02);
@@ -23,11 +22,10 @@ $transition:  all 0.3s ease-in-out;
 @mixin menuStyle {
     @include flexCenter();
     justify-content: space-between;
-    max-width: 1080px;
+    max-width: $maxWidth;
     width: 100%;
     margin: 0 auto;
 }
-
 @mixin dropdownMenu {
     @include flexCenter();
     cursor: pointer;
@@ -64,6 +62,10 @@ $transition:  all 0.3s ease-in-out;
         opacity: 100%;
     }
 }
+@mixin buttonHover {
+    bottom: 1px;
+    box-shadow: 1px 1px 1px rgb(64, 64, 64);    
+}
 
 // HEADER
 header {
@@ -78,6 +80,7 @@ header {
         }
     }
     svg {
+        margin-left: 2px;
         fill: $textColor;
     }
 }
@@ -110,22 +113,25 @@ header {
 }
 .addressBlock__cartBlock {
     @include flexCenter();
-    > div:first-child {
+    div:first-child {
         min-width: 37px;
         min-height: 51px;
-        margin: 0 10px;
+        margin: 0 15px;
+    }
+    a {
+        color: rgb(245, 160, 0);
     }
 }
 .addressBlock__cartCounter {
     position: absolute;
     bottom: -5px;
-    left: 35px;
+    left: 40px;
     width: fit-content;
     min-width: 16px;
     padding: 2px;
-    background-color: rgb(210, 255, 140);
+    background-color: rgb(255, 229, 0);
     border-radius: 10px;
-    border: 1px solid rgba(64, 64, 64);
+    border: 2px solid rgb(64, 64, 64);
     text-align: center;
     font-size: 14px;
 }
@@ -133,6 +139,9 @@ header {
 // NAVIGATION BAR
 nav {
     @include barStyle();
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 .navBar {
     @include menuStyle();
@@ -142,6 +151,9 @@ nav {
         font-weight: 500;
         li {
             @include dropdownMenu();
+        }
+        svg {
+            margin-left: 5px;
         }
     }
 }
@@ -156,12 +168,52 @@ nav {
         border-radius: 5px;
     }
     button {
+        position: relative;
         height: 25px;
         width: 25px;
-        @include bgColor(1);
+        @include bgColor(0.9);
         border-radius: 20%;
         border: none;
+        margin-right: 10px;
+        transition: $transition;
+        &:hover {
+            @include bgColor(0.7);
+            cursor: pointer;
+        }
     }
 }
 
-
+// CONTENT
+.content__banner-slider {
+    @include menuStyle();
+    margin: 5px auto;
+    height: 400px;
+    overflow: hidden;
+    justify-content: center;
+    img {
+        max-width: $maxWidth;
+    }
+    ul {
+        position: absolute;
+        display: flex;
+        bottom: 10px;
+        li{
+            position: relative;
+            border: $borderBar;
+            height: 12px;
+            width: 12px;
+            margin: 2px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            transition: $transition;
+            &:hover {
+                bottom: 1px;
+                box-shadow: 1px 1px 1px rgb(64, 64, 64);
+                background-color: rgba(255, 255, 255, 0.8);
+            }
+            &:first-child {
+                background-color: rgb(255, 229, 0);
+            }
+        }
+    }
+}
