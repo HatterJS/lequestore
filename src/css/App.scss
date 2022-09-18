@@ -15,12 +15,17 @@ $transition:  all 0.3s ease-in-out;
 
 @mixin barStyle {
     display: flex;
-    justify-content: space-between;
     background-color: rgba(64, 64, 64, 0.02);
     border: $borderBar;
     height: 40px;
     width: 100%;
-    align-items: center;
+}
+@mixin menuStyle {
+    @include flexCenter();
+    justify-content: space-between;
+    max-width: 1080px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 @mixin dropdownMenu {
@@ -60,14 +65,12 @@ $transition:  all 0.3s ease-in-out;
     }
 }
 
-.wrapper {
-    max-width: 1080px;
-    margin: 0 auto;
-}
-
 // HEADER
-.topBar {
+header {
     @include barStyle();
+}
+.topBar {
+    @include menuStyle();
     ul.dropdown {
         height: 100%;
         li {
@@ -96,9 +99,8 @@ $transition:  all 0.3s ease-in-out;
 
 // ADDRESS BLOCK
 .addressBlock {
-    @include flexCenter();
+    @include menuStyle();
     padding: 5px 0;
-    justify-content: space-between;
     img {
         height: 80px;
     }
@@ -106,10 +108,34 @@ $transition:  all 0.3s ease-in-out;
         font-weight: 500;
     }
 }
+.addressBlock__cartBlock {
+    @include flexCenter();
+    > div:first-child {
+        min-width: 37px;
+        min-height: 51px;
+        margin: 0 10px;
+    }
+}
+.addressBlock__cartCounter {
+    position: absolute;
+    bottom: -5px;
+    left: 35px;
+    width: fit-content;
+    min-width: 16px;
+    padding: 2px;
+    background-color: rgb(210, 255, 140);
+    border-radius: 10px;
+    border: 1px solid rgba(64, 64, 64);
+    text-align: center;
+    font-size: 14px;
+}
 
 // NAVIGATION BAR
-.navBar {
+nav {
     @include barStyle();
+}
+.navBar {
+    @include menuStyle();
     ul.dropdown {
         height: 100%;
         display: flex;

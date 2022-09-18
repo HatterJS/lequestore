@@ -1,22 +1,27 @@
-.wrapper {
-  max-width: 1080px;
-  margin: 0 auto;
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: rgba(64, 64, 64, 0.02);
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  height: 40px;
+  width: 100%;
 }
 
 .topBar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  background-color: rgba(64, 64, 64, 0.02);
-  border: 1px solid rgba(64, 64, 64, 0.2);
-  height: 40px;
-  width: 100%;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
 }
 .topBar ul.dropdown {
   height: 100%;
@@ -98,10 +103,13 @@
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  padding: 5px 0;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 5px 0;
 }
 .addressBlock img {
   height: 80px;
@@ -110,20 +118,61 @@
   font-weight: 500;
 }
 
-.navBar {
+.addressBlock__cartBlock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+.addressBlock__cartBlock > div:first-child {
+  min-width: 37px;
+  min-height: 51px;
+  margin: 0 10px;
+}
+
+.addressBlock__cartCounter {
+  position: absolute;
+  bottom: -5px;
+  left: 35px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 16px;
+  padding: 2px;
+  background-color: rgb(210, 255, 140);
+  border-radius: 10px;
+  border: 1px solid rgb(64, 64, 64);
+  text-align: center;
+  font-size: 14px;
+}
+
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   background-color: rgba(64, 64, 64, 0.02);
   border: 1px solid rgba(64, 64, 64, 0.2);
   height: 40px;
   width: 100%;
+}
+
+.navBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
 }
 .navBar ul.dropdown {
   height: 100%;
