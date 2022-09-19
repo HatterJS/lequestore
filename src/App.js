@@ -1,9 +1,18 @@
 import './css/App.css';
 import logo from './img/logo.webp';
-import banner from './img/banner-slider/banner_01.jpg'
+import banner from './img/banner-slider/banner_01.jpg';
+import switshot_01 from './img/goods/switshot_01.jpg';
+import switshot_02 from './img/goods/switshot_02.jpg';
+import tshirt_01 from './img/goods/t-shirt_01.jpg';
 
 const arrowSVG = <svg width="12" height="7" viewBox="0 0 12 7">
 <path d="M1 1L6.26316 6L11 1" stroke="#404040" fill="none"/></svg>
+
+const addToCartSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+  <rect width="40" height="40" rx="10" fill="white" fill-opacity="0.25"/>
+  <rect x="0.5" y="0.5" width="39" height="39" rx="9.5" stroke="black" stroke-opacity="0.3"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.8895 26.5V28H21.8895V26.5V22.6841H26.5H28V19.6841H26.5H21.8895V15.5V14H18.8895V15.5V19.6841H14.5H13V22.6841H14.5H18.8895V26.5Z" fill="black" fill-opacity="0.3"/>
+</svg>
 
 function App() {
   return (
@@ -64,7 +73,7 @@ function App() {
                 <mask id="path-1-inside-1_34_8" fill="white">
                   <path d="M0 15C0 14.4477 0.447715 14 1 14H36C36.5523 14 37 14.4477 37 15V46C37 48.7614 34.7614 51 32 51H5C2.23858 51 0 48.7614 0 46V15Z"/>
                 </mask>
-                <path d="M0 15C0 14.4477 0.447715 14 1 14H36C36.5523 14 37 14.4477 37 15V46C37 48.7614 34.7614 51 32 51H5C2.23858 51 0 48.7614 0 46V15Z" stroke="#404040" stroke-width="6" mask="url(#path-1-inside-1_34_8)"/>
+                <path d="M0 15C0 14.4477 0.447715 14 1 14H36C36.5523 14 37 14.4477 37 15V46C37 48.7614 34.7614 51 32 51H5C2.23858 51 0 48.7614 0 46V15Z" fill="#FFE500" stroke="#404040" stroke-width="6" mask="url(#path-1-inside-1_34_8)"/>
                 <path d="M10 18.5V11C10 6.02944 14.0294 2 19 2C23.9706 2 28 6.02944 28 11V18.5" stroke="#404040" stroke-width="3" stroke-linecap="round"/>
                 <line x1="9.5" y1="43.5" x2="28.5" y2="43.5" stroke="#404040" stroke-width="3" stroke-linecap="round"/>
               </svg>
@@ -138,6 +147,28 @@ function App() {
             <li></li>
             <li></li>
           </ul>
+        </div>
+        <div className="content__hotOffers">
+          <div><p>Розпродаж</p></div>
+          <div><p>Нова колекція</p></div>
+          <div><p>Хіт продажів</p></div>
+        </div>
+        <div className="content__goods">
+          <div>
+            <p>2 250 грн.</p>
+            <img src={switshot_01} alt="sorry" />
+            <button>{addToCartSVG}</button>
+          </div>
+          <div>
+            <p>1 950 грн.</p>
+            <img src={switshot_02} alt="sorry" />
+            <button>{addToCartSVG}</button>
+          </div>
+          <div>
+            <p>1 700 грн.</p>
+            <img src={tshirt_01} alt="sorry" />
+            <button>{addToCartSVG}</button>
+          </div>
         </div>
       </div>
     </div>

@@ -23,3 +23,11 @@ li {
   list-style: none;
   color: rgb(64, 64, 64);
 }
+
+button {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+button:hover {
+  cursor: pointer;
+}
