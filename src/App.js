@@ -4,15 +4,20 @@ import banner from './img/banner-slider/banner_01.jpg';
 import switshot_01 from './img/goods/switshot_01.jpg';
 import switshot_02 from './img/goods/switshot_02.jpg';
 import tshirt_01 from './img/goods/t-shirt_01.jpg';
+import sneakers_001 from './img/goods/sneakers_001.jpg';
+import sneakers_002 from './img/goods/sneakers_002.jpg';
+import sneakers_003 from './img/goods/sneakers_003.jpg';
+import accessory_001 from './img/goods/accessory_001.jpg';
 
 const arrowSVG = <svg width="12" height="7" viewBox="0 0 12 7">
 <path d="M1 1L6.26316 6L11 1" stroke="#404040" fill="none"/></svg>
 
 const addToCartSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-  <rect width="40" height="40" rx="10" fill="white" fill-opacity="0.25"/>
+  <rect width="40" height="40" rx="10" fill="white" fill-opacity="0.3"/>
   <rect x="0.5" y="0.5" width="39" height="39" rx="9.5" stroke="black" stroke-opacity="0.3"/>
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.8895 26.5V28H21.8895V26.5V22.6841H26.5H28V19.6841H26.5H21.8895V15.5V14H18.8895V15.5V19.6841H14.5H13V22.6841H14.5H18.8895V26.5Z" fill="black" fill-opacity="0.3"/>
+  <path d="M28 13L19.5287 26.1306C19.1832 26.666 18.4318 26.7461 17.9813 26.2955L12 20.3143" stroke="black" stroke-opacity="0.2" stroke-width="3" stroke-linecap="round"/>
 </svg>
+
 
 function App() {
   return (
@@ -56,7 +61,7 @@ function App() {
       </header>
       <address>
         <div className="addressBlock">
-          <img src={logo} alt="Lequestore" />
+          <a href="./"><img src={logo} alt="Lequestore" /></a>
           <div className="addressBlock__schedule">
             <p>Графік роботи:</p>
             <p>Пн-Пт / 10.00 - 19.00</p>
@@ -93,37 +98,55 @@ function App() {
           <ul className="navBar__main-menu dropdown">
             <li>ОДЯГ{arrowSVG}
               <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>Унісекс</li>
+                <li>На флісі</li>
               </ul>
             </li>
             <li>ВЗУТТЯ{arrowSVG}
               <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>Adidas</li>
+                <li>Nike</li>
+                <li>Off-white</li>
+                <li>Prada</li>
+                <li>Puma</li>
+                <li>Fila</li>
+                <li>Reebok</li>
+                <li>Alexander Mcqueen</li>
+                <li>Native</li>
               </ul>
             </li>
             <li>ДЛЯ ЧОЛОВІКІВ{arrowSVG}
               <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>Adidas</li>
+                <li>Nike</li>
+                <li>Off-white</li>
+                <li>Prada</li>
+                <li>Puma</li>
+                <li>Fila</li>
+                <li>Reebok</li>
+                <li>Alexander Mcqueen</li>
+                <li>Native</li>
               </ul>
             </li>
             <li>ДЛЯ ЖІНОК{arrowSVG}
               <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>Adidas</li>
+                <li>Nike</li>
+                <li>Off-white</li>
+                <li>Prada</li>
+                <li>Puma</li>
+                <li>Fila</li>
+                <li>Reebok</li>
+                <li>Alexander Mcqueen</li>
+                <li>Native</li>
               </ul>
             </li>
             <li>АКСЕСУАРИ{arrowSVG}
               <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>Шкарпетки</li>
+                <li>Чохли</li>
+                <li>Біжутерія</li>
+                <li>Фігурки</li>
               </ul>
             </li>
           </ul>
@@ -153,24 +176,117 @@ function App() {
           <div><p>Нова колекція</p></div>
           <div><p>Хіт продажів</p></div>
         </div>
-        <div className="content__goods">
-          <div>
-            <p>2 250 грн.</p>
-            <img src={switshot_01} alt="sorry" />
-            <button>{addToCartSVG}</button>
+        <div className="content__goodsBlock">
+          <div className='content__goodsItem' style={{backgroundImage: `url(${switshot_01})`}}>
+            <div><p>1 250 грн.</p></div>
+            <div>
+              <p>Худи Balenciaga yellow</p>
+              <button>{addToCartSVG}</button>
+            </div>
+            <img src={switshot_01} alt="sorry" /> {/* for indexation*/}
           </div>
-          <div>
-            <p>1 950 грн.</p>
-            <img src={switshot_02} alt="sorry" />
-            <button>{addToCartSVG}</button>
+          <div className='content__goodsItem' style={{backgroundImage: `url(${switshot_02})`}}>
+            <div><p>1 350 грн.</p></div>
+            <div>
+              <p>Худи Balenciaga Light Blue</p>
+              <button>{addToCartSVG}</button>
+            </div>
+            <img src={switshot_02} alt="sorry" /> {/* for indexation*/}
           </div>
-          <div>
-            <p>1 700 грн.</p>
-            <img src={tshirt_01} alt="sorry" />
-            <button>{addToCartSVG}</button>
+          <div className='content__goodsItem' style={{backgroundImage: `url(${tshirt_01})`}}>
+            <div><p>700 грн.</p></div>
+            <div>
+              <p>Футболка FEAR OF GOD ESSENTIALS Los Angeles 3M Boxy Tee White</p>
+              <button>{addToCartSVG}</button>
+            </div>
+            <img src={tshirt_01} alt="sorry" /> {/* for indexation*/}
+          </div>
+          <div className='content__goodsItem' style={{backgroundImage: `url(${sneakers_001})`}}>
+            <div><p>2 100 грн.</p></div>
+            <div>
+              <p>Кросівки Balenciaga Track Trainer Beige</p>
+              <button>{addToCartSVG}</button>
+            </div>
+            <img src={sneakers_001} alt="sorry" /> {/* for indexation*/}
+          </div>
+          <div className='content__goodsItem' style={{backgroundImage: `url(${sneakers_002})`}}>
+            <div><p>1 950 грн.</p></div>
+            <div>
+              <p>Демісезонні ботинки Black Green на байці</p>
+              <button>{addToCartSVG}</button>
+            </div>
+            <img src={sneakers_002} alt="sorry" /> {/* for indexation*/}
+          </div>
+          <div className='content__goodsItem' style={{backgroundImage: `url(${sneakers_003})`}}>
+            <div><p>2 599 грн.</p></div>
+            <div>
+              <p>Кросівкі adidas Yeezy Boost 350 V2 Ash Stone</p>
+              <button>{addToCartSVG}</button>
+            </div>
+            <img src={sneakers_003} alt="sorry" /> {/* for indexation*/}
+          </div>
+          <div className='content__goodsItem' style={{backgroundImage: `url(${accessory_001})`}}>
+            <div><p>249 грн.</p></div>
+            <div>
+              <p>Шкарпетки FOG ESSENTIALS LOS ANGELES SOCKS Fear of God Kanye West Crew Grey</p>
+              <button>{addToCartSVG}</button>
+            </div>
+            <img src={accessory_001} alt="sorry" /> {/* for indexation*/}
+          </div>
+          <div className='content__goodsItem' style={{backgroundImage: `url(${switshot_01})`}}>
+            <div><p>1 250 грн.</p></div>
+            <div>
+              <p>Худи Balenciaga yellow</p>
+              <button>{addToCartSVG}</button>
+            </div>
+            <img src={switshot_01} alt="sorry" /> {/* for indexation*/}
           </div>
         </div>
       </div>
+      <div className="moreGoods">
+        <p>ПОКАЗАТИ БІЛЬШЕ ...</p>
+      </div>
+      <footer>
+        <div className="footer">
+          <ul>
+            <li>Наші контакти</li>
+            <li>066 0469 277 - Телеграм</li>
+            <li>067 9766 777 - Вайбер</li>
+            <li>
+              <p>Пн-Пт / 10.00 - 19.00</p>
+              <p>Сб / 11.00 - 16.00</p>
+            </li>
+          </ul>
+          <ul>
+            <li>Каталог</li>
+            <li>Одяг</li>
+            <li>Взуття</li>
+            <li>Для чоловіків</li>
+            <li>Для жінок</li>
+            <li>Аксесуари</li>
+          </ul>
+          <ul>
+            <li>Клієнтам</li>
+            <li>Про магазин</li>
+            <li>Доставка і оплата</li>
+            <li>Підібрати розмір</li>
+            <li>Обмін і повернення</li>
+            <li>FAQ</li>
+          </ul>
+          <ul>
+            <li>Наші бренди</li>
+            <li>Adidas</li>
+            <li>Nike</li>
+            <li>Off-white</li>
+            <li>Prada</li>
+            <li>Puma</li>
+            <li>Fila</li>
+            <li>Reebok</li>
+            <li>Alexander Mcqueen</li>
+            <li>Native</li>
+          </ul>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# goods images
+/src/img/goods
+/src/img/banner-slider
+
 # testing
 /coverage
 

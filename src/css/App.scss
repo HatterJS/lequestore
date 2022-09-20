@@ -1,8 +1,8 @@
 $borderBar: 1px solid rgba(64, 64, 64, 0.2);
-$textColor: rgba(64, 64, 64);
+$textColor: rgb(64, 64, 64);
 $borderColor: rgba(64, 64, 64, 0.2);
 $transition:  all 0.2s ease-in-out;
-$maxWidth: 1080px;
+$maxWidth: 1090px;
 
 @mixin bgColor ($transparancy: 0.5) {
     background-color: rgba(64, 64, 64, $transparancy);
@@ -42,12 +42,13 @@ $maxWidth: 1080px;
         min-width: 100%;
         z-index: 999;
         background-color: rgba(255, 255, 255, 0.8);
-
         li {
             line-height: 1.8;
             @include bgColor(0.02);
             cursor: pointer;
             transition: $transition;
+            min-width: max-content;
+            padding: 3px 15px;
             &:hover {
                 @include bgColor(0.1);
             }
@@ -65,6 +66,10 @@ $maxWidth: 1080px;
 @mixin buttonHover {
     bottom: 1px;
     box-shadow: 1px 1px 1px rgb(64, 64, 64);    
+}
+
+.wrapper {
+    // min-width: 1080px;
 }
 
 // HEADER
@@ -185,9 +190,9 @@ nav {
     // BANNER SLIDER
 .content__banner-slider {
     @include menuStyle();
-    height: 400px;
+    max-width: 1080px;
     margin: 5px auto;
-    overflow: hidden;
+    margin-top: 10px;
     justify-content: center;
     img {
         width: 100%;
@@ -211,7 +216,7 @@ nav {
                 background-color: rgba(255, 255, 255, 0.8);
             }
             &:first-child {
-                background-color: rgba(255, 229, 0, 0.6);
+                background-color: rgba(255, 240, 120, 0.7);
             }
         }
     }
@@ -219,17 +224,24 @@ nav {
     // HOT OFFERS
 .content__hotOffers {
     @include menuStyle();
-    max-width: 1090px;
+    max-width: $maxWidth;
+    flex-wrap: wrap;
     div {
+        display: flex;
         position: relative;
-        width: 100%;
+        justify-content: center;
+        flex: 1 1 auto;
+        min-width: 220px;
         margin: 5px;
         cursor: pointer;
         transition: $transition;
-        background-color: rgb(255, 240, 80);
+        @include bgColor(0.1);
+        background-color: rgb(255, 245, 120);
+        
         border: $borderBar;
         p {
             display: flex;
+            width: 200px;
             height: 40px;
             text-transform: uppercase;
             font-weight: 500;
@@ -238,60 +250,68 @@ nav {
             justify-content: center;
         }
         &:hover {
-            bottom: 1px;
+            bottom: 2px;
             box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
-            background-color: rgb(255, 234, 0);
+            // background-color: rgb(255, 240, 80);
         }
     }
 }
     // GOODS
-.content__goods {
+.content__goodsBlock {
     @include menuStyle();
-    max-width: 1090px;
-    div {
+    max-width: $maxWidth;
+    flex-wrap: wrap;
+    div.content__goodsItem {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         position: relative;
-        width: 100%;
+        flex: 1 1 auto;
+        background-position: center;
+        background-size: 100%;
         height: 350px;
+        min-width: 270px;
         margin: 5px;
         cursor: pointer;
         transition: $transition;
-        overflow: hidden;
         p {
-            position: absolute;
-            top: 0;
-            display: flex;
-            width: 100%;
-            height: 40px;
-            background-color: rgba(0, 0, 0, 0.3);
+            width: 200px;
+            text-align: center;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.5);
+            transition: $transition;
+            z-index: 9;
+        }
+        div {
+            width: 100%;
+            margin: 0;
+            padding: 5px 0;
+            min-height: 30px;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: rgba(255, 255, 255, 0.5);
+            display: flex;
             align-items: center;
             justify-content: center;
             transition: $transition;
             z-index: 9;
         }
-        img {
-            position: relative;
-            width: 100%;
-            top: 0;
-            transition: all 0.5s ease-in-out;
+        img {               // for indexation
+            display: none;
         }
         &:hover {
+            background-size: 120%;
             p {
-                background-color: rgba(0, 0, 0, 0.7);
                 color: rgba(255, 255, 255, 0.9);
             }
-            img {
-                top: -100px;
+            div {
+                background-color: rgba(0, 0, 0, 0.7);
             }
         }
         button {
-            position: absolute;
             z-index: 9;
-            bottom: 5px;
-            right: 5px;
             width: 40px;
             height: 40px;
+            margin-left: 10px;
             &:hover {
                 rect {
                     fill-opacity: 0.8;
@@ -306,10 +326,51 @@ nav {
                     fill: greenyellow;
                 }
                 path {
-                    fill: white;
-                    fill-opacity: 1;
+                    stroke-opacity: 0.6;
                 }
             }
         }
+    }
+}
+
+// MORE GOODS
+.moreGoods {
+    width: fit-content;
+    margin: 10px auto;
+    cursor: pointer;
+    color: rgba(64, 64, 64, 0.6);
+    P {
+        font-weight: 500;
+    }
+    &:hover {        
+        color: $textColor;
+    }
+}
+
+// FOOTER
+footer {
+    @include bgColor(1);
+}
+.footer {
+    display: flex;
+    max-width: $maxWidth;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 10px;
+    ul {
+        margin: 20px 5px;
+    }
+    li {
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    li:first-child {
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 10px;
     }
 }
