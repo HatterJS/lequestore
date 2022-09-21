@@ -15,7 +15,7 @@ $textColor: rgba(64, 64, 64);
     font-style: none;
     font-family: 'Roboto';
 }
-a {
+a, h1, h2, h3, h4 h5 {
     text-decoration: none;
     color: $textColor;
 }
