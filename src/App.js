@@ -14,13 +14,48 @@ import sneakers_002 from './img/goods/sneakers_002.jpg';
 import sneakers_003 from './img/goods/sneakers_003.jpg';
 import accessory_001 from './img/goods/accessory_001.jpg';
 
-const addToCartSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-  <rect width="40" height="40" rx="10" fill="white" fill-opacity="0.3"/>
-  <rect x="0.5" y="0.5" width="39" height="39" rx="9.5" stroke="black" stroke-opacity="0.3"/>
-  <path d="M28 13L19.5287 26.1306C19.1832 26.666 18.4318 26.7461 17.9813 26.2955L12 20.3143" stroke="black" stroke-opacity="0.2" stroke-width="3" stroke-linecap="round"/>
-</svg>
-
-
+const arrGoods = [
+  {
+    name: 'Худи Balenciaga yellow',
+    cost: '1 250',
+    goodsImage: switshot_01
+  },
+  {
+    name: 'Худи Balenciaga Light Blue',
+    cost: '1 350',
+    goodsImage: switshot_02
+  },
+  {
+    name: 'Футболка FEAR OF GOD ESSENTIALS Los Angeles 3M Boxy Tee White',
+    cost: '700',
+    goodsImage: tshirt_01
+  },
+  {
+    name: 'Кросівки Balenciaga Track Trainer Beige',
+    cost: '2 100',
+    goodsImage: sneakers_001
+  },
+  {
+    name: 'Демісезонні ботинки Black Green на байці',
+    cost: '1 950',
+    goodsImage: sneakers_002
+  },
+  {
+    name: 'Кросівкі adidas Yeezy Boost 350 V2 Ash Stone',
+    cost: '2 599',
+    goodsImage: sneakers_003
+  },
+  {
+    name: 'Шкарпетки FOG ESSENTIALS LOS ANGELES SOCKS Fear of God Kanye West Crew Grey',
+    cost: '249',
+    goodsImage: accessory_001
+  },
+  {
+    name: 'Худи Balenciaga yellow',
+    cost: '1 250',
+    goodsImage: switshot_01
+  }
+];
 
 function App() {
   return (
@@ -46,63 +81,12 @@ function App() {
           <div><p>Хіт продажів</p></div>
         </div>
         <div className="content__goodsBlock">
-          <GoodsItem />
-          <div className='content__goodsItem' style={{backgroundImage: `url(${switshot_02})`}}>
-            <div><p>Худи Balenciaga Light Blue</p></div>
-            <div>
-              <p>1 350 грн.</p>
-              <button>{addToCartSVG}</button>
-            </div>
-            <img src={switshot_02} alt="sorry" /> {/* for indexation*/}
-          </div>
-          <div className='content__goodsItem' style={{backgroundImage: `url(${tshirt_01})`}}>
-            <div><p>Футболка FEAR OF GOD ESSENTIALS Los Angeles 3M Boxy Tee White</p></div>
-            <div>
-              <p>700 грн.</p>
-              <button>{addToCartSVG}</button>
-            </div>
-            <img src={tshirt_01} alt="sorry" /> {/* for indexation*/}
-          </div>
-          <div className='content__goodsItem' style={{backgroundImage: `url(${sneakers_001})`}}>
-            <div><p>Кросівки Balenciaga Track Trainer Beige</p></div>
-            <div>
-              <p>2 100 грн.</p>
-              <button>{addToCartSVG}</button>
-            </div>
-            <img src={sneakers_001} alt="sorry" /> {/* for indexation*/}
-          </div>
-          <div className='content__goodsItem' style={{backgroundImage: `url(${sneakers_002})`}}>
-            <div><p>Демісезонні ботинки Black Green на байці</p></div>
-            <div>
-              <p>1 950 грн.</p>
-              <button>{addToCartSVG}</button>
-            </div>
-            <img src={sneakers_002} alt="sorry" /> {/* for indexation*/}
-          </div>
-          <div className='content__goodsItem' style={{backgroundImage: `url(${sneakers_003})`}}>
-            <div><p>Кросівкі adidas Yeezy Boost 350 V2 Ash Stone</p></div>
-            <div>
-              <p>2 599 грн.</p>
-              <button>{addToCartSVG}</button>
-            </div>
-            <img src={sneakers_003} alt="sorry" /> {/* for indexation*/}
-          </div>
-          <div className='content__goodsItem' style={{backgroundImage: `url(${accessory_001})`}}>
-            <div><p>Шкарпетки FOG ESSENTIALS LOS ANGELES SOCKS Fear of God Kanye West Crew Grey</p></div>
-            <div>
-              <p>249 грн.</p>
-              <button>{addToCartSVG}</button>
-            </div>
-            <img src={accessory_001} alt="sorry" /> {/* for indexation*/}
-          </div>
-          <div className='content__goodsItem' style={{backgroundImage: `url(${switshot_01})`}}>
-            <div><p>Худи Balenciaga yellow</p></div>
-            <div>
-              <p>1 250 грн.</p>
-              <button>{addToCartSVG}</button>
-            </div>
-            <img src={switshot_01} alt="sorry" /> {/* for indexation*/}
-          </div>
+          {arrGoods.map(obj => <GoodsItem 
+            name={obj.name}
+            cost={obj.cost}
+            goodsImage={obj.goodsImage}
+            />
+           )}
         </div>
       </div>
       <div className="moreGoods">
