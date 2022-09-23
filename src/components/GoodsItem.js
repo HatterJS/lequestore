@@ -10,6 +10,11 @@ function GoodsItem(props) {
     const [isAdded, setIsAdded] = React.useState(false);
     const addedToCart = () => {
         setIsAdded(!isAdded);
+            props.onAddToCart({
+            "name": props.name,
+            "cost": props.cost,
+            "goodsImage": props.goodsImage
+        });
     }
 
     return (

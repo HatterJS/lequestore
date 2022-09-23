@@ -9,17 +9,26 @@ import './css/App.css';
 
 function App() {
   const [quickCart, setQuickCart] = React.useState(false);
-  const [arrGoods, setArrGoods] = React.useState([]);
+  const [goods, setGoods] = React.useState([]);
+  const [addedItems, setAddedItems] = React.useState([]);
 
-  fetch('https://632db5102cfd5ccc2af512de.mockapi.io/items').then(res => {
-    return res.json();
-  }).then(json => {
-    setArrGoods(json);
-  });
+  React.useEffect(() => {
+    fetch('https://632db5102cfd5ccc2af512de.mockapi.io/items')
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        setGoods(json);
+      });
+  }, []);
+
+  const addedOnCart = (obj) => {
+    setAddedItems(prev => [...prev, obj]);
+  }
 
   return (
     <div className='wrapper'>
-      {quickCart && <QuickCart onClose = {() => setQuickCart(false)}/>}
+      {quickCart && <QuickCart onClose = {() => setQuickCart(false)} addedItems = {addedItems}/>}
       <Header />
       <Address 
         onClickCart = {() => setQuickCart(true)}
@@ -42,10 +51,11 @@ function App() {
           <div><p>Хіт продажів</p></div>
         </div>
         <div className="content__goodsBlock">
-          {arrGoods.map(obj => <GoodsItem 
-            name={obj.name}
-            cost={obj.cost}
-            goodsImage={obj.goodsImage}
+          {goods.map(obj => <GoodsItem 
+            name = {obj.name}
+            cost = {obj.cost}
+            goodsImage = {obj.goodsImage}
+            onAddToCart = {(cartItem) => addedOnCart(cartItem)}
             />
            )}
         </div>
