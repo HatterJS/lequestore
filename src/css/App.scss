@@ -87,9 +87,6 @@ $maxWidth: 1090px;
 }
 
 // QUICK CARRT
-.quickCart {
-    // display: none;
-}
 .quickCart__shadow {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
@@ -224,10 +221,11 @@ header {
 }
 .addressBlock__cartBlock {
     @include flexCenter();
-    div:first-child {
+    .addressBlock__cart {
         min-width: 37px;
         min-height: 51px;
         margin: 0 15px;
+        cursor: pointer;
     }
     a {
         color: rgb(245, 160, 0);
@@ -413,7 +411,12 @@ nav {
                 background-color: rgba(0, 0, 0, 0.7);
             }
         }
-        button {
+        .addedToCartBtn {
+            rect:first-child {
+                fill: rgb(185, 255, 80);
+            }
+        }
+        .addToCartBtn, .addedToCartBtn {
             z-index: 9;
             width: 40px;
             height: 40px;
@@ -422,14 +425,6 @@ nav {
                 rect {
                     fill-opacity: 0.8;
                     stroke-opacity: 0.6;
-                }
-                path {
-                    fill-opacity: 0.6;
-                }
-            }
-            &:active {
-                rect {
-                    fill: greenyellow;
                 }
                 path {
                     stroke-opacity: 0.6;
