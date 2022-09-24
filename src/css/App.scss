@@ -272,21 +272,21 @@ nav {
     input {
         height: 25px;
         padding: 5px;
-        margin-right: 10px;
         border: $borderBar;
-        border-radius: 5px;
+        border-radius: 5px 0 0 5px;
+        &:focus {
+            border: 2px solid rgba(64, 64, 64, 0.8);
+        }
     }
-    button {
-        position: relative;
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 25px;
         width: 25px;
-        @include bgColor(0.9);
-        border-radius: 20%;
+        @include bgColor(0.7);
+        border-radius: 0 5px 5px 0;
         margin-right: 10px;
-        transition: $transition;
-        &:hover {
-            @include bgColor(0.7);
-        }
     }
 }
 

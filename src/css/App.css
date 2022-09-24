@@ -400,22 +400,27 @@ nav {
 .navBar__searchForm input {
   height: 25px;
   padding: 5px;
-  margin-right: 10px;
   border: 1px solid rgba(64, 64, 64, 0.2);
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
 }
-.navBar__searchForm button {
-  position: relative;
+.navBar__searchForm input:focus {
+  border: 2px solid rgba(64, 64, 64, 0.8);
+}
+.navBar__searchForm div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 25px;
   width: 25px;
-  background-color: rgba(64, 64, 64, 0.9);
-  border-radius: 20%;
-  margin-right: 10px;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-.navBar__searchForm button:hover {
   background-color: rgba(64, 64, 64, 0.7);
+  border-radius: 0 5px 5px 0;
+  margin-right: 10px;
 }
 
 .content__banner-slider {
