@@ -11,6 +11,7 @@ function App() {
   const [quickCart, setQuickCart] = React.useState(false);
   const [goods, setGoods] = React.useState([]);
   const [addedItems, setAddedItems] = React.useState([]);
+  const [goodsTitle, setGoodsTitle] = React.useState('Всі пропозиції');
 
   React.useEffect(() => {
     fetch('https://632db5102cfd5ccc2af512de.mockapi.io/items')
@@ -33,7 +34,9 @@ function App() {
       <Address 
         onClickCart = {() => setQuickCart(true)}
       />
-      <NavBar />
+      <NavBar 
+        onChangeSearch = {(searchValue) => setGoodsTitle(searchValue)}
+      />
       <div className="content">
         <div className="content__banner-slider">
           <img src="/img/banner-slider/banner_01.jpg" alt="banner" />
@@ -50,8 +53,10 @@ function App() {
           <div><p>Нова колекція</p></div>
           <div><p>Хіт продажів</p></div>
         </div>
+        <h2>{goodsTitle} <div></div></h2>
         <div className="content__goodsBlock">
-          {goods.map(obj => <GoodsItem 
+          {goods.map((obj, index) => <GoodsItem 
+            key = {index}
             name = {obj.name}
             cost = {obj.cost}
             goodsImage = {obj.goodsImage}
