@@ -1,6 +1,16 @@
 import React from 'react';
+import axios from 'axios';
 
 function Address(props) {
+
+    const [itemsCartCounter, setItemsCartCounter] = React.useState();
+    
+    React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
+    axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems')
+        .then(res => setItemsCartCounter(res.data.length)); //подгрузка с бекэнда товаров добавленных в корзину
+}, []);
+console.log(itemsCartCounter);
+
     return(
         <address>
             <div className="addressBlock">
@@ -26,7 +36,7 @@ function Address(props) {
                         <line x1="9.5" y1="43.5" x2="28.5" y2="43.5" stroke="#404040" strokeWidth="3" strokeLinecap="round"/>
                     </svg>
                     <div className="addressBlock__cartCounter">
-                        <p>0</p>
+                        <p>{props.itemsCartCounter}</p>
                     </div>
                 </div>
                 <div>

@@ -11,32 +11,32 @@ import './css/App.css';
 function App() {
   const [quickCart, setQuickCart] = React.useState(false); //отображение/скрытие корзины
   const [goods, setGoods] = React.useState([]); //отображение товаров на главной
-  const [addedItems, setAddedItems] = React.useState([]); //отображение товаров добавленных в корзину
   const [goodsTitle, setGoodsTitle] = React.useState(''); //заголовок блока товаров
+  const [itemsCartCounter, setItemsCartCounter] = React.useState(0); //изменение счетчика корзины
 
   React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
       axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items')
         .then(res => setGoods(res.data)); //подгрузка с бекэнда всех товаров
       axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems')
-        .then(res => setAddedItems(res.data)); //подгрузка с бекэнда товаров добавленных в корзину
+          .then(res => setItemsCartCounter(res.data.length)); //подгрузка с бекэнда товаров добавленных в корзину
   }, []);
 
   const addedOnCart = (obj) => {
     axios.post('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems', obj); //выгрузка на бекэнд товаров добавленных в корзину
-    setAddedItems(prev => [...prev, obj]); //отображение товаров добавленных в корзину
-  }
-
-  const deleteFromCart = (id) => { //удаление товаров из корзины
-    axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${id}`); //удаление с бека
-    setAddedItems((prev) => prev.filter(item => item.id !== id)); //удаление из корзины
+    setItemsCartCounter(prev => prev + 1); //увеличение счетчика корзины
   }
 
   return (
     <div className='wrapper'>
-      {quickCart && <QuickCart onClose = {() => setQuickCart(false)} addedItems = {addedItems} deleteItem = {deleteFromCart}/>}
+      {quickCart && <QuickCart
+        onClose = {() => setQuickCart(false)}
+        itemsCartCounter = {itemsCartCounter}
+        itemsCartCounterMinus = {(counter) => setItemsCartCounter(counter)}
+      />}
       <Header />
       <Address 
         onClickCart = {() => setQuickCart(true)}
+        itemsCartCounter = {itemsCartCounter}
       />
       <NavBar 
         onChangeSearch = {(searchValue) => setGoodsTitle(searchValue)}
@@ -61,7 +61,7 @@ function App() {
         <div className="content__goodsBlock">
           {goods.filter((item) => item.name.toLowerCase().includes(goodsTitle.toLowerCase())).map((obj, index) => <GoodsItem 
             key = {index}
-            id = {index + 1} // какой-то бред (на бекэнде id с 0 а index с 1 и при удалении из корзины пока с бека не подтянулись айдишники один товар не удаляется). Возможно брать из бека нужно в момент открытия корзины а не в момент загрузки страницы.
+            //id = {index + 1} // какой-то бред (на бекэнде id с 0 а index с 1 и при удалении из корзины пока с бека не подтянулись айдишники один товар не удаляется). Возможно брать из бека нужно в момент открытия корзины а не в момент загрузки страницы.
             name = {obj.name}
             cost = {obj.cost}
             goodsImage = {obj.goodsImage}

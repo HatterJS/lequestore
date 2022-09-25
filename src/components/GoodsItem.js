@@ -7,6 +7,7 @@ const addToCartSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
 </svg>
 
 function GoodsItem(props) {
+
     const [isAdded, setIsAdded] = React.useState(false);
     const addedToCart = () => {
         setIsAdded(!isAdded);
