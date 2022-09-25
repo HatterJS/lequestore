@@ -340,9 +340,7 @@ nav {
         cursor: pointer;
         transition: $transition;
         @include bgColor(0.1);
-        background: rgb(255,245,163);
-        background: linear-gradient(90deg, rgba(255,245,163,1) 0%, rgba(255,240,123,1) 50%, rgba(255,245,163,1) 100%);
-        
+        background: rgb(243, 243, 243);
         border: $borderBar;
         p {
             display: flex;
@@ -357,8 +355,11 @@ nav {
         &:hover {
             transform: translateY(-2px);
             box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
-            background-color: rgb(255, 240, 80);
+            background: linear-gradient(90deg, rgba(255,245,165,1) 0%, rgba(255,240,135,1) 50%, rgba(255,245,165,1) 100%);
         }
+    }
+    .content_activeHotOffers {
+        background: linear-gradient(90deg, rgba(255,245,165,1) 0%, rgba(255,240,135,1) 50%, rgba(255,245,165,1) 100%);
     }
 }
     // GOODS TITLE
@@ -369,7 +370,7 @@ nav {
         margin: 0 auto;
         overflow: auto;
         div {
-            border-top: 2px solid $textColor;
+            border-top: 1px solid $textColor;
             flex: 1;
             align-self: center;
             margin-left: 20px;

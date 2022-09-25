@@ -1,15 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 
 function Address(props) {
-
-    const [itemsCartCounter, setItemsCartCounter] = React.useState();
-    
-    React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
-    axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems')
-        .then(res => setItemsCartCounter(res.data.length)); //подгрузка с бекэнда товаров добавленных в корзину
-}, []);
-console.log(itemsCartCounter);
 
     return(
         <address>

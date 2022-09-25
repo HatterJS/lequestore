@@ -511,9 +511,7 @@ nav {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   background-color: rgba(64, 64, 64, 0.1);
-  background: rgb(255, 245, 163);
-  background: -webkit-gradient(linear, left top, right top, from(rgb(255, 245, 163)), color-stop(50%, rgb(255, 240, 123)), to(rgb(255, 245, 163)));
-  background: linear-gradient(90deg, rgb(255, 245, 163) 0%, rgb(255, 240, 123) 50%, rgb(255, 245, 163) 100%);
+  background: rgb(243, 243, 243);
   border: 1px solid rgba(64, 64, 64, 0.2);
 }
 .content__hotOffers div p {
@@ -537,7 +535,12 @@ nav {
           transform: translateY(-2px);
   -webkit-box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
           box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
-  background-color: rgb(255, 240, 80);
+  background: -webkit-gradient(linear, left top, right top, from(rgb(255, 245, 165)), color-stop(50%, rgb(255, 240, 135)), to(rgb(255, 245, 165)));
+  background: linear-gradient(90deg, rgb(255, 245, 165) 0%, rgb(255, 240, 135) 50%, rgb(255, 245, 165) 100%);
+}
+.content__hotOffers .content_activeHotOffers {
+  background: -webkit-gradient(linear, left top, right top, from(rgb(255, 245, 165)), color-stop(50%, rgb(255, 240, 135)), to(rgb(255, 245, 165)));
+  background: linear-gradient(90deg, rgb(255, 245, 165) 0%, rgb(255, 240, 135) 50%, rgb(255, 245, 165) 100%);
 }
 
 .content h2 {
@@ -549,7 +552,7 @@ nav {
   overflow: auto;
 }
 .content h2 div {
-  border-top: 2px solid rgb(64, 64, 64);
+  border-top: 1px solid rgb(64, 64, 64);
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
