@@ -10,10 +10,11 @@ const deleteFromCartSvg = <svg width="40" height="40" viewBox="0 0 40 40" fill="
 function QuickCart(props) {
   const [addedItems, setAddedItems] = React.useState([]); //отображение товаров добавленных в корзину
 
-  const deleteFromCart = (id) => { //удаление товаров из корзины
-    axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${id}`); //удаление с бека
-    setAddedItems((prev) => prev.filter(item => item.id !== id)); //удаление из корзины
+  const deleteFromCart = (obj) => { //удаление товаров из корзины
+    axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${obj.id}`); //удаление с бека
+    setAddedItems((prev) => prev.filter(item => item.id !== obj.id)); //удаление из корзины
     props.itemsCartCounterMinus(props.itemsCartCounter - 1); //уменьшение счетчика корзины
+    props.totalCostMinus((prev => prev - parseInt(obj.cost))); //уменьшение суммы заказа
   }
 
   React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
@@ -34,13 +35,13 @@ function QuickCart(props) {
                   <p>{obj.name}</p>
                   <p>{obj.cost} грн.</p>
                 </div>
-                <div onClick={() => deleteFromCart(obj.id)}>{deleteFromCartSvg}</div>
+                <div onClick={() => deleteFromCart(obj)}>{deleteFromCartSvg}</div>
               </div>))
             }
           </div>
           <div className='quickCart__total'>
             <p>Всього:</p>
-            <p>3 849 грн.</p>
+            <p>{props.totalCost} грн.</p>
           </div>
           <button className='acceptButton'>Оформити замовлення</button>
           <button

@@ -274,21 +274,19 @@ header {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
+  margin: 0 10px;
 }
 .addressBlock__cartBlock .addressBlock__cart {
   min-width: 37px;
   min-height: 51px;
-  margin: 0 15px;
+  margin: 0 10px;
   cursor: pointer;
-}
-.addressBlock__cartBlock a {
-  color: rgb(245, 160, 0);
 }
 
 .addressBlock__cartCounter {
   position: absolute;
   bottom: -5px;
-  left: 40px;
+  left: 35px;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;

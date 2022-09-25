@@ -13,23 +13,31 @@ function App() {
   const [goods, setGoods] = React.useState([]); //отображение товаров на главной
   const [goodsTitle, setGoodsTitle] = React.useState(''); //заголовок блока товаров
   const [itemsCartCounter, setItemsCartCounter] = React.useState(0); //изменение счетчика корзины
+  const [totalCost, setTotalCost] = React.useState(0);
 
   React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
       axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items')
         .then(res => setGoods(res.data)); //подгрузка с бекэнда всех товаров
       axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems')
-          .then(res => setItemsCartCounter(res.data.length)); //подгрузка с бекэнда товаров добавленных в корзину
+          .then(res => {setItemsCartCounter(res.data.length); res.data.map(item => setTotalCost(prev => (prev + item.cost)))}); //подгрузка с бекэнда товаров добавленных в корзину
   }, []);
 
   const addedOnCart = (obj) => {
     axios.post('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems', obj); //выгрузка на бекэнд товаров добавленных в корзину
     setItemsCartCounter(prev => prev + 1); //увеличение счетчика корзины
+    setTotalCost(prev => prev + obj.cost); //уведичение суммы заказа
+  }
+  const filterGoodsCondition = (item) => {
+    return (
+      item.group.toLowerCase().includes(goodsTitle.toLowerCase())||item.name.toLowerCase().includes(goodsTitle.toLowerCase())); //добавить фильтр из NavBara
   }
 
   return (
     <div className='wrapper'>
       {quickCart && <QuickCart
         onClose = {() => setQuickCart(false)}
+        totalCost = {totalCost}
+        totalCostMinus = {(itemCost) => setTotalCost(itemCost)}
         itemsCartCounter = {itemsCartCounter}
         itemsCartCounterMinus = {(counter) => setItemsCartCounter(counter)}
       />}
@@ -37,6 +45,7 @@ function App() {
       <Address 
         onClickCart = {() => setQuickCart(true)}
         itemsCartCounter = {itemsCartCounter}
+        totalCost = {totalCost}
       />
       <NavBar 
         onChangeSearch = {(searchValue) => setGoodsTitle(searchValue)}
@@ -53,14 +62,26 @@ function App() {
           </ul>
         </div>
         <div className="content__hotOffers">
-          <div className={(goodsTitle==='розпродаж') && 'content_activeHotOffers'} onClick={() => setGoodsTitle('розпродаж')}><p>Розпродаж</p></div>
-          <div className={(goodsTitle==='нова колекція') && 'content_activeHotOffers'} onClick={() => setGoodsTitle('нова колекція')}><p>Нова колекція</p></div>
-          <div className={(goodsTitle==='хіт продажів') && 'content_activeHotOffers'} onClick={() => setGoodsTitle('хіт продажів')}><p>Хіт продажів</p></div>
-          <div className={(goodsTitle==='') && 'content_activeHotOffers'} onClick={() => setGoodsTitle('')}><p>Всі пропозиції</p></div>
+          <div
+            className={(goodsTitle==='розпродаж') ? 'content_activeHotOffers' : ''} 
+            onClick={() => setGoodsTitle('розпродаж')}
+          ><p>Розпродаж</p></div>
+          <div
+            className={(goodsTitle==='нова колекція') ? 'content_activeHotOffers' : ''}
+            onClick={() => setGoodsTitle('нова колекція')}
+          ><p>Нова колекція</p></div>
+          <div
+            className={(goodsTitle==='хіт продажів') ? 'content_activeHotOffers' : ''}
+            onClick={() => setGoodsTitle('хіт продажів')}
+          ><p>Хіт продажів</p></div>
+          <div
+            className={(goodsTitle==='') ? 'content_activeHotOffers' : ''}
+            onClick={() => setGoodsTitle('')}
+          ><p>Всі пропозиції</p></div>
         </div>
         <h2>{goodsTitle ? `Пошук: ${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
         <div className="content__goodsBlock">
-          {goods.filter((item) => item.group.toLowerCase().includes(goodsTitle.toLowerCase())||item.name.toLowerCase().includes(goodsTitle.toLowerCase())).map((obj, index) => <GoodsItem 
+          {goods.filter(filterGoodsCondition).map((obj, index) => <GoodsItem 
             key = {index}
             //id = {index + 1} // какой-то бред (на бекэнде id с 0 а index с 1 и при удалении из корзины пока с бека не подтянулись айдишники один товар не удаляется). Возможно брать из бека нужно в момент открытия корзины а не в момент загрузки страницы.
             name = {obj.name}

@@ -221,20 +221,18 @@ header {
 }
 .addressBlock__cartBlock {
     @include flexCenter();
+    margin: 0 10px;
     .addressBlock__cart {
         min-width: 37px;
         min-height: 51px;
-        margin: 0 15px;
+        margin: 0 10px;
         cursor: pointer;
-    }
-    a {
-        color: rgb(245, 160, 0);
     }
 }
 .addressBlock__cartCounter {
     position: absolute;
     bottom: -5px;
-    left: 40px;
+    left: 35px;
     width: fit-content;
     min-width: 16px;
     padding: 2px;

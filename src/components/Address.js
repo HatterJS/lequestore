@@ -31,8 +31,8 @@ function Address(props) {
                     </div>
                 </div>
                 <div>
-                <p>0 грн.</p>
-                <a href="./">Оформлення замовлення</a>
+                <p>{props.totalCost} грн.</p>
+                {/* <a href="./">Оформлення замовлення</a> */}
                 </div>
             </div>
             </div>
