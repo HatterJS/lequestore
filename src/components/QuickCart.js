@@ -43,7 +43,7 @@ function QuickCart(props) {
             <p>Всього:</p>
             <p>{props.totalCost} грн.</p>
           </div>
-          <button className='acceptButton'>Оформити замовлення</button>
+          <button className='acceptButton' disabled = {props.itemsCartCounter ? false : true}>Оформити замовлення</button>
           <button
             className='acceptButton'
             style={{background: 'none'}}

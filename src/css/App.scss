@@ -69,7 +69,11 @@ $maxWidth: 1090px;
 }
 // COMMON CLASSES
 .wrapper {
+    display: flex;
+    flex-direction: column;
     position: relative;
+    min-height: 100vh;
+    width: 100%;
 }
 .acceptButton {
     border: $borderBar;
@@ -83,6 +87,12 @@ $maxWidth: 1090px;
     &:hover {
         transform: translateY(-2px);
         box-shadow: 1px 1px 2px rgb(122, 122, 122);
+    }
+    &:disabled {
+        transform: none;
+        box-shadow: none;
+        cursor: auto;
+        background-color: rgb(241, 241, 241);
     }
 }
 
@@ -101,7 +111,8 @@ $maxWidth: 1090px;
         flex-direction: column;
         position: absolute;
         background-color: white;
-        width: 470px;
+        width: max-content;
+        min-width: 400px;
         height: 100%;
         right: 0;
         top: 0;
@@ -118,53 +129,6 @@ $maxWidth: 1090px;
             padding: 10px;
         }
     }
-    .quickCart__item {
-        @include flexCenter();
-        justify-content: space-between;
-        border: $borderBar;
-        border-radius: 25px;
-        margin-top: 15px;
-        padding: 10px;
-        transition: $transition;
-        cursor: pointer;
-        div:first-child {
-            display: flex;
-            align-items: center;
-            min-width: 100px;
-            width: 100px;
-            height: 100px;
-            border-radius: 15px;
-            margin-right: 10px;
-            overflow: hidden;
-            img {
-                width: 100%;
-            }
-        }
-        .quickCart__description {
-            flex-grow: 1;
-        }
-        p:last-child {
-            font-weight: 700;
-            margin-top: 10px;
-        }
-        svg {
-            align-self: flex-end;
-            margin-left: 10px;
-            cursor: pointer;
-        }
-        svg:hover {
-            rect {
-                stroke-opacity: 0.6;
-            }
-            path {
-                fill-opacity: 0.6;
-            }
-        }
-        &:hover {
-            transform: translateY(-3px);
-            box-shadow: 1px 1px 2px rgb(122, 122, 122);
-        }
-    }
     .quickCart__total {
         @include flexCenter();
         justify-content: space-between;
@@ -172,6 +136,57 @@ $maxWidth: 1090px;
         padding-top: 10px;
         margin-top: 15px;
         font-weight: 500;
+    }
+}
+.quickCart__item, .favorite__item {
+    @include flexCenter();
+    justify-content: space-between;
+    border: $borderBar;
+    border-radius: 25px;
+    margin-top: 15px;
+    padding: 10px;
+    transition: $transition;
+    min-width: 200px;
+    max-width: 450px;
+    flex: 1 1 auto;
+    cursor: pointer;
+    div:first-child {
+        display: flex;
+        align-items: center;
+        min-width: 100px;
+        width: 100px;
+        height: 100px;
+        border-radius: 15px;
+        margin-right: 10px;
+        overflow: hidden;
+        img {
+            width: 100%;
+        }
+    }
+    .quickCart__description, .favorite__description {
+        flex-grow: 1;
+        max-width: 170px;
+    }
+    p:last-child {
+        font-weight: 700;
+        margin-top: 10px;
+    }
+    svg {
+        align-self: flex-end;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    svg:hover {
+        rect {
+            stroke-opacity: 0.6;
+        }
+        path {
+            fill-opacity: 0.6;
+        }
+    }
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 1px 1px 2px rgb(122, 122, 122);
     }
 }
 
@@ -211,25 +226,30 @@ header {
 // ADDRESS BLOCK
 .addressBlock {
     @include menuStyle();
-    padding: 5px 0;
+    padding: 10px 0;
     img {
-        height: 80px;
+        height: 70px;
     }
     & p:first-child {
         font-weight: 500;
     }
+    .addressBlock__favoriteCart {
+        display: flex;
+    }
 }
-.addressBlock__cartBlock {
+.addressBlock__cartBlock, .addressBlock__favoriteBlock {
     @include flexCenter();
-    margin: 0 10px;
+    margin: 10px;
     .addressBlock__cart {
         min-width: 37px;
         min-height: 51px;
-        margin: 0 10px;
         cursor: pointer;
     }
+    .addressBlock__totalCost {
+        margin-left: 10px;
+    }
 }
-.addressBlock__cartCounter {
+.addressBlock__cartCounter, .addressBlock__favoriteCounter {
     position: absolute;
     bottom: -5px;
     left: 35px;
@@ -238,7 +258,7 @@ header {
     padding: 2px;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    border: 2px solid rgb(64, 64, 64);
+    border: 1px solid rgb(184, 184, 184);
     text-align: center;
     font-size: 14px;
 }
@@ -446,6 +466,29 @@ nav {
                 }
             }
         }
+        .addedToFavoriteBtn {
+            path {
+                fill: rgba(255, 123, 123, 0.562);
+                fill-opacity: 0.8;
+                stroke: rgb(97, 97, 97);
+            }
+        }
+        .addToFavoriteBtn, .addedToFavoriteBtn {
+            z-index: 9;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            &:hover {
+                rect {
+                    fill-opacity: 0.8;
+                    stroke-opacity: 0.6;
+                }
+                path {
+                    stroke-opacity: 0.6;
+                    fill: rgb(255, 113, 113);
+                }
+            }
+        }
     }
 }
 
@@ -461,6 +504,11 @@ nav {
     &:hover {        
         color: $textColor;
     }
+}
+
+//FILLER
+.filler {
+    flex: 1;
 }
 
 // FOOTER
@@ -488,5 +536,25 @@ footer {
         text-transform: uppercase;
         font-weight: 500;
         margin-bottom: 10px;
+    }
+}
+
+//FAVORITE
+.favorite__content {
+    max-width: $maxWidth;
+    width: 100%;
+    margin: 10px auto;
+    border-top: 2px solid $borderColor;
+    padding: 20px 0;
+    h2 {
+        margin-left: 10px;
+    }
+    .favorite__itemsBlock {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        .favorite__item {
+            margin: 5px;
+        }
     }
 }
