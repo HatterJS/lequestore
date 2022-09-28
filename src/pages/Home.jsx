@@ -1,7 +1,7 @@
 import GoodsItem from '../components/GoodsItem';
 import NavBar from '../components/NavBar';
 
-function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondition, addedOnFavorite, itemsFromFavorite}) {
+function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondition, itemsFromFavorite, setItemsFavoriteCounter, setItemsFromFavorite}) {
     return (
     <div className="content">
         <NavBar 
@@ -38,14 +38,14 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
         <h2>{goodsTitle ? `Пошук: ${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
         <div className="content__goodsBlock">
             {goods.filter(filterGoodsCondition).map((obj, index) => <GoodsItem 
-            key = {index}
-            //id = {index + 1} // какой-то бред (на бекэнде id с 0 а index с 1 и при удалении из корзины пока с бека не подтянулись айдишники один товар не удаляется). Возможно брать из бека нужно в момент открытия корзины а не в момент загрузки страницы.
+            key = {index} //заменить на id
             name = {obj.name}
             cost = {obj.cost}
             goodsImage = {obj.goodsImage}
             onAddToCart = {(cartItem) => addedOnCart(cartItem)}
-            onAddToFavorite = {(favoriteItem) => addedOnFavorite(favoriteItem)}
             itemsFromFavorite = {itemsFromFavorite}
+            setItemsFavoriteCounter = {setItemsFavoriteCounter}
+            setItemsFromFavorite = {setItemsFromFavorite}
             />
             )}
         </div>

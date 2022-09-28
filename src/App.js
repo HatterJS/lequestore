@@ -33,11 +33,6 @@ function App() {
     setTotalCost(prev => prev + obj.cost); //уведичение суммы заказа
   }
 
-  const addedOnFavorite = (obj) => {
-    axios.post('https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems', obj); //выгрузка на бекэнд товаров добавленных в избранное
-    setItemsFavoriteCounter(prev => prev + 1); //увеличение счетчика избранных
-  }
-
   const filterGoodsCondition = (item) => {
     return (
       item.group.toLowerCase().includes(goodsTitle.toLowerCase())||item.name.toLowerCase().includes(goodsTitle.toLowerCase())); //добавить фильтр из NavBara
@@ -65,15 +60,16 @@ function App() {
             goodsTitle = {goodsTitle}
             setGoodsTitle = {setGoodsTitle}
             addedOnCart = {addedOnCart}
-            addedOnFavorite = {addedOnFavorite}
             itemsFromFavorite = {itemsFromFavorite}
+            setItemsFavoriteCounter = {setItemsFavoriteCounter}
+            setItemsFromFavorite= {setItemsFromFavorite}
             filterGoodsCondition = {filterGoodsCondition}
           />}
         />
         <Route path = '/favorite' element = {<Favorite
             itemsCartCounterMinus = {(counter) => setItemsCartCounter(counter)}
-            itemsFavoriteCounter = {itemsFavoriteCounter}
-            itemsFavoriteCounterMinus = {(counter) => setItemsFavoriteCounter(counter)}
+            itemsFavoriteCounterMinus = {setItemsFavoriteCounter}
+            setItemsFromFavorite = {setItemsFromFavorite}
             />}
           >
         </Route>

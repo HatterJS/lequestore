@@ -710,7 +710,6 @@ nav {
 }
 .content__goodsBlock div.content__goodsItem .addToFavoriteBtn:hover path, .content__goodsBlock div.content__goodsItem .addedToFavoriteBtn:hover path {
   stroke-opacity: 0.6;
-  fill: rgb(255, 113, 113);
 }
 
 .moreGoods {

@@ -12,8 +12,9 @@ function Favorite (props) {
     const [addedItems, setAddedItems] = React.useState([]); //отображение товаров добавленных в корзину
     const deleteFromFavorite = (obj) => { //удаление товаров из корзины
       axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems/${obj.id}`); //удаление с бека
-      setAddedItems((prev) => prev.filter(item => item.id !== obj.id)); //удаление из избранного
-      props.itemsFavoriteCounterMinus(props.itemsFavoriteCounter - 1); //уменьшение счетчика избранного
+      setAddedItems(prev => prev.filter((item) => item.id !== obj.id)); //удаление из избранного
+      props.itemsFavoriteCounterMinus(prev => prev - 1); //уменьшение счетчика избранного
+      props.setItemsFromFavorite(prev => prev.filter((item) => !item.name.includes(obj.name))); //удаление из локального массива избранных
     }
 
     React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы

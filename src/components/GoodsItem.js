@@ -1,4 +1,5 @@
 import React  from "react";
+import axios from "axios";
 
 const addToCartSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
   <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.4"/>
@@ -32,13 +33,22 @@ function GoodsItem(props) {
         });
     }
     const addedToFavorite = () => {
-        setIsFavorite(!isFavorite);
-        props.onAddToFavorite({
+        const addToFavorite = {
             "id": props.id,
             "name": props.name,
             "cost": props.cost,
             "goodsImage": props.goodsImage
+        };
+        axios.post('https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems', addToFavorite); //выгрузка на бекэнд товаров добавленных в избранное
+        props.setItemsFavoriteCounter(prev => prev + 1); //увеличение счетчика избранных
+        props.setItemsFromFavorite(prev => [...prev, addToFavorite]); //добавление в локальный массив избранных
+    }
+    const deleteFromFavorite = () => {
+        axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems').then((res) => {
+            res.data.map((item) => item.name.includes(props.name) && axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems/${item.id}`));
         });
+        props.setItemsFavoriteCounter(prev => prev - 1); //уменьшение счетчика избранных
+        props.setItemsFromFavorite(prev => prev.filter((item) => !item.name.includes(props.name))); //удаление из локального массива избранных
     }
 
     return (
@@ -52,7 +62,7 @@ function GoodsItem(props) {
                 </button>
                 <button 
                     className={isFavorite ? "addedToFavoriteBtn" : "addToFavoriteBtn"}
-                    onClick={addedToFavorite}>{addToFavoriteSVG}
+                    onClick={isFavorite ? deleteFromFavorite : addedToFavorite}>{addToFavoriteSVG}
                 </button>
             </div>
             <img src={props.goodsImage} alt="sorry" /> {/* for indexation*/}
