@@ -18,6 +18,10 @@ function GoodsItem(props) {
     const [isAdded, setIsAdded] = React.useState(false);
     const [isFavorite, setIsFavorite] = React.useState(false);
 
+    React.useEffect(() => {
+        setIsFavorite(props.itemsFromFavorite.map(obj => obj.name).includes(props.name));
+    }, [props.itemsFromFavorite, props.name]);
+
     const addedToCart = () => {
         setIsAdded(!isAdded);
         props.onAddToCart({

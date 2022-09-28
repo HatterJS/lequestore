@@ -1,7 +1,7 @@
 import GoodsItem from '../components/GoodsItem';
 import NavBar from '../components/NavBar';
 
-function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondition, addedOnFavorite}) {
+function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondition, addedOnFavorite, itemsFromFavorite}) {
     return (
     <div className="content">
         <NavBar 
@@ -45,6 +45,7 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
             goodsImage = {obj.goodsImage}
             onAddToCart = {(cartItem) => addedOnCart(cartItem)}
             onAddToFavorite = {(favoriteItem) => addedOnFavorite(favoriteItem)}
+            itemsFromFavorite = {itemsFromFavorite}
             />
             )}
         </div>
