@@ -42,6 +42,7 @@ function QuickCart(props) {
           <div className="quickCart__emptyCart emptyCart" style = {{display: addedItems.length ? 'none' : 'flex'}}>
             <h3>Ваш кошик порожній</h3>
             <img src="../img/icons/emptyCart.png" alt="emptyCart" />
+            <p>Додайте хоча б один товар щоб зробити замовлення</p>
             <button className='acceptButton' onClick={props.onClose}>Повернутись до покупок</button>
           </div>
           <div className='quickCart__total'>

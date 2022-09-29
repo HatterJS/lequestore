@@ -1,5 +1,6 @@
 import React  from "react";
 import axios from "axios";
+import ContentLoader from "react-content-loader";
 
 const addToCartSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
   <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.4"/>
@@ -51,7 +52,7 @@ function GoodsItem(props) {
         props.setItemsFromFavorite(prev => prev.filter((item) => !item.name.includes(props.name))); //удаление из локального массива избранных
     }
 
-    return (
+    return (props.isLoad ?
         <div className='content__goodsItem' style={{backgroundImage: `url(${props.goodsImage})`}}>
             <div><p>{props.name}</p></div>
             <div>
@@ -66,7 +67,22 @@ function GoodsItem(props) {
                 </button>
             </div>
             <img src={props.goodsImage} alt="sorry" /> {/* for indexation*/}
-        </div>
+        </div> :
+        <ContentLoader 
+            speed={3}
+            width={330}
+            height={350}
+            viewBox="0 0 350 350"
+            backgroundColor="#f3f3f3"
+            foregroundColor="#dedede"
+            // {...props}
+        >
+            <rect x="10" y="10" rx="5" ry="6" width="330" height="50" /> 
+            <rect x="10" y="70" rx="10" ry="10" width="330" height="190" /> 
+            <rect x="10" y="270" rx="5" ry="5" width="330" height="30" /> 
+            <rect x="10" y="310" rx="5" ry="5" width="210" height="30" /> 
+            <rect x="230" y="310" rx="5" ry="5" width="30" height="30" />
+        </ContentLoader>
     );
 }
 

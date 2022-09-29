@@ -1,7 +1,10 @@
 import GoodsItem from '../components/GoodsItem';
 import NavBar from '../components/NavBar';
 
-function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondition, itemsFromFavorite, setItemsFavoriteCounter, setItemsFromFavorite}) {
+function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondition, itemsFromFavorite, setItemsFavoriteCounter, setItemsFromFavorite, isLoad}) {
+
+    const loadArr = [...Array(6)];
+    
     return (
     <div className="content">
         <NavBar 
@@ -37,7 +40,7 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
         </div>
         <h2>{goodsTitle ? `Пошук: ${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
         <div className="content__goodsBlock">
-            {goods.filter(filterGoodsCondition).map((obj) => <GoodsItem 
+            {isLoad ? goods.filter(filterGoodsCondition).map((obj) => <GoodsItem 
             key = {obj.id}
             name = {obj.name}
             cost = {obj.cost}
@@ -46,8 +49,16 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
             itemsFromFavorite = {itemsFromFavorite}
             setItemsFavoriteCounter = {setItemsFavoriteCounter}
             setItemsFromFavorite = {setItemsFromFavorite}
-            />
-            )}
+            isLoad = {isLoad}
+            />) : loadArr.map((obj, index) => <GoodsItem 
+                key = {index}
+                onAddToCart = {(cartItem) => addedOnCart(cartItem)}
+                itemsFromFavorite = {itemsFromFavorite}
+                setItemsFavoriteCounter = {setItemsFavoriteCounter}
+                setItemsFromFavorite = {setItemsFromFavorite}
+                isLoad = {isLoad}
+            />)
+            }
         </div>
         <div className="moreGoods">
             <p>ПОКАЗАТИ БІЛЬШЕ ...</p>

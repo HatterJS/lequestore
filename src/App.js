@@ -17,10 +17,15 @@ function App() {
   const [totalCost, setTotalCost] = React.useState(0); //изменение общей стоимости в корзине 
   const [itemsFavoriteCounter, setItemsFavoriteCounter] = React.useState(0); //изменение счетчика корзины
   const [itemsFromFavorite, setItemsFromFavorite] = React.useState([]); //отслеживание товаров добавленых в избранное
+  const [isLoad, setIsLoad] = React.useState(false);
 
   React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
-      axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items')
+    async function getData () {
+      await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items')
         .then(res => setGoods(res.data)); //подгрузка с бекэнда всех товаров
+      setIsLoad(true);
+    }
+    getData();
       axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems')
           .then(res => {setItemsCartCounter(res.data.length); res.data.map(item => setTotalCost(prev => (prev + item.cost)))}); //подгрузка с бекэнда товаров добавленных в корзину
       axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems')
@@ -63,6 +68,7 @@ function App() {
             setItemsFavoriteCounter = {setItemsFavoriteCounter}
             setItemsFromFavorite= {setItemsFromFavorite}
             filterGoodsCondition = {filterGoodsCondition}
+            isLoad = {isLoad}
           />}
         />
         <Route path = '/favorite' element = {<Favorite
