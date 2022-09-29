@@ -44,8 +44,7 @@ function App() {
         onClose = {() => setQuickCart(false)}
         totalCost = {totalCost}
         totalCostMinus = {(itemCost) => setTotalCost(itemCost)}
-        itemsCartCounter = {itemsCartCounter}
-        itemsCartCounterMinus = {(counter) => setItemsCartCounter(counter)}
+        setItemsCartCounter = {setItemsCartCounter}
       />}
       <Header />
       <Address 
@@ -74,7 +73,6 @@ function App() {
           >
         </Route>
       </Routes>
-      <div className='filler'></div>      
       <Footer />
     </div>
   );

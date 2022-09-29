@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const deleteFromCartSvg = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -36,6 +37,11 @@ function Favorite (props) {
                     <div onClick={() => deleteFromFavorite(obj)}>{deleteFromCartSvg}</div>
                 </div>))
                 }
+            </div>
+            <div className="favorite__content-emptyCart emptyCart" style = {{display: addedItems.length ? 'none' : 'flex'}}>
+                <h3>Відсутні обрані товари</h3>
+                <img src="../img/icons/emptyCart.png" alt="emptyCart" />
+                <Link to = '/'><button className='acceptButton' onClick={props.onClose}>Повернутись до покупок</button></Link>
             </div>
         </div>
     );

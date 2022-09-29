@@ -37,8 +37,8 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
         </div>
         <h2>{goodsTitle ? `Пошук: ${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
         <div className="content__goodsBlock">
-            {goods.filter(filterGoodsCondition).map((obj, index) => <GoodsItem 
-            key = {index} //заменить на id
+            {goods.filter(filterGoodsCondition).map((obj) => <GoodsItem 
+            key = {obj.id}
             name = {obj.name}
             cost = {obj.cost}
             goodsImage = {obj.goodsImage}

@@ -13,7 +13,7 @@ function QuickCart(props) {
   const deleteFromCart = (obj) => { //удаление товаров из корзины
     axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${obj.id}`); //удаление с бека
     setAddedItems((prev) => prev.filter(item => item.id !== obj.id)); //удаление из корзины
-    props.itemsCartCounterMinus(props.itemsCartCounter - 1); //уменьшение счетчика корзины
+    props.setItemsCartCounter(prev => prev - 1); //уменьшение счетчика корзины
     props.totalCostMinus((prev => prev - parseInt(obj.cost))); //уменьшение суммы заказа
   }
 
@@ -28,8 +28,8 @@ function QuickCart(props) {
         <div className="quickCart__content">
           <h4>АКТИВНІ ЗАМОВЛЕННЯ</h4>
           <div className="quickCart__itemsBlock">
-            {addedItems.map((obj, index) => (
-              <div className="quickCart__item" key = {index}>
+            {addedItems.map((obj) => (
+              <div className="quickCart__item" key = {obj.id}>
                 <div><img src={obj.goodsImage} alt="sneakers" /></div>
                 <div className='quickCart__description'>
                   <p>{obj.name}</p>
@@ -39,11 +39,16 @@ function QuickCart(props) {
               </div>))
             }
           </div>
+          <div className="quickCart__emptyCart emptyCart" style = {{display: addedItems.length ? 'none' : 'flex'}}>
+            <h3>Ваш кошик порожній</h3>
+            <img src="../img/icons/emptyCart.png" alt="emptyCart" />
+            <button className='acceptButton' onClick={props.onClose}>Повернутись до покупок</button>
+          </div>
           <div className='quickCart__total'>
             <p>Всього:</p>
             <p>{props.totalCost} грн.</p>
           </div>
-          <button className='acceptButton' disabled = {props.itemsCartCounter ? false : true}>Оформити замовлення</button>
+          <button className='acceptButton' disabled = {!addedItems.length ? true : false}>Оформити замовлення</button>
           <button
             className='acceptButton'
             style={{background: 'none'}}
