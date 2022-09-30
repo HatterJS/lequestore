@@ -25,7 +25,7 @@ function Favorite (props) {
 
     return (
         <div className="favorite__content">
-            <h2>Обране:</h2>
+            <h2>ОБРАНЕ</h2>
             <div className="favorite__itemsBlock">
                 {addedItems.map((obj, index) => (
                 <div className="favorite__item" key = {index}>

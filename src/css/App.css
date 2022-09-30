@@ -107,7 +107,8 @@
 .quickCart__shadow .quickCart__emptyCart {
   min-width: 400px;
 }
-.quickCart__shadow .quickCart__total {
+
+.quickCart__total {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -809,7 +810,7 @@ footer {
   max-width: 1090px;
   width: 100%;
   margin: 10px auto;
-  border-top: 2px solid rgba(64, 64, 64, 0.2);
+  border-top: 1px solid rgba(64, 64, 64, 0.2);
   padding: 20px 0;
 }
 .favorite__content h2 {
@@ -826,4 +827,78 @@ footer {
 }
 .favorite__content .favorite__itemsBlock .favorite__item {
   margin: 5px;
+}
+
+.orderContent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  max-width: 1090px;
+  width: 100%;
+  margin: 10px auto;
+  border-top: 1px solid rgba(64, 64, 64, 0.2);
+  padding: 20px 0;
+}
+.orderContent .orderContent__title h2 {
+  line-height: 2;
+}
+.orderContent .orderContent__title p {
+  color: rgb(231, 123, 0);
+}
+.orderContent .orderContent__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.orderContent .orderContent__content .orderContent__deliveryForm {
+  min-width: 400px;
+  width: 50%;
+  margin-right: 20px;
+}
+.orderContent .orderContent__content .orderContent__deliveryForm h5 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.orderContent .orderContent__content .orderContent__deliveryForm input {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+}
+.orderContent .orderContent__content .orderContent__deliveryForm select {
+  padding: 10px;
+  min-width: 400px;
+  width: 100%;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.orderContent .orderContent__content .orderContent__deliveryForm textarea {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  min-width: 400px;
+  width: 100%;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  resize: none;
+}
+.orderContent .orderContent__content .orderContent__goods {
+  min-width: 400px;
+  width: 50%;
+  margin-left: 20px;
+}
+.orderContent .orderContent__content .orderContent__goods h4 {
+  display: block;
+  border-bottom: 1px solid rgba(64, 64, 64, 0.2);
+  padding-bottom: 10px;
 }

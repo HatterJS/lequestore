@@ -149,14 +149,14 @@ $maxWidth: 1090px;
     .quickCart__emptyCart {
         min-width: 400px;
     }
-    .quickCart__total {
-        @include flexCenter();
-        justify-content: space-between;
-        border-top: 1px solid $borderColor;
-        padding-top: 10px;
-        margin-top: 15px;
-        font-weight: 500;
-    }
+}
+.quickCart__total {
+    @include flexCenter();
+    justify-content: space-between;
+    border-top: 1px solid $borderColor;
+    padding-top: 10px;
+    margin-top: 15px;
+    font-weight: 500;
 }
 .quickCart__item, .favorite__item {
     @include flexCenter();
@@ -566,7 +566,7 @@ footer {
     max-width: $maxWidth;
     width: 100%;
     margin: 10px auto;
-    border-top: 2px solid $borderColor;
+    border-top: 1px solid $borderColor;
     padding: 20px 0;
     h2 {
         margin-left: 10px;
@@ -577,6 +577,69 @@ footer {
         flex-wrap: wrap;
         .favorite__item {
             margin: 5px;
+        }
+    }
+}
+
+//ORDER
+.orderContent {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    max-width: $maxWidth;
+    width: 100%;
+    margin: 10px auto;
+    border-top: 1px solid $borderColor;
+    padding: 20px 0;
+    .orderContent__title {
+        h2 {
+            line-height: 2;
+        }
+        p {
+            color: rgb(231, 123, 0);
+        }
+    }
+    .orderContent__content {
+        display: flex;
+        justify-content: space-between;
+        .orderContent__deliveryForm {
+            min-width: 400px;
+            width: 50%;
+            margin-right: 20px;
+            h5 {
+                margin-top: 10px;
+                margin-bottom: 5px;
+            }
+            input {
+                padding: 10px;
+                margin-right: 10px;
+                border: $borderBar;
+            }
+            select {
+                padding: 10px;
+                min-width: 400px;
+                width: 100%;
+                border: $borderBar;
+                appearance: none;
+            }
+            textarea {
+                box-sizing: border-box;
+                padding: 10px;
+                min-width: 400px;
+                width: 100%;
+                border: $borderBar;
+                resize: none;
+            }
+        }
+        .orderContent__goods {
+            min-width: 400px;
+            width: 50%;
+            margin-left: 20px;
+            h4 {
+                display: block;
+                border-bottom: 1px solid $borderColor;
+                padding-bottom: 10px;
+            }
         }
     }
 }

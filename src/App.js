@@ -83,7 +83,15 @@ function App() {
             />}
           >
         </Route>
-        <Route path='/order' element = {<Order />}></Route>
+        <Route path='/order'
+            element = {
+              <Order 
+                totalCost = {totalCost}
+                totalCostMinus = {(itemCost) => setTotalCost(itemCost)}
+                setItemsCartCounter = {setItemsCartCounter}
+              />
+            }>
+        </Route>
       </Routes>
       <Footer />
     </div>
