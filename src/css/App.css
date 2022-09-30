@@ -21,6 +21,7 @@
   font-weight: 500;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  width: 100%;
 }
 .acceptButton:hover {
   -webkit-transform: translateY(-2px);

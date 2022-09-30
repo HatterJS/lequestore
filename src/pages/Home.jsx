@@ -1,10 +1,9 @@
 import GoodsItem from '../components/GoodsItem';
 import NavBar from '../components/NavBar';
+import '../css/loader.css';
 
 function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondition, itemsFromFavorite, setItemsFavoriteCounter, setItemsFromFavorite, isLoad}) {
 
-    const loadArr = [...Array(6)];
-    
     return (
     <div className="content">
         <NavBar 
@@ -49,15 +48,14 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
             itemsFromFavorite = {itemsFromFavorite}
             setItemsFavoriteCounter = {setItemsFavoriteCounter}
             setItemsFromFavorite = {setItemsFromFavorite}
-            isLoad = {isLoad}
-            />) : loadArr.map((obj, index) => <GoodsItem 
-                key = {index}
-                onAddToCart = {(cartItem) => addedOnCart(cartItem)}
-                itemsFromFavorite = {itemsFromFavorite}
-                setItemsFavoriteCounter = {setItemsFavoriteCounter}
-                setItemsFromFavorite = {setItemsFromFavorite}
-                isLoad = {isLoad}
-            />)
+            />) : 
+            <div className="loader02">
+                <div className="border02">
+                    <div className="shapeEye01"></div>
+                    <div className="shapeEye02"></div>
+                </div>
+                <p>loading...</p>
+            </div>
             }
         </div>
         <div className="moreGoods">

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
-import Home from '../src/pages/Home';
+import Home from './pages/Home';
 import Favorite from './pages/Favorite';
+import Order from './pages/Order';
 import Header from './components/Header';
 import QuickCart from './components/QuickCart';
 import Address from './components/Address';
@@ -21,10 +22,14 @@ function App() {
 
   React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
     async function getData () {
-      await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items')
-        .then(res => setGoods(res.data)); //подгрузка с бекэнда всех товаров
-      setIsLoad(true);
-    }
+      try {
+        await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items')
+          .then(res => setGoods(res.data)); //подгрузка с бекэнда всех товаров
+        setIsLoad(true);
+      } catch (error) {
+        alert('Помилочка! Перезавантажте сторінку.');
+      }
+    };
     getData();
       axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems')
           .then(res => {setItemsCartCounter(res.data.length); res.data.map(item => setTotalCost(prev => (prev + item.cost)))}); //подгрузка с бекэнда товаров добавленных в корзину
@@ -78,6 +83,7 @@ function App() {
             />}
           >
         </Route>
+        <Route path='/order' element = {<Order />}></Route>
       </Routes>
       <Footer />
     </div>

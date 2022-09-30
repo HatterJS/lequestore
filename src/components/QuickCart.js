@@ -1,5 +1,6 @@
 import React  from "react";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const deleteFromCartSvg = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
     <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.25"/>
@@ -49,7 +50,7 @@ function QuickCart(props) {
             <p>Всього:</p>
             <p>{props.totalCost} грн.</p>
           </div>
-          <button className='acceptButton' disabled = {!addedItems.length ? true : false}>Оформити замовлення</button>
+          <Link to={"/order"}><button className = 'acceptButton' disabled = {!addedItems.length ? true : false} onClick = {props.onClose}>Оформити замовлення</button></Link>
           <button
             className='acceptButton'
             style={{background: 'none'}}
