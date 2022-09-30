@@ -101,7 +101,7 @@ $maxWidth: 1090px;
     align-items: center;
     position: relative;
     flex-direction: column;
-    flex: 1;
+    flex: 1 1 auto;
     justify-content: center;
     h3 {
         margin-bottom: 10px;
@@ -141,7 +141,9 @@ $maxWidth: 1090px;
             padding-bottom: 20px;
         }
         .quickCart__itemsBlock {
-            // flex: 1;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
             overflow: auto;
             padding: 10px;
         }
@@ -165,7 +167,7 @@ $maxWidth: 1090px;
     transition: $transition;
     min-width: 200px;
     max-width: 450px;
-    flex: 1 1 auto;
+    height: max-content;
     cursor: pointer;
     div:first-child {
         display: flex;
@@ -570,7 +572,6 @@ footer {
     }
     .favorite__itemsBlock {
         display: flex;
-        justify-content: space-around;
         flex-wrap: wrap;
         .favorite__item {
             margin: 5px;
@@ -629,6 +630,8 @@ footer {
             }
         }
         .orderContent__goods {
+            display: flex;
+            flex-direction: column;
             min-width: 400px;
             width: 50%;
             margin-left: 20px;
@@ -636,10 +639,6 @@ footer {
                 display: block;
                 border-bottom: 1px solid $borderColor;
                 padding-bottom: 10px;
-            }
-            .orderContent__emptyOrder {
-                // margin: 50px 0;
-                height: 100%;
             }
         }
     }

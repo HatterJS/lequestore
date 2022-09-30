@@ -11,6 +11,8 @@ const deleteFromCartSvg = <svg width="40" height="40" viewBox="0 0 40 40" fill="
 function Favorite (props) {
 
     const [addedItems, setAddedItems] = React.useState([]); //отображение товаров добавленных в корзину
+    const [isLoad, setIsLoad] = React.useState(false);
+
     const deleteFromFavorite = (obj) => { //удаление товаров из корзины
       axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems/${obj.id}`); //удаление с бека
       setAddedItems(prev => prev.filter((item) => item.id !== obj.id)); //удаление из избранного
@@ -19,28 +21,47 @@ function Favorite (props) {
     }
 
     React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
-        axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems')
-            .then(res => setAddedItems(res.data)); //подгрузка с бекэнда товаров добавленных в корзину
+        async function getData () {
+            try {
+                await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems')
+                    .then(res => setAddedItems(res.data)); //подгрузка с бекэнда товаров добавленных в корзину}
+            } catch (error) {
+                alert('Помилочка! Перезавантажте сторінку.');
+            }
+            setIsLoad(true);
+        }
+        getData();
     }, []);
 
     return (
         <div className="favorite__content">
             <h2>ОБРАНЕ</h2>
-            <div className="favorite__itemsBlock">
-                {addedItems.map((obj, index) => (
-                <div className="favorite__item" key = {index}>
-                    <div><img src={obj.goodsImage} alt="sneakers" /></div>
-                    <div className='favorite__description'>
-                    <p>{obj.name}</p>
-                    <p>{obj.cost} грн.</p>
+            {isLoad ?
+                <>
+                    <div className="favorite__itemsBlock">
+                        {addedItems.map((obj, index) => (
+                        <div className="favorite__item" key = {index}>
+                            <div><img src={obj.goodsImage} alt="sneakers" /></div>
+                            <div className='favorite__description'>
+                            <p>{obj.name}</p>
+                            <p>{obj.cost} грн.</p>
+                            </div>
+                            <div onClick={() => deleteFromFavorite(obj)}>{deleteFromCartSvg}</div>
+                        </div>))
+                        }
                     </div>
-                    <div onClick={() => deleteFromFavorite(obj)}>{deleteFromCartSvg}</div>
-                </div>))
-                }
-            </div>
-            <div className="favorite__content-emptyCart emptyCart" style = {{display: addedItems.length ? 'none' : 'flex'}}>
-                <Empty></Empty>
-            </div>
+                    <div className="favorite__content-emptyCart emptyCart" style = {{display: addedItems.length ? 'none' : 'flex'}}>
+                        <Empty></Empty>
+                    </div>
+                </> : 
+                <div className="loader02">
+                    <div className="border02">
+                        <div className="shapeEye01"></div>
+                        <div className="shapeEye02"></div>
+                    </div>
+                    <p>loading...</p>
+                </div>
+            }
         </div>
     );
 }

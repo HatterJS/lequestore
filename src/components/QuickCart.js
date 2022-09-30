@@ -10,7 +10,10 @@ const deleteFromCartSvg = <svg width="40" height="40" viewBox="0 0 40 40" fill="
 </svg>
 
 function QuickCart(props) {
+
   const [addedItems, setAddedItems] = React.useState([]); //отображение товаров добавленных в корзину
+  const [isLoad, setIsLoad] = React.useState(false);
+
 
   const deleteFromCart = (obj) => { //удаление товаров из корзины
     axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${obj.id}`); //удаление с бека
@@ -20,8 +23,16 @@ function QuickCart(props) {
   }
 
   React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
-      axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems')
-          .then(res => setAddedItems(res.data)); //подгрузка с бекэнда товаров добавленных в корзину
+    async function getData () {
+      try {
+        await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems')
+            .then(res => setAddedItems(res.data)); //подгрузка с бекэнда товаров добавленных в корзину
+      } catch (error) {
+        alert('Помилочка! Перезавантажте сторінку.');
+      }
+      setIsLoad(true);
+    }
+    getData ();
   }, []);
   
   return(
@@ -29,7 +40,7 @@ function QuickCart(props) {
       <div className="quickCart__shadow">
         <div className="quickCart__content">
           <h4>АКТИВНІ ЗАМОВЛЕННЯ</h4>
-          <div className="quickCart__itemsBlock">
+          {isLoad ? <div className="quickCart__itemsBlock">
             {addedItems.map((obj) => (
               <div className="quickCart__item" key = {obj.id}>
                 <div><img src={obj.goodsImage} alt="sneakers" /></div>
@@ -40,12 +51,20 @@ function QuickCart(props) {
                 <div onClick={() => deleteFromCart(obj)}>{deleteFromCartSvg}</div>
               </div>))
             }
+            <div className="quickCart__emptyCart emptyCart" style = {{display: addedItems.length ? 'none' : 'flex'}}>
+              <Empty
+                onClose = {props.onClose}
+              ></Empty>
+            </div>
+          </div> : 
+          <div className="loader02">
+              <div className="border02">
+                  <div className="shapeEye01"></div>
+                  <div className="shapeEye02"></div>
+              </div>
+              <p>loading...</p>
           </div>
-          <div className="quickCart__emptyCart emptyCart" style = {{display: addedItems.length ? 'none' : 'flex'}}>
-            <Empty
-              onClose = {props.onClose}
-            ></Empty>
-          </div>
+          }
           <div className='quickCart__total'>
             <p>Всього:</p>
             <p>{props.totalCost} грн.</p>
