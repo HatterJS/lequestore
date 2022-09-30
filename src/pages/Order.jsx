@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Empty from "../components/Empty";
 
 const deleteFromCartSvg = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
     <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.25"/>
@@ -26,7 +27,7 @@ function Order (props) {
         <div className="orderContent">
             <div className="orderContent__title">
                 <h2>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</h2>
-                <p>На всі замовлення потрібна передоплата в розмірі 100 грн.</p>
+                <p>На всі замовлення потрібна часткова передоплата в розмірі 100 грн.</p>
             </div>
             <div className="orderContent__content">
                 <div className="orderContent__deliveryForm">
@@ -66,7 +67,7 @@ function Order (props) {
                     <div className="orderContent__discontBlock">
                         <textarea placeholder="Вкажіть додаткові побажання щодо замовлення" maxLength={300} rows={8}></textarea>
                     </div>
-                    <button className="acceptButton">Підтвердити замовлення</button>
+                    <button className="acceptButton" disabled = {addedItems.length ? false : true}>Підтвердити замовлення</button>
                 </div>
                 <div className="orderContent__goods">
                     <h4>АКТИВНІ ЗАМОВЛЕННЯ</h4>
@@ -82,7 +83,10 @@ function Order (props) {
                         </div>))
                         }
                     </div>
-                    <div className='orderContent__total quickCart__total'>
+                    <div className="orderContent__emptyOrder emptyCart" style = {{display: addedItems.length ? 'none' : 'flex'}}>
+                        <Empty></Empty>
+                    </div>
+                    <div className='orderContent__total quickCart__total' style = {{display: addedItems.length ? 'flex' : 'none'}}>
                         <p>Всього:</p>
                         <p>{props.totalCost} грн.</p>
                     </div>

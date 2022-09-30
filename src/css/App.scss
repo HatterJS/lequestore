@@ -129,7 +129,7 @@ $maxWidth: 1090px;
         position: absolute;
         background-color: white;
         width: max-content;
-        min-width: 400px;
+        min-width: 435px;
         height: 100%;
         right: 0;
         top: 0;
@@ -145,9 +145,6 @@ $maxWidth: 1090px;
             overflow: auto;
             padding: 10px;
         }
-    }
-    .quickCart__emptyCart {
-        min-width: 400px;
     }
 }
 .quickCart__total {
@@ -639,6 +636,10 @@ footer {
                 display: block;
                 border-bottom: 1px solid $borderColor;
                 padding-bottom: 10px;
+            }
+            .orderContent__emptyOrder {
+                // margin: 50px 0;
+                height: 100%;
             }
         }
     }
