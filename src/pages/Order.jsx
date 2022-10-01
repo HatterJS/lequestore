@@ -25,7 +25,6 @@ function Order (props) {
     }
 
     const [isLoad, setIsLoad] = React.useState(false);
-
     React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
         async function getData () {
           try {
@@ -78,27 +77,27 @@ function Order (props) {
             </div>
             <div className="orderContent__content">
                 <div className="orderContent__deliveryForm">
-                    <h5>ПІБ</h5>
+                    <h5>ПІБ *</h5>
                     <div className="orderContent__nameBlock">
-                        <input className="orderContent__surname" type="text" placeholder="Прізвище" onChange={event => setSurname(event.target.value)}/>
-                        <input className="orderContent__name" type="text" placeholder="Ім'я" onChange={event => setName(event.target.value)}/>
+                        <input className="orderContent__surname" type="text" placeholder="Прізвище" onChange={event => setSurname(event.target.value)} style={!surname ? {borderColor: '#FF824C'} : {borderColor: ''}}/>
+                        <input className="orderContent__name" type="text" placeholder="Ім'я" onChange={event => setName(event.target.value)} style={!name ? {borderColor: '#FF824C'} : {borderColor: ''}}/>
                     </div>
-                    <h5>Телефон (по можливості з Telegram)</h5>
+                    <h5>Телефон (по можливості з Telegram) *</h5>
                     <div className="orderContent__phoneBlock">
-                        <input className="orderContent__phone" type="tel" placeholder="+38(000)000-00-00" onChange={event => setPhoneNumber(event.target.value)}/>
+                        <input className="orderContent__phone" type="tel" placeholder="+38(xxx)xxx-xx-xx" onChange={event => setPhoneNumber(event.target.value)} style={phoneNumber.length<10 ? {borderColor: '#FF824C'} : {borderColor: ''}} maxLength={20}/>
                     </div>
                     <h5>Ваш instagram для зручності</h5>
                     <div className="orderContent__instagramBlock">
                         <input className="orderContent__instagram" type="text" placeholder="посилання на профіль"/>
                     </div>
-                    <h5>Спосіб доставки</h5>
+                    <h5>Спосіб доставки *</h5>
                     <div className="orderContent__deliveryBlock">
                         <select name="orderContent__deliveryType" onChange={event => setDeliveryType(event.target.options[event.target.selectedIndex].text)}>
                             <option value="1">НОВА ПОШТА (до відділення)</option>
                             <option value="2">НОВА ПОШТА (адресна доставка)</option>
                         </select>
                     </div>
-                    <h5>Спосіб оплати</h5>
+                    <h5>Спосіб оплати *</h5>
                     <div className="orderContent__paymentBlock">
                         <select className="orderContent__paymentType" onChange={event => setPaymentType(event.target.options[event.target.selectedIndex].text)}>
                             <option value="1">Оплата при отриманні</option>
@@ -114,7 +113,7 @@ function Order (props) {
                     <div className="orderContent__noteBlock" onChange={event => setMessage(event.target.value)}>
                         <textarea placeholder="Вкажіть додаткові побажання щодо замовлення" maxLength={300} rows={8}></textarea>
                     </div>
-                    <button className="acceptButton" disabled = {addedItems.length ? false : true} onClick = {sendToTelegram}>Підтвердити замовлення</button>
+                    <button className="acceptButton" disabled = {addedItems.length&&surname&&name&&phoneNumber ? false : true} onClick = {sendToTelegram}>{addedItems.length ? (surname&&name&&phoneNumber ? 'Підтвердити замовлення' : 'Вкажіть дані для відправки') : 'Відсутні товари'}</button>
                 </div>
                 <div className="orderContent__goods">
                     <h4>АКТИВНІ ЗАМОВЛЕННЯ</h4>
