@@ -4,6 +4,7 @@ import axios from 'axios';
 import Home from './pages/Home';
 import Favorite from './pages/Favorite';
 import Order from './pages/Order';
+import GoodsCard from './pages/GoodsCard';
 import Header from './components/Header';
 import QuickCart from './components/QuickCart';
 import Address from './components/Address';
@@ -91,6 +92,11 @@ function App() {
                 setItemsCartCounter = {setItemsCartCounter}
               />
             }>
+        </Route>
+        <Route path='/goods-card'
+          element = {
+            <GoodsCard />
+          }>
         </Route>
       </Routes>
       <Footer />

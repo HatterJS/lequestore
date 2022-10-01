@@ -1,5 +1,6 @@
 import React  from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const addToCartSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
   <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.4"/>
@@ -52,7 +53,7 @@ function GoodsItem(props) {
 
     return (
         <div className='content__goodsItem' style={{backgroundImage: `url(${props.goodsImage})`}}>
-            <div><p>{props.name}</p></div>
+            <Link to='/goods-card' state={{ id: props.id}}><div><p>{props.name}</p></div></Link>
             <div>
                 <p>{props.cost} грн.</p>
                 <button 

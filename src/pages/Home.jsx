@@ -41,6 +41,7 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
         <div className="content__goodsBlock">
             {isLoad ? goods.filter(filterGoodsCondition).map((obj) => <GoodsItem 
             key = {obj.id}
+            id = {obj.id}
             name = {obj.name}
             cost = {obj.cost}
             goodsImage = {obj.goodsImage}
