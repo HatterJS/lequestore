@@ -152,7 +152,7 @@ $maxWidth: 1090px;
         position: absolute;
         background-color: white;
         width: max-content;
-        min-width: 435px;
+        max-width: 435px;
         height: 100%;
         right: 0;
         top: 0;
@@ -184,15 +184,14 @@ $maxWidth: 1090px;
 //ADDED ITEM
 .AddedItem {
     @include flexCenter();
-    justify-content: space-between;
+    // justify-content: space-between;
     border: $borderBar;
     border-radius: 25px;
     margin-top: 15px;
     padding: 10px;
     transition: $transition;
     // min-width: 200px;
-    // flex: 1 1 auto;
-    // max-width: 600px;
+    // max-width: 400px;
     height: fit-content;
     cursor: pointer;
     img {
@@ -201,8 +200,8 @@ $maxWidth: 1090px;
         border-radius: 15px;
     }
     .AddedItem__description {
-        flex-grow: 1;
-        max-width: 170px;
+        width: 100%;
+        // max-width: 170px;
     }
     .AddedItem__cost {
         display: flex;
@@ -215,6 +214,12 @@ $maxWidth: 1090px;
             div {
                 width: 20px;
                 font-size: 16px;
+            }
+        }
+        .isLoadCounter {
+            color: rgb(182, 182, 182);
+            div {
+                color: rgb(209, 209, 209);
             }
         }
         p {
@@ -588,6 +593,9 @@ footer {
     margin: 0 auto;
     border-top: 1px solid $borderColor;
     padding: 20px 0;
+    .AddedItem {
+        max-width: 330px;
+    }
     h2 {
         margin-left: 10px;
     }
@@ -624,7 +632,7 @@ footer {
         .orderContent__deliveryForm {
             min-width: 400px;
             width: 50%;
-            margin-right: 20px;
+            margin-right: 40px;
             h5 {
                 margin-top: 10px;
                 margin-bottom: 5px;
@@ -653,9 +661,13 @@ footer {
         .orderContent__goods {
             display: flex;
             flex-direction: column;
-            min-width: 400px;
+            // min-width: 400px;
             width: 50%;
-            margin-left: 20px;
+            // margin-left: 20px;
+            .orderContent__itemsBlock {
+                max-height: 650px;
+                overflow: auto;
+            }
             h4 {
                 display: block;
                 border-bottom: 1px solid $borderColor;
@@ -704,25 +716,30 @@ footer {
         .goodsCard__size-option {
             display: flex;
             margin-top: 5px;
-            div {
+            input {
                 width: 40px;
                 padding: 5px;
                 margin-right: 10px;
                 border: $borderBar;
                 border-radius: 5px;
-                background-color: rgb(255, 243, 139);
+                background-color: rgb(245, 245, 245);
                 text-align: center;
-                cursor: pointer;
+                font-size: 16px;
+                appearance: none;
                 transition: $transition;
+                cursor: pointer;
                 &:hover {
                     transform: translateY(-2px);
                     box-shadow: 1px 1px 2px rgb(71, 71, 71);
                 }
-            }
-            .disable {
-                color: rgb(190, 190, 190);
-                background-color: rgb(240, 240, 240);
-                pointer-events: none;
+                &:checked {
+                    background-color: rgb(235, 255, 204);
+                    transform: translateY(-2px);
+                    box-shadow: 1px 1px 2px rgb(71, 71, 71);
+                }
+                &::before {
+                    content: attr(label);
+                }
             }
         }
     }

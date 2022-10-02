@@ -11,15 +11,28 @@ function Order (props) {
     const [deliveryType, setDeliveryType] = React.useState("Нова пошта (до відділення)");
     const [paymentType, setPaymentType] = React.useState("Оплата при отриманні");
     const [message, setMessage] = React.useState("");
+
+    const [isLoad, setIsLoad] = React.useState(false);
+    const [isLoadCount, setIsLoadCount] = React.useState(true);
   
-    const deleteFromCart = (obj) => { //удаление товаров из корзины
+    const deleteFromCart = (obj, amount) => { //удаление товаров из корзины
       axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${obj.id}`); //удаление с бека
       setAddedItems((prev) => prev.filter(item => item.id !== obj.id)); //удаление из корзины
       props.setItemsCartCounter(prev => prev - 1); //уменьшение счетчика корзины
-      props.totalCostMinus((prev => prev - (obj.cost * obj.amount))); //уменьшение суммы заказа
+      props.totalCostMinus(prev => prev - (obj.cost * amount)); //уменьшение суммы заказа
     }
 
-    const [isLoad, setIsLoad] = React.useState(false);
+    async function totalCostChange (id, cost, amount) { //изменение количества товара
+      setIsLoadCount(false);
+      try {
+        await axios.put(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${id}`, {amount: amount}); //удаление с бека
+      } catch (error) {
+        alert('Помилочка! Перезавантажте сторінку.');
+      }
+      props.totalCostMinus(prev => prev + cost); //уменьшение суммы заказа
+      setIsLoadCount(true);
+    }
+
     React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
         async function getData () {
           try {
@@ -38,7 +51,8 @@ function Order (props) {
         `<b>НОВЕ ЗАМОВЛЕННЯ!</b>\n` +
         `<b>_______________________________</b>\n` +
         addedItems.map((obj) => (
-            `<b>Назва товару: </b>${obj.name}\n` +
+            `<b>Назва товару: </b>${obj.name} x ${obj.amount}\n` +
+            `<b>Розмін: </b>${obj.size} \n` +
             `<b>Ціна: </b>${obj.cost} грн.\n` +
             `\n`
         )) +
@@ -121,7 +135,9 @@ function Order (props) {
                                         name = {obj.name}
                                         cost = {obj.cost}
                                         amount = {obj.amount}
-                                        deleteFromCart = {() => deleteFromCart(obj)}
+                                        deleteFromCart = {(amount) => deleteFromCart(obj, amount)}
+                                        totalCostChange = {(cost, amount) => totalCostChange(obj.id, cost, amount)}
+                                        isLoadCount = {isLoadCount}
                                     />)
                                 }
                             </div>

@@ -131,7 +131,7 @@
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  min-width: 435px;
+  max-width: 435px;
   height: 100%;
   right: 0;
   top: 0;
@@ -184,9 +184,6 @@
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   border: 1px solid rgba(64, 64, 64, 0.2);
   border-radius: 25px;
   margin-top: 15px;
@@ -204,10 +201,7 @@
   border-radius: 15px;
 }
 .AddedItem .AddedItem__description {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  max-width: 170px;
+  width: 100%;
 }
 .AddedItem .AddedItem__cost {
   display: -webkit-box;
@@ -227,6 +221,12 @@
 .AddedItem .AddedItem__cost .AddedItem__counter div {
   width: 20px;
   font-size: 16px;
+}
+.AddedItem .AddedItem__cost .isLoadCounter {
+  color: rgb(182, 182, 182);
+}
+.AddedItem .AddedItem__cost .isLoadCounter div {
+  color: rgb(209, 209, 209);
 }
 .AddedItem .AddedItem__cost p {
   font-weight: 700;
@@ -865,6 +865,9 @@ footer {
   border-top: 1px solid rgba(64, 64, 64, 0.2);
   padding: 20px 0;
 }
+.favorite__content .AddedItem {
+  max-width: 330px;
+}
 .favorite__content h2 {
   margin-left: 10px;
 }
@@ -913,7 +916,7 @@ footer {
 .orderContent .orderContent__content .orderContent__deliveryForm {
   min-width: 400px;
   width: 50%;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 .orderContent .orderContent__content .orderContent__deliveryForm h5 {
   margin-top: 10px;
@@ -950,9 +953,11 @@ footer {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  min-width: 400px;
   width: 50%;
-  margin-left: 20px;
+}
+.orderContent .orderContent__content .orderContent__goods .orderContent__itemsBlock {
+  max-height: 650px;
+  overflow: auto;
 }
 .orderContent .orderContent__content .orderContent__goods h4 {
   display: block;
@@ -1015,28 +1020,37 @@ footer {
   display: flex;
   margin-top: 5px;
 }
-.goodsCard__content .goodsCard__size .goodsCard__size-option div {
+.goodsCard__content .goodsCard__size .goodsCard__size-option input {
   width: 40px;
   padding: 5px;
   margin-right: 10px;
   border: 1px solid rgba(64, 64, 64, 0.2);
   border-radius: 5px;
-  background-color: rgb(255, 243, 139);
+  background-color: rgb(245, 245, 245);
   text-align: center;
-  cursor: pointer;
+  font-size: 16px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
-.goodsCard__content .goodsCard__size .goodsCard__size-option div:hover {
+.goodsCard__content .goodsCard__size .goodsCard__size-option input:hover {
   -webkit-transform: translateY(-2px);
           transform: translateY(-2px);
   -webkit-box-shadow: 1px 1px 2px rgb(71, 71, 71);
           box-shadow: 1px 1px 2px rgb(71, 71, 71);
 }
-.goodsCard__content .goodsCard__size .goodsCard__size-option .disable {
-  color: rgb(190, 190, 190);
-  background-color: rgb(240, 240, 240);
-  pointer-events: none;
+.goodsCard__content .goodsCard__size .goodsCard__size-option input:checked {
+  background-color: rgb(235, 255, 204);
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+  -webkit-box-shadow: 1px 1px 2px rgb(71, 71, 71);
+          box-shadow: 1px 1px 2px rgb(71, 71, 71);
+}
+.goodsCard__content .goodsCard__size .goodsCard__size-option input::before {
+  content: attr(label);
 }
 .goodsCard__content .goodsCard__sizeHelp {
   display: -webkit-box;

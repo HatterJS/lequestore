@@ -10,6 +10,19 @@ function AddedItem (props) {
 
     const [goodsAmount, setGoodsAmount] = React.useState(props.amount);
 
+    const changeCounterPlus = () => {
+        if (props.isLoadCount) {
+            setGoodsAmount(goodsAmount + 1);
+            props.totalCostChange(+ props.cost, goodsAmount);
+        }
+    }
+    const changeCounterMinus = () => {
+        if (goodsAmount > 1 & props.isLoadCount) {
+            setGoodsAmount(goodsAmount - 1);
+            props.totalCostChange(- props.cost, goodsAmount-1);
+        }
+    }
+
     return (
         <div className="AddedItem">
             <div>
@@ -20,15 +33,15 @@ function AddedItem (props) {
                 <div className="AddedItem__cost">
                     <p>{props.cost} грн.</p>
                     {props.amount &&
-                        <div className="AddedItem__counter counter">
-                            <div className="unselectable" onClick={() => ((goodsAmount > 1) && setGoodsAmount(goodsAmount - 1))}>-</div>
+                        <div className={props.isLoadCount ? "AddedItem__counter counter" : "AddedItem__counter counter isLoadCounter"}>
+                            <div className="unselectable" onClick={changeCounterMinus}>-</div>
                             {goodsAmount} шт.
-                            <div className="unselectable" onClick={() => setGoodsAmount(goodsAmount + 1)}>+</div>
+                            <div className="unselectable" onClick={changeCounterPlus}>+</div>
                         </div>
                     }
                 </div>
             </div>
-            <div onClick={props.deleteFromCart}>
+            <div onClick={() => props.deleteFromCart(goodsAmount)}>
                 {deleteFromCartSvg}
             </div>
         </div>

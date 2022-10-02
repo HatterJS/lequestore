@@ -8,13 +8,25 @@ function QuickCart(props) {
 
   const [addedItems, setAddedItems] = React.useState([]); //отображение товаров добавленных в корзину
   const [isLoad, setIsLoad] = React.useState(false);
+  const [isLoadCount, setIsLoadCount] = React.useState(true);
 
 
-  const deleteFromCart = (obj) => { //удаление товаров из корзины
+  const deleteFromCart = (obj, amount) => { //удаление товаров из корзины
     axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${obj.id}`); //удаление с бека
     setAddedItems((prev) => prev.filter(item => item.id !== obj.id)); //удаление из корзины
     props.setItemsCartCounter(prev => prev - 1); //уменьшение счетчика корзины
-    props.totalCostMinus((prev => prev - (obj.cost * obj.amount))); //уменьшение суммы заказа
+    props.totalCostMinus(prev => prev - (obj.cost * amount)); //уменьшение суммы заказа
+  }
+
+  async function totalCostChange (id, cost, amount) { //изменение количества товара
+    setIsLoadCount(false);
+    try {
+      await axios.put(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${id}`, {amount: amount}); //удаление с бека
+    } catch (error) {
+      alert('Помилочка! Перезавантажте сторінку.');
+    }
+    props.totalCostMinus(prev => prev + cost); //уменьшение суммы заказа
+    setIsLoadCount(true);
   }
 
   React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
@@ -42,7 +54,9 @@ function QuickCart(props) {
               name = {obj.name}
               cost = {obj.cost}
               amount = {obj.amount}
-              deleteFromCart = {() => deleteFromCart(obj)}
+              deleteFromCart = {(amount) => deleteFromCart(obj, amount)}
+              totalCostChange = {(cost, amount) => totalCostChange(obj.id, cost, amount)}
+              isLoadCount = {isLoadCount}
               />)
             }
             <div className="quickCart__emptyCart emptyCart" style = {{display: addedItems.length ? 'none' : 'flex'}}>
@@ -63,7 +77,7 @@ function QuickCart(props) {
             <p>Всього:</p>
             <p>{props.totalCost} грн.</p>
           </div>
-          <Link to={"/order"}><button className = 'acceptButton' disabled = {!addedItems.length ? true : false} onClick = {props.onClose}>Оформити замовлення</button></Link>
+          <Link to={"/order"}><button className = 'acceptButton' disabled = {!addedItems.length || !isLoadCount ? true : false} onClick = {props.onClose}>Оформити замовлення</button></Link>
           <button
             className='acceptButton'
             style={{background: 'none'}}

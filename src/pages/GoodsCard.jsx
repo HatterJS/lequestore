@@ -12,6 +12,7 @@ function GoodsCard(props) {
     const [goodsItem, setGoodsItem] = React.useState([]);
     const [isLoad, setIsLoad] = React.useState(false);
     const [goodsAmount, setGoodsAmount] = React.useState(1);
+    const [checkedSize, setCheckedSize] = React.useState("");
 
     const location = useLocation();
     const { id } = location.state;
@@ -20,6 +21,7 @@ function GoodsCard(props) {
         props.addedOnCart({
             "name": goodsItem.name,
             "cost": goodsItem.cost,
+            "size": checkedSize,
             "goodsImage": goodsItem.goodsImage,
             "amount": goodsAmount
         });
@@ -55,12 +57,13 @@ function GoodsCard(props) {
                             <div className="goodsCard__size">
                                 <p>Розмір:</p>
                                 <div className="goodsCard__size-option">
-                                    <div>XS</div>
-                                    <div>S</div>
-                                    <div className="disable">M</div>
-                                    <div className="disable">L</div>
-                                    <div>XL</div>
-                                    <div>XXL</div>
+                                    {goodsItem.size.map(obj => <input
+                                        key={obj}
+                                        label={obj}
+                                        type="radio"
+                                        name="size"
+                                        onClick={() => setCheckedSize(obj)}
+                                    />)}
                                 </div>
                             </div>
                             <div className="goodsCard__sizeHelp">
@@ -76,7 +79,7 @@ function GoodsCard(props) {
                                 </div>
                             </div>
                             <div className="goodsCard__accept">
-                                <button className="acceptButton" onClick={addedToCart}>Додати в кошик</button>
+                                <button className="acceptButton" disabled={!checkedSize ? true : false} onClick={addedToCart}>{checkedSize ? "Додати в кошик" : "Оберіть розмір"}</button>
                                 <button className="acceptButton" disabled>Купити в один клік</button>
                             </div>
                         </div>
