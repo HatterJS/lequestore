@@ -2,11 +2,6 @@ import React  from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const addToCartSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-  <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.4"/>
-  <rect x="0.5" y="0.5" width="39" height="39" rx="9.5" stroke="black" strokeOpacity="0.3"/>
-  <path d="M28 13L19.5287 26.1306C19.1832 26.666 18.4318 26.7461 17.9813 26.2955L12 20.3143" stroke="black" strokeOpacity="0.2" strokeWidth="3" strokeLinecap="round"/>
-</svg>
 const addToFavoriteSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
     <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.4"/>
     <rect x="0.5" y="0.5" width="39" height="39" rx="9.5" stroke="black" strokeOpacity="0.3"/>
@@ -16,22 +11,12 @@ const addToFavoriteSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="n
 
 function GoodsItem(props) {
 
-    const [isAdded, setIsAdded] = React.useState(false);
     const [isFavorite, setIsFavorite] = React.useState(false);
 
     React.useEffect(() => {
         setIsFavorite(props.itemsFromFavorite.map(obj => obj.name).includes(props.name));
     }, [props.itemsFromFavorite, props.name]);
 
-    const addedToCart = () => {
-        setIsAdded(!isAdded);
-        props.onAddToCart({
-            "id": props.id,
-            "name": props.name,
-            "cost": props.cost,
-            "goodsImage": props.goodsImage
-        });
-    }
     const addedToFavorite = () => {
         const addToFavorite = {
             "id": props.id,
@@ -52,20 +37,16 @@ function GoodsItem(props) {
     }
 
     return (
-        <div className='content__goodsItem' style={{backgroundImage: `url(${props.goodsImage})`}}>
-            <Link to='/goods-card' state={{ id: props.id}}><div><p>{props.name}</p></div></Link>
+        <div className='content__goodsItem'>
+            <div><p>{props.name}</p></div>
+            <Link to='/goods-card' state={{id: props.id}}><img src={props.goodsImage} alt="sorry" /></Link>
             <div>
-                <p>{props.cost} грн.</p>
-                <button 
-                    className={isAdded ? "addedToCartBtn" : "addToCartBtn"}
-                    onClick={addedToCart}>{addToCartSVG}
-                </button>
+                <p className="content__cost">{props.cost} грн.</p>
                 <button 
                     className={isFavorite ? "addedToFavoriteBtn" : "addToFavoriteBtn"}
                     onClick={isFavorite ? deleteFromFavorite : addedToFavorite}>{addToFavoriteSVG}
                 </button>
             </div>
-            <img src={props.goodsImage} alt="sorry" /> {/* for indexation*/}
         </div>
     );
 }

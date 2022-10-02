@@ -33,7 +33,7 @@ function App() {
     };
     getData();
       axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems')
-          .then(res => {setItemsCartCounter(res.data.length); res.data.map(item => setTotalCost(prev => (prev + item.cost)))}); //подгрузка с бекэнда товаров добавленных в корзину
+          .then(res => {setItemsCartCounter(res.data.length); res.data.map(item => setTotalCost(prev => (prev + (item.cost * item.amount))))}); //подгрузка с бекэнда товаров добавленных в корзину
       axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems')
           .then(res => {setItemsFavoriteCounter(res.data.length); setItemsFromFavorite(res.data)}); //подгрузка с бекэнда товаров добавленных в избранное
   }, []);
@@ -41,7 +41,7 @@ function App() {
   const addedOnCart = (obj) => {
     axios.post('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems', obj); //выгрузка на бекэнд товаров добавленных в корзину
     setItemsCartCounter(prev => prev + 1); //увеличение счетчика корзины
-    setTotalCost(prev => prev + obj.cost); //уведичение суммы заказа
+    setTotalCost(prev => prev + (obj.cost * obj.amount)); //уведичение суммы заказа
   }
 
   const filterGoodsCondition = (item) => {
@@ -95,7 +95,8 @@ function App() {
         </Route>
         <Route path='/goods-card'
           element = {
-            <GoodsCard />
+            <GoodsCard 
+              addedOnCart = {addedOnCart}/>
           }>
         </Route>
       </Routes>
