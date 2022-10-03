@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const arrowSVG = <svg width="12" height="7" viewBox="0 0 12 7">
 <path d="M1 1L6.26316 6L11 1" stroke="#404040" fill="none"/></svg>
 
@@ -6,12 +8,12 @@ function Header() {
         <header>
           <div className='topBar'>
             <ul className='topBar__mainMenu'>
-              <li><a href='./'>Про магазин</a></li>
-              <li><a href='./'>Доставка і оплата</a></li>
-              <li><a href='./'>Підібрати розмір</a></li>
-              <li><a href='./'>Обмін і повернення</a></li>
-              <li><a href='./'>FAQ</a></li>
-              <li><a href='./'>Контакти</a></li>
+              <li><Link to='/information'>Про магазин</Link></li>
+              <li><Link to='/information'>Доставка і оплата</Link></li>
+              <li><Link to='/information'>Підібрати розмір</Link></li>
+              <li><Link to='/information'>Обмін і повернення</Link></li>
+              <li><Link to='/information'>FAQ</Link></li>
+              <li><Link to='/information'>Контакти</Link></li>
             </ul>
             <ul className='topBar__social'>
               <li>Приєднуйтесь:</li>

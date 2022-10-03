@@ -85,6 +85,7 @@
   background-color: rgb(250, 250, 250);
   text-align: center;
   overflow: hidden;
+  z-index: 9;
 }
 .counter div {
   display: -webkit-box;
@@ -106,8 +107,17 @@
 .counter div:last-child {
   border-left: 1px solid rgba(64, 64, 64, 0.2);
 }
+.counter div:first-child:hover {
+  background-color: rgb(220, 220, 220);
+}
+.counter div:last-child:hover {
+  background-color: rgb(220, 220, 220);
+}
 
 .quickCart__shadow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
@@ -115,6 +125,11 @@
   z-index: 99;
   top: 0;
   left: 0;
+}
+.quickCart__shadow .quickCart__shadowArea {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
 }
 .quickCart__shadow .quickCart__content {
   display: -webkit-box;
@@ -131,18 +146,36 @@
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  max-width: 435px;
+  width: 435px;
   height: 100%;
   right: 0;
   top: 0;
   -webkit-box-shadow: 10px 0px 25px black;
           box-shadow: 10px 0px 25px black;
   padding: 30px;
+  z-index: 99;
 }
-.quickCart__shadow .quickCart__content h4 {
-  display: block;
+.quickCart__shadow .quickCart__content .quickCart__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-bottom: 1px solid rgba(64, 64, 64, 0.2);
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+}
+.quickCart__shadow .quickCart__content .quickCart__header svg {
+  cursor: pointer;
+}
+.quickCart__shadow .quickCart__content .quickCart__header svg:hover rect {
+  stroke-opacity: 0.6;
+}
+.quickCart__shadow .quickCart__content .quickCart__header svg:hover path {
+  fill-opacity: 0.6;
 }
 .quickCart__shadow .quickCart__content .quickCart__itemsBlock {
   display: -webkit-box;
@@ -176,7 +209,7 @@
   font-weight: 500;
 }
 
-.AddedItem {
+.addedItem {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -195,15 +228,26 @@
   height: fit-content;
   cursor: pointer;
 }
-.AddedItem img {
-  width: 100px;
+.addedItem .addedItem__forLink {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 25px;
+}
+.addedItem .addedItem__deleteItemBtn {
+  z-index: 9;
+}
+.addedItem img {
+  height: 120px;
   margin-right: 10px;
   border-radius: 15px;
 }
-.AddedItem .AddedItem__description {
+.addedItem .addedItem__description {
   width: 100%;
 }
-.AddedItem .AddedItem__cost {
+.addedItem .addedItem__cost {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -212,39 +256,39 @@
       -ms-flex-direction: column;
           flex-direction: column;
 }
-.AddedItem .AddedItem__cost .AddedItem__counter {
+.addedItem .addedItem__cost .addedItem__counter {
   border-radius: 5px;
   height: 30px;
   margin-top: 5px;
-  width: 100px;
+  width: 110px;
 }
-.AddedItem .AddedItem__cost .AddedItem__counter div {
-  width: 20px;
+.addedItem .addedItem__cost .addedItem__counter div {
+  width: 25px;
   font-size: 16px;
 }
-.AddedItem .AddedItem__cost .isLoadCounter {
+.addedItem .addedItem__cost .isLoadCounter {
   color: rgb(182, 182, 182);
 }
-.AddedItem .AddedItem__cost .isLoadCounter div {
+.addedItem .addedItem__cost .isLoadCounter div {
   color: rgb(209, 209, 209);
 }
-.AddedItem .AddedItem__cost p {
+.addedItem .addedItem__cost p {
   font-weight: 700;
   margin-top: 5px;
 }
-.AddedItem svg {
+.addedItem svg {
   -ms-flex-item-align: end;
       align-self: flex-end;
   margin-left: 10px;
   cursor: pointer;
 }
-.AddedItem svg:hover rect {
+.addedItem svg:hover rect {
   stroke-opacity: 0.6;
 }
-.AddedItem svg:hover path {
+.addedItem svg:hover path {
   fill-opacity: 0.6;
 }
-.AddedItem:hover {
+.addedItem:hover {
   -webkit-transform: translateY(-3px);
           transform: translateY(-3px);
   -webkit-box-shadow: 1px 1px 2px rgb(122, 122, 122);
@@ -865,7 +909,7 @@ footer {
   border-top: 1px solid rgba(64, 64, 64, 0.2);
   padding: 20px 0;
 }
-.favorite__content .AddedItem {
+.favorite__content .addedItem {
   max-width: 330px;
 }
 .favorite__content h2 {
@@ -878,7 +922,7 @@ footer {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-.favorite__content .favorite__itemsBlock .AddedItem {
+.favorite__content .favorite__itemsBlock .addedItem {
   margin: 5px;
 }
 
@@ -918,6 +962,33 @@ footer {
   width: 50%;
   margin-right: 40px;
 }
+.orderContent .orderContent__content .orderContent__deliveryForm .orderContent__deliveryAddress {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+.orderContent .orderContent__content .orderContent__deliveryForm .orderContent__deliveryAddress .orderContent__addressBlock {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+.orderContent .orderContent__content .orderContent__deliveryForm .orderContent__deliveryAddress div:first-child {
+  margin-right: 10px;
+}
+.orderContent .orderContent__content .orderContent__deliveryForm .orderContent__deliveryAddress input {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-top: 10px;
+}
+.orderContent .orderContent__content .orderContent__deliveryForm .orderContent__deliveryAddress .orderContent__department {
+  width: 100px;
+}
+.orderContent .orderContent__content .orderContent__deliveryForm .orderContent__deliveryAddress .orderContent__address {
+  width: 100%;
+}
 .orderContent .orderContent__content .orderContent__deliveryForm h5 {
   margin-top: 10px;
   margin-bottom: 5px;
@@ -956,6 +1027,7 @@ footer {
   width: 50%;
 }
 .orderContent .orderContent__content .orderContent__goods .orderContent__itemsBlock {
+  padding: 5px;
   max-height: 650px;
   overflow: auto;
 }
@@ -1090,6 +1162,9 @@ footer {
   display: flex;
   margin-top: 40px;
 }
+.goodsCard__content .goodsCard__accept a {
+  width: 100%;
+}
 .goodsCard__content .goodsCard__accept button {
   margin-right: 20px;
 }
@@ -1115,4 +1190,17 @@ footer {
 .goodsCard__description .goodsCard__context {
   margin-top: 10px;
   line-height: 1.5;
+}
+
+.information {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const deleteFromCartSvg = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
     <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.25"/>
@@ -13,7 +14,7 @@ function AddedItem (props) {
     const changeCounterPlus = () => {
         if (props.isLoadCount) {
             setGoodsAmount(goodsAmount + 1);
-            props.totalCostChange(+ props.cost, goodsAmount);
+            props.totalCostChange(+ props.cost, goodsAmount+1);
         }
     }
     const changeCounterMinus = () => {
@@ -24,16 +25,20 @@ function AddedItem (props) {
     }
 
     return (
-        <div className="AddedItem">
+        <div className="addedItem">
+            <Link to='/goods-card' state={{id: props.id}}>
+                <div className="addedItem__forLink" onClick={() => console.log("click")}></div>
+            </Link>
             <div>
                 <img src={props.goodsImage} alt="sneakers" />
             </div>
-            <div className='AddedItem__description'>
+            <div className='addedItem__description'>
                 <p>{props.name}</p>
-                <div className="AddedItem__cost">
+                {props.size && <p style={{fontSize:"14px"}}>(Розмір: <b>{props.size}</b>)</p>}
+                <div className="addedItem__cost">
                     <p>{props.cost} грн.</p>
                     {props.amount &&
-                        <div className={props.isLoadCount ? "AddedItem__counter counter" : "AddedItem__counter counter isLoadCounter"}>
+                        <div className={props.isLoadCount ? "addedItem__counter counter" : "addedItem__counter counter isLoadCounter"}>
                             <div className="unselectable" onClick={changeCounterMinus}>-</div>
                             {goodsAmount} шт.
                             <div className="unselectable" onClick={changeCounterPlus}>+</div>
@@ -41,7 +46,7 @@ function AddedItem (props) {
                     }
                 </div>
             </div>
-            <div onClick={() => props.deleteFromCart(goodsAmount)}>
+            <div className="addedItem__deleteItemBtn" onClick={() => props.deleteFromCart(goodsAmount)}>
                 {deleteFromCartSvg}
             </div>
         </div>

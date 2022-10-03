@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Favorite from './pages/Favorite';
 import Order from './pages/Order';
 import GoodsCard from './pages/GoodsCard';
+import Information from './pages/Information';
 import Header from './components/Header';
 import QuickCart from './components/QuickCart';
 import Address from './components/Address';
@@ -98,6 +99,11 @@ function App() {
             <GoodsCard 
               addedOnCart = {addedOnCart}/>
           }>
+        </Route>
+        <Route path='/information'
+          element={
+            <Information 
+          />}>
         </Route>
       </Routes>
       <Footer />
