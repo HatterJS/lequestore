@@ -17,8 +17,14 @@ function QuickCart(props) {
   const [isLoadCount, setIsLoadCount] = React.useState(true);
 
 
-  const deleteFromCart = (obj, amount) => { //удаление товаров из корзины
-    axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${obj.id}`); //удаление с бека
+  async function deleteFromCart(obj, amount) { //удаление товаров из корзины
+    setIsLoad(false);
+    try {
+      await axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${obj.id}`); //удаление с бека
+    } catch (error) {
+      alert('Помилочка! Перезавантажте сторінку.');
+    }
+    setIsLoad(true);
     setAddedItems((prev) => prev.filter(item => item.id !== obj.id)); //удаление из корзины
     props.setItemsCartCounter(prev => prev - 1); //уменьшение счетчика корзины
     props.totalCostMinus(prev => prev - (obj.cost * amount)); //уменьшение суммы заказа

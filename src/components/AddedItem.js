@@ -27,7 +27,7 @@ function AddedItem (props) {
     return (
         <div className="addedItem">
             <Link to='/goods-card' state={{id: props.id}}>
-                <div className="addedItem__forLink" onClick={() => console.log("click")}></div>
+                <div className="addedItem__forLink"></div>
             </Link>
             <div>
                 <img src={props.goodsImage} alt="sneakers" />

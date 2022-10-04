@@ -154,6 +154,28 @@
           box-shadow: 10px 0px 25px black;
   padding: 30px;
   z-index: 99;
+  -webkit-animation: appearence 0.3s ease-in 1 forwards;
+          animation: appearence 0.3s ease-in 1 forwards;
+}
+@-webkit-keyframes appearence {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+@keyframes appearence {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
 }
 .quickCart__shadow .quickCart__content .quickCart__header {
   display: -webkit-box;

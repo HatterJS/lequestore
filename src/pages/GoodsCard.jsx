@@ -11,6 +11,7 @@ function GoodsCard(props) {
 
     const [goodsItem, setGoodsItem] = React.useState([]);
     const [isLoad, setIsLoad] = React.useState(false);
+    const [delay, setDelay] = React.useState(false);
     const [goodsAmount, setGoodsAmount] = React.useState(1);
     const [checkedSize, setCheckedSize] = React.useState("");
 
@@ -25,6 +26,11 @@ function GoodsCard(props) {
             "goodsImage": goodsItem.goodsImage,
             "amount": goodsAmount
         });
+        setDelay(true);
+        setTimeout(() => {
+            setDelay(false);
+        }, 3000);
+        
     }
     
     React.useEffect(() => {
@@ -79,7 +85,7 @@ function GoodsCard(props) {
                                 </div>
                             </div>
                             <div className="goodsCard__accept">
-                                <button className="acceptButton" disabled={!checkedSize ? true : false} onClick={addedToCart}>{checkedSize ? "Додати в кошик" : "Оберіть розмір"}</button>
+                                <button className="acceptButton" disabled={!checkedSize||delay ? true : false} onClick={addedToCart}>{checkedSize ? "Додати в кошик" : "Оберіть розмір"}</button>
                                 <button className="acceptButton" disabled>Купити в один клік</button>
                             </div>
                         </div>

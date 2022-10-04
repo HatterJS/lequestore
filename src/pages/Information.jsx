@@ -2,12 +2,11 @@ import React from 'react';
 
 function Information() {
 
-    const [isLoad, setIsLoad] = React.useState(false);
-    setIsLoad(false);
+    // const [isLoad, setIsLoad] = React.useState(false);
 
     return (
         <div className='information'>
-            {isLoad ? <div>
+            {false ? <div> {/* FALSE ЗАМЕНИТЬ НА isLoad */}
 
             </div> :
             <div className="loader02">
