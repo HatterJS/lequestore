@@ -1,0 +1,140 @@
+$borderBar: 1px solid rgba(64, 64, 64, 0.2);
+$transition:  all 0.2s ease-in-out;
+$textColor: rgb(64, 64, 64);
+$transition:  all 0.2s ease-in-out;
+
+//ADMIN PANEL
+.adminPanel {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 1090px;
+    margin: 0 auto;
+    border-top: $borderBar;
+    padding-top: 10px;
+    input, select, label {
+        border: $borderBar;
+        padding: 8px;
+        font-size: 16px;
+    }
+    .adminPanel__bookmarkBlock{
+        display: flex;
+        align-items: flex-end;
+        height: 60px;
+        input {
+            width: 100px;
+            height: 35px;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            background-color: rgb(245, 245, 245);
+            text-align: center;
+            font-size: 16px;
+            appearance: none;
+            color: $textColor;
+            transition: $transition;
+            cursor: pointer;
+            &:hover {
+                height: 40px;
+                z-index: 1;
+            }
+            &:checked {
+                background-color: rgb(235, 255, 204);
+                height: 50px;
+                z-index: 1;
+            }
+            &::before {
+                content: attr(label);
+            }
+        }
+    }
+}
+
+//GOODS SECTION
+.adminPanel__sectionGoods {
+    display: flex;
+    border: $borderBar;
+    padding: 20px;
+    height: 100%;
+}
+.adminPanel__settings {
+    width: 50%;
+    margin-right: 40px;
+    h4 {
+        margin-right: 10px;
+    }
+    div {
+        display: flex;
+        align-items: center;
+        margin-top: 30px;
+    }
+    input, select, label {
+        border-radius: 10px;
+    }
+    p {
+        margin-left: 10px;
+    }
+    .adminPanel__nameBlock {
+        h4 {
+            width: 150px;
+        }
+        input {
+            width: 100%;
+        }
+    }
+    .adminPanel__costBlock {
+        input {
+            width: 80px;
+        }
+    }
+    .adminPanel__sizeBlock {
+        input {
+            display: none;
+            &:checked ~ label{
+                background-color: rgb(235, 255, 204);
+            }
+        }
+        label {
+            display: block;
+            cursor: pointer;
+            margin: 0 2px;
+            width: 30px;
+            text-align: center;
+            background-color: rgb(245, 245, 245);
+            transition: $transition;
+            &:hover {
+                background-color: white;
+                box-shadow: 1px 1px 2px black;
+                transform: translateY(-2px);
+            }
+        }
+    }
+    .adminPanel__imageBlock {
+        h4 {
+            width: 250px;
+        }
+        input {
+            width: 100%;
+        }}
+}
+.adminPanel__example {
+    width: 50%;
+}
+
+//AUTORIZATION
+.adminPanel__enterForm {
+    align-self: center;
+    margin: auto 0;
+    border: $borderBar;
+    padding: 20px;
+    border-radius: 20px;
+    transform: translateY(-3px);
+    box-shadow: 1px 1px 2px rgb(122, 122, 122);
+    .adminPanel__passwordField {
+        margin-top: 5px;
+    }
+    input {
+        border-radius: 5px;
+        border: $borderBar;
+        padding: 5px;
+    }
+}

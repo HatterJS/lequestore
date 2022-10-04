@@ -6,6 +6,7 @@ import Favorite from './pages/Favorite';
 import Order from './pages/Order';
 import GoodsCard from './pages/GoodsCard';
 import Information from './pages/Information';
+import Admin from './pages/Admin/Admin';
 import Header from './components/Header';
 import QuickCart from './components/QuickCart';
 import Address from './components/Address';
@@ -102,6 +103,11 @@ function App() {
         <Route path='/information'
           element={
             <Information 
+          />}>
+        </Route>
+        <Route path='/admin'
+          element={
+            <Admin 
           />}>
         </Route>
       </Routes>
