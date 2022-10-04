@@ -79,7 +79,6 @@ function App() {
           />}
         />
         <Route path = '/favorite' element = {<Favorite
-            itemsCartCounterMinus = {(counter) => setItemsCartCounter(counter)}
             itemsFavoriteCounterMinus = {setItemsFavoriteCounter}
             setItemsFromFavorite = {setItemsFromFavorite}
             />}

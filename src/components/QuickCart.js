@@ -67,7 +67,8 @@ function QuickCart(props) {
           </div>
           {isLoad ? <div className="quickCart__itemsBlock">
             {addedItems.map((obj) => <AddedItem  key = {obj.id}
-              id = {obj.id}
+              // id = {obj.id}
+              parentId = {obj.parentId}
               goodsImage = {obj.goodsImage}
               name = {obj.name}
               size = {obj.size}

@@ -19,7 +19,7 @@ function GoodsItem(props) {
 
     const addedToFavorite = () => {
         const addToFavorite = {
-            "id": props.id,
+            "parentId": props.id,
             "name": props.name,
             "cost": props.cost,
             "goodsImage": props.goodsImage

@@ -20,6 +20,7 @@ function GoodsCard(props) {
 
     const addedToCart = () => {
         props.addedOnCart({
+            "parentId": goodsItem.id,
             "name": goodsItem.name,
             "cost": goodsItem.cost,
             "size": checkedSize,

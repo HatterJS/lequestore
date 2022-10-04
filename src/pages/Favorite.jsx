@@ -35,7 +35,8 @@ function Favorite (props) {
                 <>
                     <div className="favorite__itemsBlock">
                         {addedItems.map((obj) => <AddedItem  key = {obj.id}
-                            id = {obj.id}
+                            // id = {obj.id}
+                            parentId = {obj.parentId}
                             goodsImage = {obj.goodsImage}
                             name = {obj.name}
                             cost = {obj.cost}

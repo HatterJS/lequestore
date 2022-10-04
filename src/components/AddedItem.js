@@ -26,7 +26,7 @@ function AddedItem (props) {
 
     return (
         <div className="addedItem">
-            <Link to='/goods-card' state={{id: props.id}}>
+            <Link to='/goods-card' state={{id: props.parentId}}>
                 <div className="addedItem__forLink"></div>
             </Link>
             <div>

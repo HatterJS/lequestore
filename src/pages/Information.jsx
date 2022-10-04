@@ -7,7 +7,6 @@ function Information() {
     return (
         <div className='information'>
             {false ? <div> {/* FALSE ЗАМЕНИТЬ НА isLoad */}
-
             </div> :
             <div className="loader02">
                 <div className="border02">
