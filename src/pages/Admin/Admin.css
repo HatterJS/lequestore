@@ -82,11 +82,34 @@
           align-items: center;
   margin-top: 30px;
 }
-.adminPanel__settings input, .adminPanel__settings select, .adminPanel__settings label {
+.adminPanel__settings input, .adminPanel__settings select, .adminPanel__settings label, .adminPanel__settings button {
   border-radius: 10px;
 }
 .adminPanel__settings p {
   margin-left: 10px;
+}
+.adminPanel__settings .adminPanel__recomendIdBlock button {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  background-color: rgb(245, 245, 245);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.adminPanel__settings .adminPanel__recomendIdBlock button:hover {
+  -webkit-box-shadow: 1px 1px 2px black;
+          box-shadow: 1px 1px 2px black;
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+}
+.adminPanel__settings .adminPanel__recomendIdBlock button:active {
+  -webkit-box-shadow: 1px 1px 2px black inset;
+          box-shadow: 1px 1px 2px black inset;
+  -webkit-transform: translateY(2px);
+          transform: translateY(2px);
+}
+.adminPanel__settings .adminPanel__idBlock input {
+  width: 50px;
 }
 .adminPanel__settings .adminPanel__nameBlock h4 {
   width: 150px;
@@ -120,11 +143,17 @@
   -webkit-transform: translateY(-2px);
           transform: translateY(-2px);
 }
+.adminPanel__settings .adminPanel__imageBlock p {
+  font-size: 14px;
+  margin-right: 5px;
+}
 .adminPanel__settings .adminPanel__imageBlock h4 {
-  width: 250px;
+  width: 155px;
 }
 .adminPanel__settings .adminPanel__imageBlock input {
-  width: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
 }
 
 .adminPanel__example {

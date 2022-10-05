@@ -67,11 +67,33 @@ $transition:  all 0.2s ease-in-out;
         align-items: center;
         margin-top: 30px;
     }
-    input, select, label {
+    input, select, label, button {
         border-radius: 10px;
     }
     p {
         margin-left: 10px;
+    }
+    .adminPanel__recomendIdBlock {
+        button {
+            padding: 10px;
+            font-size: 14px;
+            border: $borderBar;
+            background-color: rgb(245, 245, 245);
+            transition: $transition;
+            &:hover {
+                box-shadow: 1px 1px 2px black;
+                transform: translateY(-2px);
+            }
+            &:active {
+                box-shadow: 1px 1px 2px black inset;
+                transform: translateY(2px);
+            }
+        }
+    }
+    .adminPanel__idBlock {
+        input {
+            width: 50px;
+        }
     }
     .adminPanel__nameBlock {
         h4 {
@@ -109,11 +131,15 @@ $transition:  all 0.2s ease-in-out;
         }
     }
     .adminPanel__imageBlock {
+        p {
+            font-size: 14px;
+            margin-right: 5px;
+        }
         h4 {
-            width: 250px;
+            width: 155px;
         }
         input {
-            width: 100%;
+            flex: 1 1 auto;
         }}
 }
 .adminPanel__example {
