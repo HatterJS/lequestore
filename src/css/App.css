@@ -476,10 +476,7 @@ header {
   position: absolute;
   bottom: -5px;
   left: 35px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  min-width: 16px;
+  min-width: 25px;
   padding: 2px;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
@@ -612,57 +609,11 @@ nav {
   margin-right: 10px;
 }
 
-.content__banner-slider {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: relative;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  max-width: 1090px;
-  width: 100%;
-  margin: 0 auto;
+.bannerBlock {
   max-width: 1080px;
-  margin: 5px auto;
+  margin: 0 auto;
   margin-top: 10px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-.content__banner-slider img {
-  width: 100%;
-}
-.content__banner-slider ul {
-  position: absolute;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  bottom: 10px;
-}
-.content__banner-slider ul li {
-  position: relative;
   border: 1px solid rgba(64, 64, 64, 0.2);
-  height: 12px;
-  width: 12px;
-  margin: 2px;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-.content__banner-slider ul li:hover {
-  -webkit-transform: translateY(-1px);
-          transform: translateY(-1px);
-  -webkit-box-shadow: 1px 1px 1px rgb(64, 64, 64);
-          box-shadow: 1px 1px 1px rgb(64, 64, 64);
-  background-color: rgba(255, 255, 255, 0.8);
-}
-.content__banner-slider ul li:first-child {
-  background-color: rgba(255, 240, 120, 0.7);
 }
 
 .content__hotOffers {
@@ -695,13 +646,14 @@ nav {
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   min-width: 220px;
-  margin: 5px;
+  margin: 10px 5px;
   cursor: pointer;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   background-color: rgba(64, 64, 64, 0.1);
   background: rgb(243, 243, 243);
   border: 1px solid rgba(64, 64, 64, 0.2);
+  border-radius: 0 0 10px 10px;
 }
 .content__hotOffers div p {
   display: -webkit-box;
@@ -724,15 +676,13 @@ nav {
           transform: translateY(-2px);
   -webkit-box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
           box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
-  background: -webkit-gradient(linear, left top, right top, from(rgb(255, 245, 165)), color-stop(50%, rgb(255, 240, 135)), to(rgb(255, 245, 165)));
-  background: linear-gradient(90deg, rgb(255, 245, 165) 0%, rgb(255, 240, 135) 50%, rgb(255, 245, 165) 100%);
+  background: rgb(255, 245, 170);
 }
 .content__hotOffers .content_activeHotOffers {
-  background: -webkit-gradient(linear, left top, right top, from(rgb(255, 245, 165)), color-stop(50%, rgb(255, 240, 135)), to(rgb(255, 245, 165)));
-  background: linear-gradient(90deg, rgb(255, 245, 165) 0%, rgb(255, 240, 135) 50%, rgb(255, 245, 165) 100%);
+  background: rgb(255, 245, 170);
 }
 
-.content h2 {
+.content h4 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -740,15 +690,15 @@ nav {
   margin: 0 auto;
   overflow: auto;
 }
-.content h2 div {
-  border-top: 1px solid rgb(64, 64, 64);
+.content h4 div {
+  border-top: 1px solid rgba(64, 64, 64, 0.2);
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  margin-left: 20px;
+  margin: 0 20px;
 }
 
 .content__goodsBlock {
@@ -814,7 +764,7 @@ nav {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 5px 0;
-  min-height: 30px;
+  min-height: 50px;
   background-color: rgba(0, 0, 0, 0.3);
   color: rgba(255, 255, 255, 0.5);
   -webkit-transition: all 0.2s ease-in-out;

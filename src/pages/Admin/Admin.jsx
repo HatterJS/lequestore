@@ -16,7 +16,7 @@ function Admin() {
 
     const [login, setLogin] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const [accepted, setAccepted] = React.useState(true);
+    const [accepted, setAccepted] = React.useState(false);
 
     const [isPosted, setIsPosted] = React.useState(false);
 

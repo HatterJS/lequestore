@@ -1,5 +1,6 @@
 import GoodsItem from '../components/GoodsItem';
 import NavBar from '../components/NavBar';
+import Banner from '../components/Banner';
 import '../css/loader.css';
 
 function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondition, itemsFromFavorite, setItemsFavoriteCounter, setItemsFromFavorite, isLoad}) {
@@ -9,16 +10,7 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
         <NavBar 
         onChangeSearch = {(searchValue) => setGoodsTitle(searchValue)}
         />
-        <div className="content__banner-slider">
-            <img src="/img/banner-slider/banner_01.jpg" alt="banner" />
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
+        <Banner />
         <div className="content__hotOffers">
             <div
             className={(goodsTitle==='розпродаж') ? 'content_activeHotOffers' : ''} 
@@ -37,7 +29,7 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
             onClick={() => setGoodsTitle('')}
             ><p>Всі пропозиції</p></div>
         </div>
-        <h2>{goodsTitle ? `Пошук: ${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
+        <h4><div></div> {goodsTitle ? `Пошук: ${goodsTitle}` : 'Всі пропозиції'} <div></div></h4>
         <div className="content__goodsBlock">
             {isLoad ? goods.filter(filterGoodsCondition).map((obj) => <GoodsItem 
             key = {obj.id}
