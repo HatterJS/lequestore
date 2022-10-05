@@ -455,7 +455,7 @@ nav {
 }
     // GOODS TITLE
 .content {
-    h4 {
+    h2 {
         display: flex;
         max-width: 1080px;
         margin: 0 auto;
@@ -488,7 +488,7 @@ nav {
         overflow: hidden;
         transition: $transition;
         p {
-            width: 200px;
+            padding: 5px 30px;
             text-align: center;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.5);
@@ -575,6 +575,12 @@ nav {
 // FOOTER
 footer {
     @include bgColor(1);
+    .footer__ovner {
+        text-align: center;
+        a {
+            color: rgb(77, 77, 77);
+        }
+    }
 }
 .footer {
     display: flex;

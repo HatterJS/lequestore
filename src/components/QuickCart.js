@@ -60,7 +60,7 @@ function QuickCart(props) {
         <div className="quickCart__shadowArea" onClick={props.onClose}></div>
         <div className="quickCart__content">
           <div className="quickCart__header">
-            <h4>АКТИВНІ ЗАМОВЛЕННЯ</h4>
+            <h3>АКТИВНІ ЗАМОВЛЕННЯ</h3>
             <div className="addedItem__deleteItemBtn" onClick={props.onClose}>
                 {deleteFromCartSvg}
             </div>

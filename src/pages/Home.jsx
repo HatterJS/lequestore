@@ -14,22 +14,22 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
         <div className="content__hotOffers">
             <div
             className={(goodsTitle==='розпродаж') ? 'content_activeHotOffers' : ''} 
-            onClick={() => setGoodsTitle('розпродаж')}
+            onClick={() => setGoodsTitle('Розпродаж')}
             ><p>Розпродаж</p></div>
             <div
             className={(goodsTitle==='нова колекція') ? 'content_activeHotOffers' : ''}
-            onClick={() => setGoodsTitle('нова колекція')}
+            onClick={() => setGoodsTitle('Нова колекція')}
             ><p>Нова колекція</p></div>
             <div
             className={(goodsTitle==='хіт продажів') ? 'content_activeHotOffers' : ''}
-            onClick={() => setGoodsTitle('хіт продажів')}
+            onClick={() => setGoodsTitle('Хіт продажів')}
             ><p>Хіт продажів</p></div>
             <div
             className={(goodsTitle==='') ? 'content_activeHotOffers' : ''}
             onClick={() => setGoodsTitle('')}
             ><p>Всі пропозиції</p></div>
         </div>
-        <h4><div></div> {goodsTitle ? `Пошук: ${goodsTitle}` : 'Всі пропозиції'} <div></div></h4>
+        <h2><div></div> {goodsTitle ? `${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
         <div className="content__goodsBlock">
             {isLoad ? goods.filter(filterGoodsCondition).map((obj) => <GoodsItem 
             key = {obj.id}

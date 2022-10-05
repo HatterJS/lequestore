@@ -30,7 +30,7 @@ function Favorite (props) {
 
     return (
         <div className="favorite__content">
-            <h2>ОБРАНЕ</h2>
+            <h1>ОБРАНЕ</h1>
             {isLoad ?
                 <>
                     <div className="favorite__itemsBlock">

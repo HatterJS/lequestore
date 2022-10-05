@@ -17,7 +17,8 @@
 .adminPanel input, .adminPanel select, .adminPanel label {
   border: 1px solid rgba(64, 64, 64, 0.2);
   padding: 8px;
-  font-size: 16px;
+  font-size: 14px;
+  color: rgb(64, 64, 64);
 }
 .adminPanel .adminPanel__bookmarkBlock {
   display: -webkit-box;
@@ -80,7 +81,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 30px;
+  margin-top: 15px;
 }
 .adminPanel__settings input, .adminPanel__settings select, .adminPanel__settings label, .adminPanel__settings button {
   border-radius: 10px;
@@ -89,7 +90,7 @@
   margin-left: 10px;
 }
 .adminPanel__settings .adminPanel__recomendIdBlock button {
-  padding: 10px;
+  padding: 5px;
   font-size: 14px;
   border: 1px solid rgba(64, 64, 64, 0.2);
   background-color: rgb(245, 245, 245);
@@ -109,7 +110,7 @@
           transform: translateY(2px);
 }
 .adminPanel__settings .adminPanel__idBlock input {
-  width: 50px;
+  width: 70px;
 }
 .adminPanel__settings .adminPanel__nameBlock h4 {
   width: 150px;
@@ -128,6 +129,8 @@
 }
 .adminPanel__settings .adminPanel__sizeBlock label {
   display: block;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   cursor: pointer;
   margin: 0 2px;
   width: 30px;
@@ -166,7 +169,7 @@
       align-self: center;
   margin: auto 0;
   border: 1px solid rgba(64, 64, 64, 0.2);
-  padding: 20px;
+  padding: 15px;
   border-radius: 20px;
   -webkit-transform: translateY(-3px);
           transform: translateY(-3px);
@@ -179,5 +182,8 @@
 .adminPanel__enterForm input {
   border-radius: 5px;
   border: 1px solid rgba(64, 64, 64, 0.2);
+  padding: 3px;
+}
+.adminPanel__enterForm button {
   padding: 5px;
 }

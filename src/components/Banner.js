@@ -7,7 +7,7 @@ function Banner() {
             <Carousel.Item>
                 <img
                 className="d-block w-100"
-                src="/img/banner-slider/banner_01.jpg"
+                src="/img/banner-slider/banner_03.jpg"
                 alt="First slide"
                 />
                 <Carousel.Caption>
@@ -19,7 +19,7 @@ function Banner() {
             <Carousel.Item>
                 <img
                 className="d-block w-100"
-                src="/img/banner-slider/banner_02.jpg"
+                src="/img/banner-slider/banner_01.jpg"
                 alt="Second slide"
                 />
                 <Carousel.Caption>
@@ -31,7 +31,7 @@ function Banner() {
             <Carousel.Item>
                 <img
                 className="d-block w-100"
-                src="/img/banner-slider/banner_03.jpg"
+                src="/img/banner-slider/banner_02.jpg"
                 alt="Third slide"
                 />
                 <Carousel.Caption>

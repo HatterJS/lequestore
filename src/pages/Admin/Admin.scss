@@ -15,7 +15,8 @@ $transition:  all 0.2s ease-in-out;
     input, select, label {
         border: $borderBar;
         padding: 8px;
-        font-size: 16px;
+        font-size: 14px;
+        color: $textColor;
     }
     .adminPanel__bookmarkBlock{
         display: flex;
@@ -65,7 +66,7 @@ $transition:  all 0.2s ease-in-out;
     div {
         display: flex;
         align-items: center;
-        margin-top: 30px;
+        margin-top: 15px;
     }
     input, select, label, button {
         border-radius: 10px;
@@ -75,7 +76,7 @@ $transition:  all 0.2s ease-in-out;
     }
     .adminPanel__recomendIdBlock {
         button {
-            padding: 10px;
+            padding: 5px;
             font-size: 14px;
             border: $borderBar;
             background-color: rgb(245, 245, 245);
@@ -92,7 +93,7 @@ $transition:  all 0.2s ease-in-out;
     }
     .adminPanel__idBlock {
         input {
-            width: 50px;
+            width: 70px;
         }
     }
     .adminPanel__nameBlock {
@@ -117,6 +118,7 @@ $transition:  all 0.2s ease-in-out;
         }
         label {
             display: block;
+            box-sizing: content-box;
             cursor: pointer;
             margin: 0 2px;
             width: 30px;
@@ -151,7 +153,7 @@ $transition:  all 0.2s ease-in-out;
     align-self: center;
     margin: auto 0;
     border: $borderBar;
-    padding: 20px;
+    padding: 15px;
     border-radius: 20px;
     transform: translateY(-3px);
     box-shadow: 1px 1px 2px rgb(122, 122, 122);
@@ -161,6 +163,9 @@ $transition:  all 0.2s ease-in-out;
     input {
         border-radius: 5px;
         border: $borderBar;
+        padding: 3px;
+    }
+    button {
         padding: 5px;
     }
 }

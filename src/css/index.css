@@ -1,5 +1,6 @@
 address {
   font: inherit;
+  margin: 0;
 }
 
 body {
@@ -14,12 +15,14 @@ body {
   font-family: "Roboto";
 }
 
-a, h1, h2, h3, h4, h5 {
+p, a, h1, h2, h3, h4, h5 {
   text-decoration: none;
   color: rgb(64, 64, 64);
+  margin: 0;
+  padding: 0;
 }
 
-p, ul, li {
+ul, li {
   margin: 0;
   padding: 0;
 }
@@ -43,4 +46,24 @@ button:hover {
 
 input:focus {
   outline: none;
+}
+
+h1 {
+  font-size: 1.6em;
+}
+
+h2 {
+  font-size: 1.4em;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+h5 {
+  font-size: 0.8em;
 }

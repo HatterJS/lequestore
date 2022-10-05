@@ -103,7 +103,7 @@ function Order (props) {
     return (
         <div className="orderContent">
             <div className="orderContent__title">
-                <h2>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</h2>
+                <h1>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</h1>
                 <p>На всі замовлення потрібна часткова передоплата в розмірі 100 грн.</p>
             </div>
             <div className="orderContent__content">
@@ -158,7 +158,7 @@ function Order (props) {
                     </div>
                     <h5>Примітка до замовлення</h5>
                     <div className="orderContent__noteBlock" onChange={event => setMessage(event.target.value)}>
-                        <textarea placeholder="Вкажіть додаткові побажання щодо замовлення" maxLength={300} rows={8}></textarea>
+                        <textarea placeholder="Вкажіть додаткові побажання щодо замовлення" maxLength={300} rows={4}></textarea>
                     </div>
                     <button className="acceptButton" disabled = {addedItems.length&&surname&&name&&(phoneNumber.length > 9)&&deliveryType&&paymentType ? false : true} onClick = {acceptOrder}>{addedItems.length ? (surname&&name&&(phoneNumber.length > 9)&&deliveryType&&paymentType ? 'Підтвердити замовлення' : 'Вкажіть дані для відправки') : 'Відсутні товари'}</button>
                 </div>

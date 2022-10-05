@@ -682,7 +682,7 @@ nav {
   background: rgb(255, 245, 170);
 }
 
-.content h4 {
+.content h2 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -690,7 +690,7 @@ nav {
   margin: 0 auto;
   overflow: auto;
 }
-.content h4 div {
+.content h2 div {
   border-top: 1px solid rgba(64, 64, 64, 0.2);
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -745,7 +745,7 @@ nav {
   transition: all 0.2s ease-in-out;
 }
 .content__goodsBlock div.content__goodsItem p {
-  width: 200px;
+  padding: 5px 30px;
   text-align: center;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.5);
@@ -838,6 +838,12 @@ nav {
 
 footer {
   background-color: rgb(64, 64, 64);
+}
+footer .footer__ovner {
+  text-align: center;
+}
+footer .footer__ovner a {
+  color: rgb(77, 77, 77);
 }
 
 .footer {

@@ -148,12 +148,12 @@ function Admin() {
             </div> :
             <div className='adminPanel__enterForm'>
                 <div className="adminPanel__loginField">
-                    <h5 className='unselectable'>Логін:</h5>
-                    <input type="text" placeholder='Введіть логін' maxLength={12} value={login} onChange={event => setLogin(event.target.value)}/>
+                    <h4 className='unselectable'>Логін:</h4>
+                    <input type="text" maxLength={12} value={login} onChange={event => setLogin(event.target.value)}/>
                 </div>
                 <div className="adminPanel__passwordField">
-                    <h5 className='unselectable'>Пароль:</h5>
-                    <input type="text" placeholder='Введіть пароль' maxLength={12} value={password} onChange={event => setPassword(event.target.value)}/>
+                    <h4 className='unselectable'>Пароль:</h4>
+                    <input type="text" maxLength={12} value={password} onChange={event => setPassword(event.target.value)}/>
                 </div>
                 <button className='acceptButton' disabled={login&&password ? false : true} onClick={enter}>{login&&password ? 'Вхід' : 'Введіть дані'}</button>
             </div>}
