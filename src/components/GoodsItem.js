@@ -1,5 +1,4 @@
 import React  from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 const addToFavoriteSVG = <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -14,26 +13,20 @@ function GoodsItem(props) {
     const [isFavorite, setIsFavorite] = React.useState(false);
 
     React.useEffect(() => {
-        setIsFavorite(props.itemsFromFavorite.map(obj => obj.name).includes(props.name));
-    }, [props.itemsFromFavorite, props.name]);
+        props.favorites && setIsFavorite(props.favorites.map(obj => obj.id).includes(props.id));
+    }, [props.id, props.favorites]);
 
-    const addedToFavorite = () => {
+    const addToFavorite = () => {
         const addToFavorite = {
-            "parentId": props.id,
+            "id": props.id,
             "name": props.name,
             "cost": props.cost,
             "goodsImage": props.goodsImage
         };
-        axios.post('https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems', addToFavorite); //выгрузка на бекэнд товаров добавленных в избранное
-        props.setItemsFavoriteCounter(prev => prev + 1); //увеличение счетчика избранных
-        props.setItemsFromFavorite(prev => [...prev, addToFavorite]); //добавление в локальный массив избранных
-    }
-    const deleteFromFavorite = () => {
-        axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems').then((res) => {
-            res.data.map((item) => item.name.includes(props.name) && axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/favoriteItems/${item.id}`));
-        });
-        props.setItemsFavoriteCounter(prev => prev - 1); //уменьшение счетчика избранных
-        props.setItemsFromFavorite(prev => prev.filter((item) => !item.name.includes(props.name))); //удаление из локального массива избранных
+        !isFavorite ?
+            props.setFavorites(prev => [...prev, addToFavorite]) :
+            props.setFavorites(JSON.parse(localStorage.getItem('favorites')).filter(obj => obj.id!==props.id));
+        setIsFavorite(!isFavorite);
     }
 
     return (
@@ -44,7 +37,7 @@ function GoodsItem(props) {
                 <p className="content__cost">{props.cost} грн.</p>
                 <button 
                     className={isFavorite ? "addedToFavoriteBtn" : "addToFavoriteBtn"}
-                    onClick={isFavorite ? deleteFromFavorite : addedToFavorite}>{addToFavoriteSVG}
+                    onClick={addToFavorite}>{addToFavoriteSVG}
                 </button>
             </div>
         </div>

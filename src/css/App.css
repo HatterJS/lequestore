@@ -292,12 +292,6 @@
   width: 25px;
   font-size: 16px;
 }
-.addedItem .addedItem__cost .isLoadCounter {
-  color: rgb(182, 182, 182);
-}
-.addedItem .addedItem__cost .isLoadCounter div {
-  color: rgb(209, 209, 209);
-}
 .addedItem .addedItem__cost p {
   font-weight: 700;
   margin-top: 5px;

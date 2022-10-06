@@ -1,9 +1,10 @@
+import React from 'react';
 import GoodsItem from '../components/GoodsItem';
 import NavBar from '../components/NavBar';
 import Banner from '../components/Banner';
 import '../css/loader.css';
 
-function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondition, itemsFromFavorite, setItemsFavoriteCounter, setItemsFromFavorite, isLoad}) {
+function Home ({goods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites}) {
 
     return (
     <div className="content">
@@ -31,16 +32,14 @@ function Home ({goods, goodsTitle, setGoodsTitle, addedOnCart, filterGoodsCondit
         </div>
         <h2><div></div> {goodsTitle ? `${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
         <div className="content__goodsBlock">
-            {isLoad ? goods.filter(filterGoodsCondition).map((obj) => <GoodsItem 
+            {isLoad ? goods.filter(filterGoodsCondition).map((obj) => <GoodsItem
             key = {obj.id}
             id = {obj.id}
             name = {obj.name}
             cost = {obj.cost}
             goodsImage = {obj.goodsImage}
-            onAddToCart = {(cartItem) => addedOnCart(cartItem)}
-            itemsFromFavorite = {itemsFromFavorite}
-            setItemsFavoriteCounter = {setItemsFavoriteCounter}
-            setItemsFromFavorite = {setItemsFromFavorite}
+            setFavorites = {setFavorites}
+            favorites = {favorites}
             />) : 
             <div className="loader02">
                 <div className="border02">

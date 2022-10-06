@@ -16,6 +16,8 @@ function Address(props) {
         <line x1="19.9054" y1="35.5541" x2="31.7703" y2="35.5541" stroke="#8C8C8C" strokeWidth="2" strokeLinecap="round"/>
     </svg>
 
+    const totalCost = props.cartItems && props.cartItems.map(obj => obj.cost*obj.amount).reduce(function (sum, elem) {return sum + elem;}, 0);
+
     return(
         <address>
             <div className="addressBlock">
@@ -35,7 +37,7 @@ function Address(props) {
                         <Link to = "/favorite">
                             <div className='addressBlock__favorite'>{addToFavoriteSVG}
                                 <div className="addressBlock__favoriteCounter">
-                                    <p>{props.itemsFavoriteCounter}</p>
+                                    <p>{props.favorites.length}</p>
                                 </div>
                             </div>
                         </Link>
@@ -44,11 +46,11 @@ function Address(props) {
                         <div className='addressBlock__cart' onClick={props.onClickCart}>
                             {addToCartSVG}
                             <div className="addressBlock__cartCounter">
-                                <p>{props.itemsCartCounter}</p>
+                                <p>{props.cartItems.length}</p>
                             </div>
                         </div>
                         <div className='addressBlock__totalCost'>
-                            <p>{props.totalCost} грн.</p>
+                            <p>{totalCost} грн.</p>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,9 @@ import Empty from "../components/Empty";
 import AddedItem from "../components/AddedItem";
 
 function Order (props) {
-    const [addedItems, setAddedItems] = React.useState([]); //отображение товаров добавленных в корзину
+
+    const totalCost = props.cartItems && props.cartItems.map(obj => obj.cost*obj.amount).reduce(function (sum, elem) {return sum + elem;}, 0);
+    
     const [surname, setSurname] = React.useState("");
     const [name, setName] = React.useState("");
     const [phoneNumber, setPhoneNumber] = React.useState("");
@@ -16,52 +18,21 @@ function Order (props) {
     const [discontCode, setDiscontCode] = React.useState("");
     const [message, setMessage] = React.useState("");
 
-    const [isLoad, setIsLoad] = React.useState(false);
-    const [isLoadCount, setIsLoadCount] = React.useState(true);
-  
-    const deleteFromCart = (obj, amount) => { //удаление товаров из корзины
-      axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${obj.id}`); //удаление с бека
-      setAddedItems((prev) => prev.filter(item => item.id !== obj.id)); //удаление из корзины
-      props.setItemsCartCounter(prev => prev - 1); //уменьшение счетчика корзины
-      props.totalCostMinus(prev => prev - (obj.cost * amount)); //уменьшение суммы заказа
+    function deleteFromCart(id, size) {
+      props.setCartItems(JSON.parse(localStorage.getItem('cart')).filter(obj => obj.id!==id||obj.size!==size));
     }
-
-    async function totalCostChange (id, cost, amount) { //изменение количества товара
-      setIsLoadCount(false);
-      try {
-        await axios.put(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${id}`, {amount: amount}); //удаление с бека
-      } catch (error) {
-        alert('Помилочка! Перезавантажте сторінку.');
-      }
-      setAddedItems(addedItems.map(obj => obj.id === id ? {...obj, amount:amount} : obj));
-      props.totalCostMinus(prev => prev + cost); //уменьшение суммы заказа
-      setIsLoadCount(true);
-    }
-
-    React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
-        async function getData () {
-          try {
-            await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/cartItems')
-                .then(res => setAddedItems(res.data)); //подгрузка с бекэнда товаров добавленных в корзину
-          } catch (error) {
-            alert('Помилочка! Перезавантажте сторінку.');
-          }
-          setIsLoad(true);
-        }
-        getData ();
-    }, []);
 
     //Начало блока отправки информации в Telegram канал
     const messageToTelegram = 
         `<b>НОВЕ ЗАМОВЛЕННЯ!</b>\n` +
         `<b>_______________________________</b>\n` +
-        addedItems.map((obj) => (
+        props.cartItems.map((obj) => (
             `<b>Назва товару: </b>${obj.name} <b>x ${obj.amount}</b>\n` +
             `<b>Розмір: </b>${obj.size} \n` +
             `<b>Ціна: </b>${obj.cost} грн.\n` +
             `\n`
         )) +
-        `<b>Загальна сума: </b>${props.totalCost} грн.\n` +
+        `<b>Загальна сума: </b>${totalCost} грн.\n` +
         `<b>_______________________________</b>\n` +
         `\n` +
         `<b>ПІБ: </b>${surname} ${name}\n` +
@@ -77,6 +48,15 @@ function Order (props) {
     const URI_API = `https://api.telegram.org/bot${ token }/sendMessage`;
 
     async function acceptOrder() {
+        try {
+            await axios.post(URI_API, {
+                chat_id: chatId,
+                parse_mode: 'html',
+                text: messageToTelegram
+            });
+        } catch(error) {
+            alert('Помилочка! Перезавантажте сторінку.');
+        }        
         setSurname("");
         setName("");
         setPhoneNumber("");
@@ -84,19 +64,7 @@ function Order (props) {
         setDepartment("");
         setAddress("");
         setDiscontCode("");
-        setIsLoad(false);
-        await axios.post(URI_API, {
-            chat_id: chatId,
-            parse_mode: 'html',
-            text: messageToTelegram
-        });
-        for (let i=0; i<addedItems.length; i++) {
-            await axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/cartItems/${addedItems[i].id}`)
-        }
-        setAddedItems([]);
-        props.setItemsCartCounter(0); //уменьшение счетчика корзины
-        props.totalCostMinus(0); //уменьшение суммы заказа
-        setIsLoad(true);
+        props.setCartItems([]);
     }
     //Конец блока отправки информации в Telegram канал
 
@@ -117,10 +85,6 @@ function Order (props) {
                     <div className="orderContent__phoneBlock">
                         <input className="orderContent__phone" type="tel" placeholder="+38(xxx)xxx-xx-xx" onChange={event => setPhoneNumber(event.target.value)} style={phoneNumber.length<10 ? {borderColor: '#FF824C'} : {borderColor: ''}} maxLength={20} value={phoneNumber}/>
                     </div>
-                    {/* <h5>Ваш instagram для зручності</h5>
-                    <div className="orderContent__instagramBlock">
-                        <input className="orderContent__instagram" type="text" placeholder="посилання на профіль"/>
-                    </div> */}
                     <h5>Спосіб доставки *</h5>
                     <div className="orderContent__deliveryBlock">
                         <select name="orderContent__deliveryType" onChange={event => setDeliveryType(event.target.options[event.target.selectedIndex].text)} style={!deliveryType ? {borderColor: '#FF824C'} : {borderColor: ''}}>
@@ -160,42 +124,32 @@ function Order (props) {
                     <div className="orderContent__noteBlock" onChange={event => setMessage(event.target.value)}>
                         <textarea placeholder="Вкажіть додаткові побажання щодо замовлення" maxLength={300} rows={4}></textarea>
                     </div>
-                    <button className="acceptButton" disabled = {addedItems.length&&surname&&name&&(phoneNumber.length > 9)&&deliveryType&&paymentType ? false : true} onClick = {acceptOrder}>{addedItems.length ? (surname&&name&&(phoneNumber.length > 9)&&deliveryType&&paymentType ? 'Підтвердити замовлення' : 'Вкажіть дані для відправки') : 'Відсутні товари'}</button>
+                    <button className="acceptButton" disabled = {props.cartItems.length&&surname&&name&&(phoneNumber.length > 9)&&deliveryType&&paymentType ? false : true} onClick = {acceptOrder}>{props.cartItems.length ? (surname&&name&&(phoneNumber.length > 9)&&deliveryType&&paymentType ? 'Підтвердити замовлення' : 'Вкажіть дані для відправки') : 'Відсутні товари'}</button>
                 </div>
                 <div className="orderContent__goods">
                     <h4>АКТИВНІ ЗАМОВЛЕННЯ</h4>
-                    {isLoad ?
-                        <>
-                            <div className="orderContent__itemsBlock quickCart__itemsBlock">
-                                {addedItems.map((obj) => <AddedItem  key = {obj.id}
-                                        id = {obj.id}
-                                        goodsImage = {obj.goodsImage}
-                                        name = {obj.name}
-                                        size = {obj.size}
-                                        cost = {obj.cost}
-                                        amount = {obj.amount}
-                                        deleteFromCart = {(amount) => deleteFromCart(obj, amount)}
-                                        totalCostChange = {(cost, amount) => totalCostChange(obj.id, cost, amount)}
-                                        isLoadCount = {isLoadCount}
-                                    />)
-                                }
-                            </div>
-                            <div className="orderContent__emptyOrder emptyCart" style = {{display: addedItems.length ? 'none' : 'flex'}}>
-                                <Empty></Empty>
-                            </div>
-                            <div className='orderContent__total quickCart__total' style = {{display: addedItems.length ? 'flex' : 'none'}}>
-                                <p>Всього:</p>
-                                <p>{props.totalCost} грн.</p>
-                            </div>
-                        </> : 
-                        <div className="loader02">
-                            <div className="border02">
-                                <div className="shapeEye01"></div>
-                                <div className="shapeEye02"></div>
-                            </div>
-                            <p>loading...</p>
-                        </div>
-                    }
+                    <div className="orderContent__itemsBlock quickCart__itemsBlock">
+                        {props.cartItems.map((obj) => <AddedItem
+                                key = {obj.id}
+                                id = {obj.id}
+                                name = {obj.name}
+                                cost = {obj.cost}
+                                goodsImage = {obj.goodsImage}
+                                size = {obj.size}
+                                amount = {obj.amount}
+                                deleteItem = {() => deleteFromCart(obj.id, obj.size)}
+                                cartItems = {props.cartItems}
+                                setCartItems = {props.setCartItems}
+                            />)
+                        }
+                    </div>
+                    <div className="orderContent__emptyOrder emptyCart" style = {{display: props.cartItems.length ? 'none' : 'flex'}}>
+                        <Empty></Empty>
+                    </div>
+                    <div className='orderContent__total quickCart__total' style = {{display: props.cartItems.length ? 'flex' : 'none'}}>
+                        <p>Всього:</p>
+                        <p>{totalCost} грн.</p>
+                    </div>
                 </div>
             </div>
         </div>
