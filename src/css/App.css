@@ -19,7 +19,7 @@
   width: 100%;
 }
 
-.acceptButton {
+.acceptButton, .cancelButton {
   border: 1px solid rgba(64, 64, 64, 0.2);
   border-radius: 10px;
   background-color: rgb(235, 255, 204);
@@ -31,19 +31,23 @@
   transition: all 0.2s ease-in-out;
   width: 100%;
 }
-.acceptButton:hover {
+.acceptButton:hover, .cancelButton:hover {
   -webkit-transform: translateY(-2px);
           transform: translateY(-2px);
   -webkit-box-shadow: 1px 1px 2px rgb(122, 122, 122);
           box-shadow: 1px 1px 2px rgb(122, 122, 122);
 }
-.acceptButton:disabled {
+.acceptButton:disabled, .cancelButton:disabled {
   -webkit-transform: none;
           transform: none;
   -webkit-box-shadow: none;
           box-shadow: none;
   cursor: auto;
   background-color: rgb(241, 241, 241);
+}
+
+.cancelButton {
+  background-color: rgb(240, 240, 240);
 }
 
 .emptyCart {
@@ -1003,7 +1007,7 @@ footer .footer__ovner a {
 }
 
 .goodsCard {
-  width: 1090px;
+  max-width: 1090px;
   margin: 0 auto;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
@@ -1017,9 +1021,15 @@ footer .footer__ovner a {
   display: flex;
   margin-top: 20px;
 }
-.goodsCard__content .goodsCard__image img {
-  max-width: 500px;
+.goodsCard__content .goodsCard__image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 50%;
   margin-right: 30px;
+}
+.goodsCard__content .goodsCard__image img {
+  width: 100%;
   border-radius: 20px;
 }
 .goodsCard__content .goodsCard__order {
@@ -1030,7 +1040,7 @@ footer .footer__ovner a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 100%;
+  width: 50%;
 }
 .goodsCard__content .goodsCard__cost {
   margin-top: 10px;
@@ -1155,6 +1165,44 @@ footer .footer__ovner a {
 .goodsCard__description .goodsCard__context {
   margin-top: 10px;
   line-height: 1.5;
+}
+
+.goodsCard__warning {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+.goodsCard__warning .goodsCard__warningNotice {
+  position: absolute;
+  background-color: white;
+  -webkit-box-shadow: 1px 1px 3px black;
+          box-shadow: 1px 1px 3px black;
+  border-radius: 15px;
+  padding: 15px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+          transform: translateY(-50%) translateX(-50%);
+}
+.goodsCard__warning .goodsCard__warningNotice div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 -5px;
+}
+.goodsCard__warning .goodsCard__warningNotice p {
+  margin-top: 5px;
+  font-size: 14px;
+}
+.goodsCard__warning .goodsCard__warningNotice button {
+  padding: 5px;
+  width: 120px;
+  margin: 5px;
+  font-size: 14px;
 }
 
 .information {

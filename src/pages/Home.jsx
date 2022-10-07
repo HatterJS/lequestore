@@ -37,7 +37,7 @@ function Home ({goods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, 
             id = {obj.id}
             name = {obj.name}
             cost = {obj.cost}
-            goodsImage = {obj.goodsImage}
+            goodsImage = {obj.goodsImage[0]}
             setFavorites = {setFavorites}
             favorites = {favorites}
             />) : 
