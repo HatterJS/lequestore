@@ -646,7 +646,7 @@ footer {
             line-height: 2;
         }
         p {
-            color: rgb(231, 123, 0);
+            font-size: 12px;
         }
     }
     .orderContent__content {
@@ -664,10 +664,10 @@ footer {
                 }
                 div:first-child {
                     // flex: 1 1 auto;
-                    margin-right: 10px;
+                    // margin-right: 10px;
                 }
                 input {
-                    box-sizing: border-box;
+                    // box-sizing: border-box;
                     margin-top: 10px;
                     // width: 100%;
                 }
@@ -682,24 +682,19 @@ footer {
                 margin-top: 10px;
                 margin-bottom: 5px;
             }
-            input {
+            input, select, textarea {
                 padding: 10px;
                 margin-right: 10px;
                 border: $borderBar;
+                font-size: 14px;
+                border-radius: 10px;
             }
             select {
-                padding: 10px;
-                min-width: 400px;
                 width: 100%;
-                border: $borderBar;
                 appearance: none;
             }
             textarea {
-                box-sizing: border-box;
-                padding: 10px;
-                min-width: 400px;
                 width: 100%;
-                border: $borderBar;
                 resize: none;
             }
         }

@@ -38,7 +38,7 @@ function Order (props) {
         `<b>ПІБ: </b>${surname} ${name}\n` +
         `<b>Телефон: </b>${phoneNumber}\n` +
         `<b>Спосіб доставки: </b>${deliveryType}\n` +
-        `<b>Адреса: </b>м.${town}, ${deliveryType === "НОВА ПОШТА (до відділення)" ? department : address}\n` +
+        `<b>Адреса: </b>м.${town}, ${deliveryType === "НОВА ПОШТА (до відділення)" ? "<b>№ </b>" + department : address}\n` +
         `<b>Спосіб оплати: </b>${paymentType}\n` +
         (discontCode && `<b>Дисконт: </b>${discontCode}\n`) +
         (message && `<b>Повідомлення: </b>${message}\n`);

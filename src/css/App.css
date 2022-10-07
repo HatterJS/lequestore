@@ -923,7 +923,7 @@ footer .footer__ovner a {
   line-height: 2;
 }
 .orderContent .orderContent__title p {
-  color: rgb(231, 123, 0);
+  font-size: 12px;
 }
 .orderContent .orderContent__content {
   display: -webkit-box;
@@ -951,12 +951,7 @@ footer .footer__ovner a {
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
 }
-.orderContent .orderContent__content .orderContent__deliveryForm .orderContent__deliveryAddress div:first-child {
-  margin-right: 10px;
-}
 .orderContent .orderContent__content .orderContent__deliveryForm .orderContent__deliveryAddress input {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
   margin-top: 10px;
 }
 .orderContent .orderContent__content .orderContent__deliveryForm .orderContent__deliveryAddress .orderContent__department {
@@ -969,27 +964,21 @@ footer .footer__ovner a {
   margin-top: 10px;
   margin-bottom: 5px;
 }
-.orderContent .orderContent__content .orderContent__deliveryForm input {
+.orderContent .orderContent__content .orderContent__deliveryForm input, .orderContent .orderContent__content .orderContent__deliveryForm select, .orderContent .orderContent__content .orderContent__deliveryForm textarea {
   padding: 10px;
   margin-right: 10px;
   border: 1px solid rgba(64, 64, 64, 0.2);
+  font-size: 14px;
+  border-radius: 10px;
 }
 .orderContent .orderContent__content .orderContent__deliveryForm select {
-  padding: 10px;
-  min-width: 400px;
   width: 100%;
-  border: 1px solid rgba(64, 64, 64, 0.2);
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
 }
 .orderContent .orderContent__content .orderContent__deliveryForm textarea {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  min-width: 400px;
   width: 100%;
-  border: 1px solid rgba(64, 64, 64, 0.2);
   resize: none;
 }
 .orderContent .orderContent__content .orderContent__goods {

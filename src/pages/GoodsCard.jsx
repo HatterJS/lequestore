@@ -12,7 +12,8 @@ function GoodsCard(props) {
 
     const [goodsItem, setGoodsItem] = React.useState([]);
     const [isLoad, setIsLoad] = React.useState(false);
-    const [delay, setDelay] = React.useState(false);
+    const [timeCounter, setTimeCounter] = React.useState(0);
+
     const [goodsAmount, setGoodsAmount] = React.useState(1);
     const [checkedSize, setCheckedSize] = React.useState("");
 
@@ -37,17 +38,34 @@ function GoodsCard(props) {
             "goodsImage": goodsItem.goodsImage,
             "amount": goodsAmount
         };
+
+        //проверка анличия товара в корзине
         if (props.cartItems.map(obj => obj.id).includes(goodsItem.id) &&
-            props.cartItems.map(obj => obj.size).includes(checkedSize))
+            props.cartItems.map(obj => obj.size).includes(checkedSize)) //проверка товара по id и size
         {
-            props.setCartItems(props.cartItems.map(obj => (obj.id===goodsItem.id && obj.size===checkedSize ? {...obj, amount: obj.amount+goodsAmount} : obj)));
+            props.setCartItems(props.cartItems.map(obj => (obj.id===goodsItem.id && obj.size===checkedSize ? {...obj, amount: obj.amount+goodsAmount} : obj))); //если объект с совпадающими id и size есть в корзине то при добавлении увеличить счетчик товара в корзине
         } else {
-            props.setCartItems(prev => [...prev, addToCart]);
+            props.setCartItems(prev => [...prev, addToCart]); //если объекта с совпадающими id и size нет в корзине то добавить как новый товар в корзину
         }
-        setDelay(true);
-        setTimeout(() => {
-            setDelay(false);
-        }, 3000);
+
+        //таймер задержки после нажатия кнопки "Додати в кошик"
+        setTimeCounter(3); // сек. до отключения блокировки кнопки "Додати в кошик" после нажатия
+        let counter = 3; // счеьчик отключения setInterval (менять в паре со значением в setTimeCounter)
+        const delay = setInterval(() => {
+            setTimeCounter(prev => prev-1);
+            counter--;
+            if (counter === 0) {clearInterval(delay)};
+        }, 1000);
+    }
+
+    function buttonTitle() {
+        if (timeCounter>0) { //таймер задержки после нажатия
+            return (timeCounter + " сек.")
+        } else if (!checkedSize) { //не выбран размер товара
+            return "Оберіть розмір"
+        } else { //товар готов к добавлению в корзину
+            return "Додати в кошик"
+        }
     }
 
     return (
@@ -90,7 +108,7 @@ function GoodsCard(props) {
                                 </div>
                             </div>
                             <div className="goodsCard__accept">
-                                <button className="acceptButton" disabled={!checkedSize||delay ? true : false} onClick={addedToCart}>{checkedSize ? "Додати в кошик" : "Оберіть розмір"}</button>
+                                <button className="acceptButton" disabled={!checkedSize||timeCounter>0 ? true : false} onClick={addedToCart}>{buttonTitle()}</button>
                                 <button className="acceptButton" disabled>Купити в один клік</button>
                             </div>
                         </div>
