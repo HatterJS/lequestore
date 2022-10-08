@@ -75,7 +75,7 @@ function GoodsCard(props) {
     function buttonTitle() {
         if (timeCounter>0) { //таймер задержки после нажатия
             return (timeCounter + " сек.")
-        } else if (!checkedSize) { //не выбран размер товара
+        } else if (Boolean(goodsItem.size.length)&!checkedSize) { //не выбран размер товара
             return "Оберіть розмір"
         } else { //товар готов к добавлению в корзину
             return "Додати в кошик"
@@ -130,8 +130,8 @@ function GoodsCard(props) {
                                 </div>
                             </div>
                             <div className="goodsCard__accept">
-                                <button className="acceptButton" disabled={!checkedSize||timeCounter>0 ? true : false} onClick={addedToCart}>{buttonTitle()}</button>
-                                <button className="acceptButton" disabled={!checkedSize ? true : false} onClick={() => setWarning(true)}>{!checkedSize ? 'Оберіть розмір' : 'Купити в один клік'}</button>
+                                <button className="acceptButton" disabled={Boolean(goodsItem.size.length)&!checkedSize||timeCounter>0 ? true : false} onClick={addedToCart}>{buttonTitle()}</button>
+                                <button className="acceptButton" disabled={Boolean(goodsItem.size.length)&!checkedSize ? true : false} onClick={() => setWarning(true)}>{Boolean(goodsItem.size.length)&!checkedSize ? 'Оберіть розмір' : 'Купити в один клік'}</button>
                             </div>
                         </div>
                     </div>

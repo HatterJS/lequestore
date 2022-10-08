@@ -97,8 +97,7 @@ function App() {
         </Route>
         <Route path='/admin'
           element={
-            <Admin 
-              goods = {goods}
+            <Admin
           />}>
         </Route>
       </Routes>

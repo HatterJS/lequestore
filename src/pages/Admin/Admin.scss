@@ -145,6 +145,21 @@ $transition:  all 0.2s ease-in-out;
             width: 90px;
         }
     }
+    .adminPanel_buttonBlock {
+        display: flex;
+        align-items: baseline;
+        .deleteButton {
+            margin-left: 10px;
+            svg:hover {
+                rect {
+                    stroke-opacity: 0.6;
+                }
+                path {
+                    fill-opacity: 0.6;
+                }
+            }
+        }
+    }
 }
 .adminPanel__example {
     width: 50%;
@@ -159,6 +174,9 @@ $transition:  all 0.2s ease-in-out;
     .example__image {
         width: 50%;
         margin-right: 10px;
+        min-height: 328px;
+        border: $borderBar;
+        border-radius: 20px;
         img {
             width: 100%;
             border-radius: 20px;

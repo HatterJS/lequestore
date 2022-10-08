@@ -157,6 +157,23 @@
 .adminPanel__settings .adminPanel__imageBlock h4 {
   width: 90px;
 }
+.adminPanel__settings .adminPanel_buttonBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+.adminPanel__settings .adminPanel_buttonBlock .deleteButton {
+  margin-left: 10px;
+}
+.adminPanel__settings .adminPanel_buttonBlock .deleteButton svg:hover rect {
+  stroke-opacity: 0.6;
+}
+.adminPanel__settings .adminPanel_buttonBlock .deleteButton svg:hover path {
+  fill-opacity: 0.6;
+}
 
 .adminPanel__example {
   width: 50%;
@@ -174,6 +191,9 @@
 .example__content .example__image {
   width: 50%;
   margin-right: 10px;
+  min-height: 328px;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  border-radius: 20px;
 }
 .example__content .example__image img {
   width: 100%;
