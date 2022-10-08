@@ -146,21 +146,181 @@
   -webkit-transform: translateY(-2px);
           transform: translateY(-2px);
 }
+.adminPanel__settings .adminPanel__imageBlock input:last-child {
+  width: 50px;
+  margin-left: 10px;
+}
 .adminPanel__settings .adminPanel__imageBlock p {
-  font-size: 14px;
-  margin-right: 5px;
+  font-size: 12px;
+  margin: 3px;
 }
 .adminPanel__settings .adminPanel__imageBlock h4 {
-  width: 155px;
-}
-.adminPanel__settings .adminPanel__imageBlock input {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+  width: 90px;
 }
 
 .adminPanel__example {
   width: 50%;
+}
+
+.example__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 20px;
+}
+.example__content p {
+  font-size: 10px;
+}
+.example__content .example__image {
+  width: 50%;
+  margin-right: 10px;
+}
+.example__content .example__image img {
+  width: 100%;
+  border-radius: 20px;
+}
+.example__content .example__order {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+}
+.example__content .example__cost {
+  margin-top: 5px;
+  padding: 3px;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  background-color: rgb(245, 245, 245);
+  border-radius: 5px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.example__content .example__size {
+  margin-top: 15px;
+}
+.example__content .example__size p {
+  font-weight: 500;
+}
+.example__content .example__size .example__size-option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 5px;
+}
+.example__content .example__size .example__size-option input {
+  width: 20px;
+  padding: 3px;
+  margin-right: 5px;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  border-radius: 3px;
+  background-color: rgb(245, 245, 245);
+  text-align: center;
+  font-size: 8px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.example__content .example__size .example__size-option input::before {
+  content: attr(label);
+}
+.example__content .example__sizeHelp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin-top: 10px;
+}
+.example__content .example__count {
+  margin-top: 15px;
+}
+.example__content .example__count p {
+  font-weight: 500;
+}
+.example__content .example__count .example__counter {
+  border-radius: 5px;
+  height: 20px;
+  margin-top: 3px;
+  width: 60px;
+  font-size: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  background-color: rgb(250, 250, 250);
+  text-align: center;
+  overflow: hidden;
+}
+.example__content .example__count .example__counter div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  background-color: rgb(240, 240, 240);
+}
+.example__content .example__count .example__counter div:first-child {
+  border-right: 1px solid rgba(64, 64, 64, 0.2);
+}
+.example__content .example__count .example__counter div:last-child {
+  border-left: 1px solid rgba(64, 64, 64, 0.2);
+}
+.example__content .example__count .example__counter div {
+  width: 15px;
+}
+.example__content .example__accept {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 25px;
+}
+.example__content .example__accept div {
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  border-radius: 6px;
+  margin-right: 10px;
+  font-size: 10px;
+  padding: 8px;
+  background-color: rgb(235, 255, 204);
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+}
+
+.example__description {
+  margin-top: 20px;
+}
+.example__description ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 5px;
+}
+.example__description ul li {
+  margin-right: 20px;
+  padding-right: 10px;
+  padding: 5px 5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.example__description .example__context {
+  margin-top: 10px;
+  line-height: 1.5;
 }
 
 .adminPanel__enterForm {

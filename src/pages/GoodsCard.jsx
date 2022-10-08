@@ -97,7 +97,6 @@ function GoodsCard(props) {
                                     />
                                 </Carousel.Item>)}
                             </Carousel>
-                            {/* <img src={goodsItem.goodsImage} alt="goodsImage" /> */}
                         </div>
                         <div className="goodsCard__order">
                             <div className="goodsCard__name">

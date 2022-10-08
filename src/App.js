@@ -98,6 +98,7 @@ function App() {
         <Route path='/admin'
           element={
             <Admin 
+              goods = {goods}
           />}>
         </Route>
       </Routes>

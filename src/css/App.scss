@@ -665,14 +665,8 @@ footer {
                 .orderContent__addressBlock {
                     flex: 1 1 auto;
                 }
-                div:first-child {
-                    // flex: 1 1 auto;
-                    // margin-right: 10px;
-                }
                 input {
-                    // box-sizing: border-box;
                     margin-top: 10px;
-                    // width: 100%;
                 }
                 .orderContent__department {
                     width: 100px;
@@ -732,7 +726,6 @@ footer {
     display: flex;
     margin-top: 20px;
     .goodsCard__image {
-        display: flex;
         width: 50%;
         margin-right: 30px;
         img {
