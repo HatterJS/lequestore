@@ -19,12 +19,14 @@ function App() {
   const [goods, setGoods] = React.useState([]); //отображение товаров на главной
   const [goodsTitle, setGoodsTitle] = React.useState(''); //заголовок блока товаров
 
+  const [showMore, setShowMore] = React.useState(9);
+
   const [isLoad, setIsLoad] = React.useState(false);
 
   React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
     async function getData () {
       try {
-        await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items')
+        await axios.get(`https://632db5102cfd5ccc2af512de.mockapi.io/items?p=1&l=${showMore}`)
           .then(res => setGoods(res.data)); //подгрузка с бекэнда всех товаров
         setIsLoad(true);
       } catch (error) {
@@ -32,7 +34,7 @@ function App() {
       }
     };
     getData();
-  }, []);
+  }, [showMore]);
 
   const filterGoodsCondition = (item) => {
     return (
@@ -66,6 +68,7 @@ function App() {
             isLoad = {isLoad}
             favorites = {favorites}
             setFavorites = {(item) => setFavorites(item)}
+            setShowMore = {(value) => setShowMore(value)}
           />}
         />
         <Route path = '/favorite' element = {<Favorite

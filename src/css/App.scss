@@ -458,6 +458,7 @@ nav {
 }
     // GOODS TITLE
 .content {
+    position: relative;
     h2 {
         display: flex;
         max-width: 1080px;
@@ -555,8 +556,7 @@ nav {
         }
     }
 }
-
-// MORE GOODS
+    // MORE GOODS
 .moreGoods {
     width: fit-content;
     margin: 10px auto;
@@ -569,11 +569,26 @@ nav {
         color: $textColor;
     }
 }
+    //SCROLL TOP
+.content__scrollTop {
+    position: fixed;
+    z-index: 99;
+    right: 10px;
+    bottom: 50%;
+    cursor: pointer;
+    transition: $transition;
+    svg:hover {
+        fill: rgb(228, 255, 129);
+    }
+}
+.content__scrollTop-hidden {
+    opacity: 0;
+}
 
 //FILLER
-.filler {
-    flex: 1;
-}
+// .filler {
+//     flex: 1;
+// }
 
 // FOOTER
 footer {

@@ -680,6 +680,9 @@ nav {
   background: rgb(255, 245, 170);
 }
 
+.content {
+  position: relative;
+}
 .content h2 {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -828,10 +831,21 @@ nav {
   color: rgb(64, 64, 64);
 }
 
-.filler {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+.content__scrollTop {
+  position: fixed;
+  z-index: 99;
+  right: 10px;
+  bottom: 50%;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.content__scrollTop svg:hover {
+  fill: rgb(228, 255, 129);
+}
+
+.content__scrollTop-hidden {
+  opacity: 0;
 }
 
 footer {
