@@ -15,29 +15,29 @@ const deleteFromCartSvg = <svg width="30" height="30" viewBox="0 0 40 40" fill="
 
 function Admin() {
 
-    const loginData = [
+    const loginData = [ //пары логин и пароль администраторов
         {login: 'immortal', password: '8171078'},
         {login: 'user', password: 'user'}
     ];
 
-    const [login, setLogin] = React.useState(localStorage.getItem('autorization') ? JSON.parse(decodeURI(localStorage.getItem('autorization'))).l : "");
-    const [password, setPassword] = React.useState(localStorage.getItem('autorization') ? JSON.parse(decodeURI(localStorage.getItem('autorization'))).p : "");
-    const [accepted, setAccepted] = React.useState(false);
+    const [login, setLogin] = React.useState(localStorage.getItem('autorization') ? JSON.parse(decodeURI(localStorage.getItem('autorization'))).l : ""); //автозаполнение логина из localStorage
+    const [password, setPassword] = React.useState(localStorage.getItem('autorization') ? JSON.parse(decodeURI(localStorage.getItem('autorization'))).p : ""); //автозаполнение пароля из localStorage
+    const [accepted, setAccepted] = React.useState(false); //авторизация
 
-    const enter = () => {
+    const enter = () => { //проверка правельности ввода пары логин - пароль и добавление в localStorage
         loginData.map(obj => obj.login===login&&obj.password===password && setAccepted(true));
         localStorage.setItem('autorization', encodeURI(JSON.stringify({l: login, p: password})));
     }
 
-    const [isLoad, setIsLoad] = React.useState(false);
+    const [isLoad, setIsLoad] = React.useState(false); //загрузчик на время запросов на сервер
 
-    const bookmarks = ['Товари', 'Розділіи', 'Акції', 'Банер'];
-    const goodsSizesArr = [
+    const bookmarks = ['Товари', 'Розділіи', 'Акції', 'Банер']; //вкладки в админ. панели
+    const goodsSizesArr = [ //типы размеров для одежды/обуви...
         ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
         ['38', '39', '40', '41', '42', '43', '44', '45']
     ];
 
-    const [checkedBookmark, setCheckedBookmark] = React.useState('Товари');
+    const [checkedBookmark, setCheckedBookmark] = React.useState('Товари'); //выбор вкладки админ. панели
 
     const [goodsId, setGoodsId] = React.useState("");
     const [goodsName, setGoodsName] = React.useState("");
@@ -47,15 +47,15 @@ function Admin() {
     const [goodsImage, setGoodsImage] = React.useState("");
     const [imageCounter, setImageCounter] = React.useState(1);
 
-    const [goods, setGoods] = React.useState([0]);
-    const [bestId, setBestId] = React.useState("______");
-    const [lastId, setLastId] = React.useState("");
+    const [goods, setGoods] = React.useState([0]); //все товары (подгружается от сервера)
+    const [bestId, setBestId] = React.useState("______"); //рекомендованый id
+    const [lastId, setLastId] = React.useState(""); //наибольший id в базе товаров
 
-    React.useEffect(() => {
+    React.useEffect(() => { //подгрузка товаров от сервера
         async function getData() {
             try {
                 await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items').then(res => setGoods(res.data));
-                setIsLoad(true);
+                setIsLoad(true); //отключение лоадера после загрузки товаров
             } catch (error) {
                 alert('Помилочка! Перезавантажте сторінку.');
             }
@@ -63,7 +63,7 @@ function Admin() {
         getData();
     }, []);
 
-    function clearAll() {
+    function clearAll() { //функция очистки всех полей
         setGoodsName("");
         setGoodsCost("");
         setGoodsCategory("Взуття");
@@ -72,72 +72,71 @@ function Admin() {
         setImageCounter(1);
     }
     
-    function findId() {
-        const allId = goods.map(obj => Number(obj.id));
-        const newArr = [];
-        allId.reduce(function(a, b) {if(b-a!==1) {newArr.push(a+1); return b} else {return b}}, 0);
-        const missedId = newArr[0]||allId.length+1;
-        setBestId(missedId);
-        setGoodsId(missedId);
-        setLastId(allId[allId.length-1]);
-        clearAll();
+    function findId() { //поиск рекомендуемого и последнего id
+        const allId = goods.map(obj => Number(obj.id)); //массив всех id
+        const newArr = []; //промежуточный массив для определения рекомендуемого id
+        allId.reduce(function(a, b) {if(b-a!==1) {newArr.push(a+1); return b} else {return b}}, 0); //выборка пропущенных id и отправка в промежуточный массив
+        const missedId = newArr[0]||allId.length+1; //наименьший пропущенный id или последний id+1
+        setBestId(missedId); //рекомендуемый id
+        setGoodsId(missedId); //id товара по умолчанию (в дальнейшем изменяется)
+        setLastId(allId[allId.length-1]); //последний id
+        clearAll(); //вызов функции очистки всех полей
     }
-    function checkedSizesArr(item) {
+    function checkedSizesArr(item) { //добавление/удаление выбранных размеров в массив
         checkedSizes.find(size => size===item) ? 
             setCheckedSizes(checkedSizes.filter(size => size!==item)) :
             setCheckedSizes([...checkedSizes, item]);
     }
-    const goodsItem = {
+    const goodsItem = { //параметры товара
         id: goodsId,
         name: goodsName,
         cost: goodsCost,
         category: goodsCategory,
         size: checkedSizes,
-        goodsImage: [...Array(Number(imageCounter)+1).keys()].slice(1).map(obj => `/img/goods/${goodsImage}/ (${obj}).jpg`),
+        goodsImage: [...Array(Number(imageCounter)+1).keys()].slice(1).map(obj => `/img/goods/${goodsImage}/${obj}.jpg`),
         group: ""
     }
-    async function postNewGoods() {
-        setIsLoad(false);
+    async function postNewGoods() { //изменение/добавление нового товара и получение обновленного списка всех товаров
+        setIsLoad(false); //активация загрузчика
         try {
             goods.map(obj => obj.id).includes(goodsItem.id) ?
                 await axios.put(`https://632db5102cfd5ccc2af512de.mockapi.io/items/${goodsItem.id}`, goodsItem) :
                 await axios.post('https://632db5102cfd5ccc2af512de.mockapi.io/items', goodsItem);
                 await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items').then(res => setGoods(res.data));
-            setIsLoad(true);
+            setIsLoad(true); //отключение загрузчика
         } catch(error) {
             alert('Помилочка! Перезавантажте сторінку.');
         }
-        setGoodsId('');
-        setBestId("______");
-        clearAll();
+        setGoodsId(''); //очистка поля id
+        setBestId("______"); //очистка поля рекомендованого id
+        clearAll(); //очистка полей
     }
-    async function deleteGoods() {
-        setIsLoad(false);
+    async function deleteGoods() { //удаление товара и получение обновленного списка всех товаров
+        setIsLoad(false); //активация загрузчика
         try {
             await axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/items/${goodsId}`);
-            setIsLoad(true);
+            setIsLoad(true); //отключение загрузчика
             await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items').then(res => setGoods(res.data));
         } catch(error) {
             alert('Помилочка! Перезавантажте сторінку.');
         }
-        setGoodsId('');
-        setBestId("______");
-        clearAll();
+        setGoodsId(''); //очистка поля id
+        setBestId("______"); //очистка поля рекомендованого id
+        clearAll(); //очистка полей
     }
 
-    function elementById(event) {
+    function elementById(event) { //автозаполнение всех полей при установке id
         setGoodsId(event.target.value);
-
-        const itemById = goods.filter(item => item.id === event.target.value)[0]||false;
-        if (itemById) {
+        const itemById = goods.filter(item => item.id === event.target.value)[0]||false; //получение товара по соответствующему id или "фолс" если товар с id отсутствует
+        if (itemById) { //заполнение всех полей данными товара с указанным id
             setGoodsName(itemById.name);
             setGoodsCost(itemById.cost);
             setGoodsCategory(itemById.category);
             setCheckedSizes(itemById.size);
-            setGoodsImage(itemById.goodsImage[0].slice(11).slice(0, -9));
+            setGoodsImage(itemById.goodsImage[0].slice(11).slice(0, -6)); //обрезаем адрес картинки чтобы осталось только название папки для отображения картинки в примере (заморочка связана с удобством добавления)
             setImageCounter(itemById.goodsImage.length);
         } else {
-            clearAll();
+            clearAll(); //очистка всех полей при отсутствии товара с указаннм id
         }
     }
 
@@ -214,7 +213,7 @@ function Admin() {
                                     {[...Array(Number(imageCounter)+1).keys()].slice(1).map(obj => <Carousel.Item key={obj}>
                                         <img
                                         className="h-100"
-                                        src={'/img/goods/' + goodsImage + '/ (' + obj + ').jpg'}
+                                        src={'/img/goods/' + goodsImage + '/' + obj + '.jpg'}
                                         alt="Slider"
                                         />
                                     </Carousel.Item>)}
