@@ -22,7 +22,7 @@ function GoodsCard(props) {
     React.useEffect(() => {
         async function getData() {
             try {
-                await axios.get(`https://632db5102cfd5ccc2af512de.mockapi.io/items/${itemId}`).then(res => setGoodsItem(res.data));
+                await axios.get(`http://localhost:9999/goods/${itemId}`).then(res => setGoodsItem(res.data));
             } catch (error) {
                 alert('Помилочка! Перезавантажте сторінку.');
             }

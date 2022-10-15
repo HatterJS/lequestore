@@ -12,7 +12,7 @@ const scrollTopSVG = <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
 </svg>
 
 
-function Home ({goods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setShowMore}) {
+function Home ({goods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setItemLimit}) {
 
     const [scrollTopClass, setScrollTopClass] = React.useState(true);
 
@@ -73,7 +73,7 @@ function Home ({goods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, 
             <div className={scrollTopClass ? "content__scrollTop content__scrollTop-hidden" : "content__scrollTop"} onClick={scrollTop}>{scrollTopSVG}</div>
         </div>
         <div className="moreGoods">
-            <p onClick={() => setShowMore(prev => prev+9)}>ПОКАЗАТИ БІЛЬШЕ ...</p>
+            <p onClick={() => setItemLimit(prev => prev+9)}>ПОКАЗАТИ БІЛЬШЕ ...</p>
         </div>
     </div>
     );
