@@ -24,7 +24,7 @@ function Admin() {
     const [password, setPassword] = React.useState(localStorage.getItem('autorization') ? JSON.parse(decodeURI(localStorage.getItem('autorization'))).p : ""); //автозаполнение пароля из localStorage
     const [accepted, setAccepted] = React.useState(false); //авторизация
 
-    const enter = () => { //проверка правельности ввода пары логин - пароль и добавление в localStorage
+    const enter = () => { //проверка правильности ввода пары логин - пароль и добавление в localStorage
         loginData.map(obj => obj.login===login&&obj.password===password && setAccepted(true));
         localStorage.setItem('autorization', encodeURI(JSON.stringify({l: login, p: password})));
     }
@@ -46,6 +46,7 @@ function Admin() {
     const [checkedSizes, setCheckedSizes] = React.useState([]);
     const [goodsImage, setGoodsImage] = React.useState("");
     const [imageCounter, setImageCounter] = React.useState(1);
+    const [additional, setAdditional] = React.useState("");
 
     const [goods, setGoods] = React.useState([0]); //все товары (подгружается от сервера)
     const [bestId, setBestId] = React.useState("______"); //рекомендованый id
@@ -54,7 +55,7 @@ function Admin() {
     React.useEffect(() => { //подгрузка товаров от сервера
         async function getData() {
             try {
-                await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items').then(res => setGoods(res.data));
+                await axios.get('http://localhost:9999/goods').then(res => setGoods(res.data));
                 setIsLoad(true); //отключение лоадера после загрузки товаров
             } catch (error) {
                 alert('Помилочка! Перезавантажте сторінку.');
@@ -70,6 +71,7 @@ function Admin() {
         setCheckedSizes([]);
         setGoodsImage("");
         setImageCounter(1);
+        setAdditional("");
     }
     
     function findId() { //поиск рекомендуемого и последнего id
@@ -94,15 +96,15 @@ function Admin() {
         category: goodsCategory,
         size: checkedSizes,
         goodsImage: [...Array(Number(imageCounter)+1).keys()].slice(1).map(obj => `/img/goods/${goodsImage}/${obj}.jpg`),
-        group: ""
+        additional: additional
     }
     async function postNewGoods() { //изменение/добавление нового товара и получение обновленного списка всех товаров
         setIsLoad(false); //активация загрузчика
         try {
-            goods.map(obj => obj.id).includes(goodsItem.id) ?
-                await axios.put(`https://632db5102cfd5ccc2af512de.mockapi.io/items/${goodsItem.id}`, goodsItem) :
-                await axios.post('https://632db5102cfd5ccc2af512de.mockapi.io/items', goodsItem);
-                await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items').then(res => setGoods(res.data));
+            goods.map(obj => obj.id).includes(Number(goodsItem.id)) ?
+                await axios.put(`http://localhost:9999/goods/${goodsItem.id}`, goodsItem) :
+                await axios.post('http://localhost:9999/goods', goodsItem);
+                await axios.get('http://localhost:9999/goods').then(res => setGoods(res.data));
             setIsLoad(true); //отключение загрузчика
         } catch(error) {
             alert('Помилочка! Перезавантажте сторінку.');
@@ -114,9 +116,9 @@ function Admin() {
     async function deleteGoods() { //удаление товара и получение обновленного списка всех товаров
         setIsLoad(false); //активация загрузчика
         try {
-            await axios.delete(`https://632db5102cfd5ccc2af512de.mockapi.io/items/${goodsId}`);
+            await axios.delete(`http://localhost:9999/goods/${goodsId}`);
             setIsLoad(true); //отключение загрузчика
-            await axios.get('https://632db5102cfd5ccc2af512de.mockapi.io/items').then(res => setGoods(res.data));
+            await axios.get('http://localhost:9999/goods').then(res => setGoods(res.data));
         } catch(error) {
             alert('Помилочка! Перезавантажте сторінку.');
         }
@@ -127,7 +129,7 @@ function Admin() {
 
     function elementById(event) { //автозаполнение всех полей при установке id
         setGoodsId(event.target.value);
-        const itemById = goods.filter(item => item.id === event.target.value)[0]||false; //получение товара по соответствующему id или "фолс" если товар с id отсутствует
+        const itemById = goods.filter(item => item.id === Number(event.target.value))[0]||false; //получение товара по соответствующему id или "фолс" если товар с id отсутствует
         if (itemById) { //заполнение всех полей данными товара с указанным id
             setGoodsName(itemById.name);
             setGoodsCost(itemById.cost);
@@ -135,6 +137,7 @@ function Admin() {
             setCheckedSizes(itemById.size);
             setGoodsImage(itemById.goodsImage[0].slice(11).slice(0, -6)); //обрезаем адрес картинки чтобы осталось только название папки для отображения картинки в примере (заморочка связана с удобством добавления)
             setImageCounter(itemById.goodsImage.length);
+            setAdditional(itemById.additional);
         } else {
             clearAll(); //очистка всех полей при отсутствии товара с указаннм id
         }
@@ -193,6 +196,15 @@ function Admin() {
                             <p>/img/goods/</p>
                             <input className="adminPanel__goodsImage" type="text" placeholder='Назва папки' onChange={event => setGoodsImage(event.target.value)} value={goodsImage}/>
                             <input className="adminPanel__count" type="number" onChange={event => event.target.value>=1 && setImageCounter(event.target.value)} value={imageCounter}/>
+                        </div>
+                        <div className="adminPanel__categoryBlock">
+                            <h4>Додтково:</h4>
+                            <select name="adminPanel__category" onChange={event => setAdditional(event.target.value)} value={additional}>
+                                <option value=""></option>
+                                <option value="Розпродаж">Розпродаж</option>
+                                <option value="Нова колекція">Нова колекція</option>
+                                <option value="Хіт продажів">Хіт продажів</option>
+                            </select>
                         </div>
                         <div className="adminPanel_buttonBlock">
                             <button className='acceptButton'

@@ -9,17 +9,17 @@ const sizeSVG = <svg width="30" height="30" viewBox="0 0 37 37" fill="none">
 
 function GoodsCard(props) {
 
-    const itemId = useLocation().state.id;
+    const itemId = useLocation().state.id; //получение id товара по ссылке
 
-    const [goodsItem, setGoodsItem] = React.useState([]);
-    const [isLoad, setIsLoad] = React.useState(false);
-    const [timeCounter, setTimeCounter] = React.useState(0);
-    const [warning, setWarning] = React.useState(false);
+    const [goodsItem, setGoodsItem] = React.useState([]); //данные товара
+    const [isLoad, setIsLoad] = React.useState(false); //лоадер
+    const [timeCounter, setTimeCounter] = React.useState(0); //задержка нажатия кнопок покупки
+    const [warning, setWarning] = React.useState(false); //предупреждение об очистке корзины
 
-    const [goodsAmount, setGoodsAmount] = React.useState(1);
-    const [checkedSize, setCheckedSize] = React.useState("");
+    const [goodsAmount, setGoodsAmount] = React.useState(1); //количество
+    const [checkedSize, setCheckedSize] = React.useState(""); //размер
 
-    React.useEffect(() => {
+    React.useEffect(() => { //получение данных товара по id
         async function getData() {
             try {
                 await axios.get(`http://localhost:9999/goods/${itemId}`).then(res => setGoodsItem(res.data));
@@ -31,7 +31,7 @@ function GoodsCard(props) {
         getData();
     }, [itemId]);
 
-    const addedToCart = () => {
+    const addedToCart = () => { //функция добавления в корзину
         const addToCart = {
             "id": goodsItem.id,
             "name": goodsItem.name,
@@ -41,7 +41,7 @@ function GoodsCard(props) {
             "amount": goodsAmount
         };
 
-        //проверка анличия товара в корзине
+        //проверка наличия товара в корзине
         if (props.cartItems.map(obj => obj.id).includes(goodsItem.id) &&
             props.cartItems.map(obj => obj.size).includes(checkedSize)) //проверка товара по id и size
         {
@@ -60,7 +60,7 @@ function GoodsCard(props) {
         }, 1000);
     }
 
-    const oneClick = () => {
+    const oneClick = () => { //покупка в один клик
         const addToCart = {
             "id": goodsItem.id,
             "name": goodsItem.name,
@@ -72,7 +72,7 @@ function GoodsCard(props) {
         props.setCartItems([addToCart]);
     }
 
-    function buttonTitle() {
+    function buttonTitle() { //заголовок кнопки в зависимости от обстоятельств
         if (timeCounter>0) { //таймер задержки после нажатия
             return (timeCounter + " сек.")
         } else if (Boolean(goodsItem.size.length)&!checkedSize) { //не выбран размер товара

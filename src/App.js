@@ -16,7 +16,8 @@ import './css/App.css';
 function App() {
 
   const [quickCart, setQuickCart] = React.useState(false); //отображение/скрытие корзины
-  const [goods, setGoods] = React.useState([]); //отображение товаров на главной
+  const [goods, setGoods] = React.useState([]); //отображение товаров на главной (пагинация)
+  const [allGoods, setAllGoods] = React.useState([]); //перечень всех товаров
   const [goodsTitle, setGoodsTitle] = React.useState(''); //заголовок блока товаров
 
   const [itemLimit, setItemLimit] = React.useState(9);
@@ -27,7 +28,9 @@ function App() {
     async function getData () {
       try {
         await axios.get(`http://localhost:9999/goods?page=1&limit=${itemLimit}`)
-          .then(res => setGoods(res.data)); //подгрузка с бекэнда всех товаров
+          .then(res => setGoods(res.data)); //подгрузка с бекэнда товаров с пагинацией
+          await axios.get(`http://localhost:9999/goods`)
+            .then(res => setAllGoods(res.data)); //подгрузка с бекэнда всех товаров
         setIsLoad(true);
       } catch (error) {
         alert('Помилочка! Перезавантажте сторінку.');
@@ -38,7 +41,7 @@ function App() {
 
   const filterGoodsCondition = (item) => {
     return (
-      item.group.toLowerCase().includes(goodsTitle.toLowerCase())||item.name.toLowerCase().includes(goodsTitle.toLowerCase())); //добавить фильтр из NavBara
+      item.additional.toLowerCase().includes(goodsTitle.toLowerCase())||item.name.toLowerCase().includes(goodsTitle.toLowerCase())); //добавить фильтр из NavBara
   }  
 
   const [favorites, setFavorites] = React.useState(JSON.parse(localStorage.getItem('favorites'))||[]);
@@ -62,6 +65,7 @@ function App() {
       <Routes>
         <Route path = '/' element = {<Home 
             goods = {goods}
+            allGoods = {allGoods}
             goodsTitle = {goodsTitle}
             setGoodsTitle = {setGoodsTitle}
             filterGoodsCondition = {filterGoodsCondition}
