@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Carousel from 'react-bootstrap/Carousel';
 
 const sizeSVG = <svg width="30" height="30" viewBox="0 0 37 37" fill="none">
@@ -19,17 +19,19 @@ function GoodsCard(props) {
     const [goodsAmount, setGoodsAmount] = React.useState(1); //количество
     const [checkedSize, setCheckedSize] = React.useState(""); //размер
 
+    const history = useNavigate(); //для перехода на главную в случае ошибки при загрузке данных с сервера
+
     React.useEffect(() => { //получение данных товара по id
         async function getData() {
             try {
-                await axios.get(`http://localhost:9999/goods/${itemId}`).then(res => setGoodsItem(res.data));
+                await axios.get(`http://185.237.204.125:9999/goods/${itemId}`).then(res => res.data ? setGoodsItem(res.data) : history('/'));
             } catch (error) {
-                alert('Помилочка! Перезавантажте сторінку.');
+                history('/'); //переход на главную при ошибке
             }
             setIsLoad(true);
         }
         getData();
-    }, [itemId]);
+    }, [itemId, history]);
 
     const addedToCart = () => { //функция добавления в корзину
         const addToCart = {

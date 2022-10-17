@@ -27,9 +27,9 @@ function App() {
   React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
     async function getData () {
       try {
-        await axios.get(`http://localhost:9999/goods?page=1&limit=${itemLimit}`)
+        await axios.get(`http://185.237.204.125:9999/goods?page=1&limit=${itemLimit}`)
           .then(res => setGoods(res.data)); //подгрузка с бекэнда товаров с пагинацией
-          await axios.get(`http://localhost:9999/goods`)
+          await axios.get(`http://185.237.204.125:9999/goods`)
             .then(res => setAllGoods(res.data)); //подгрузка с бекэнда всех товаров
         setIsLoad(true);
       } catch (error) {

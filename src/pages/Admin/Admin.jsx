@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-bootstrap/Carousel';
 
 import './Admin.css';
@@ -31,6 +32,8 @@ function Admin() {
 
     const [isLoad, setIsLoad] = React.useState(false); //загрузчик на время запросов на сервер
 
+    const history = useNavigate(); //для перехода на главную в случае ошибки при загрузке данных с сервера
+
     const bookmarks = ['Товари', 'Розділіи', 'Акції', 'Банер']; //вкладки в админ. панели
     const goodsSizesArr = [ //типы размеров для одежды/обуви...
         ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
@@ -55,14 +58,14 @@ function Admin() {
     React.useEffect(() => { //подгрузка товаров от сервера
         async function getData() {
             try {
-                await axios.get('http://localhost:9999/goods').then(res => setGoods(res.data));
+                await axios.get('http://185.237.204.125:9999/goods').then(res => setGoods(res.data));
                 setIsLoad(true); //отключение лоадера после загрузки товаров
             } catch (error) {
-                alert('Помилочка! Перезавантажте сторінку.');
+                history('/'); //переход на главную при ошибке
             }
         }
         getData();
-    }, []);
+    }, [history]);
 
     function clearAll() { //функция очистки всех полей
         setGoodsName("");
@@ -102,9 +105,9 @@ function Admin() {
         setIsLoad(false); //активация загрузчика
         try {
             goods.map(obj => obj.id).includes(Number(goodsItem.id)) ?
-                await axios.put(`http://localhost:9999/goods/${goodsItem.id}`, goodsItem) :
-                await axios.post('http://localhost:9999/goods', goodsItem);
-                await axios.get('http://localhost:9999/goods').then(res => setGoods(res.data));
+                await axios.put(`http://185.237.204.125:9999/goods/${goodsItem.id}`, goodsItem) :
+                await axios.post('http://185.237.204.125:9999/goods', goodsItem);
+                await axios.get('http://185.237.204.125:9999/goods').then(res => setGoods(res.data));
             setIsLoad(true); //отключение загрузчика
         } catch(error) {
             alert('Помилочка! Перезавантажте сторінку.');
@@ -116,9 +119,9 @@ function Admin() {
     async function deleteGoods() { //удаление товара и получение обновленного списка всех товаров
         setIsLoad(false); //активация загрузчика
         try {
-            await axios.delete(`http://localhost:9999/goods/${goodsId}`);
+            await axios.delete(`http://185.237.204.125:9999/goods/${goodsId}`);
             setIsLoad(true); //отключение загрузчика
-            await axios.get('http://localhost:9999/goods').then(res => setGoods(res.data));
+            await axios.get('http://185.237.204.125:9999/goods').then(res => setGoods(res.data));
         } catch(error) {
             alert('Помилочка! Перезавантажте сторінку.');
         }
