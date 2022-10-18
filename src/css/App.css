@@ -880,6 +880,9 @@ footer .footer__ovner a {
 .footer li:hover {
   text-decoration: underline;
 }
+.footer li a {
+  color: white;
+}
 .footer li:first-child {
   text-transform: uppercase;
   font-weight: 500;
