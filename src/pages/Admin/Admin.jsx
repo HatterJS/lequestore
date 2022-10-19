@@ -49,6 +49,8 @@ function Admin() {
     const [checkedSizes, setCheckedSizes] = React.useState([]);
     const [goodsImage, setGoodsImage] = React.useState("");
     const [imageCounter, setImageCounter] = React.useState(1);
+    const [gender, setGender] = React.useState(1);
+    const [brands, setBrands] = React.useState(1);
     const [additional, setAdditional] = React.useState("");
 
     const [goods, setGoods] = React.useState([0]); //все товары (подгружается от сервера)
@@ -99,6 +101,8 @@ function Admin() {
         category: goodsCategory,
         size: checkedSizes,
         goodsImage: [...Array(Number(imageCounter)+1).keys()].slice(1).map(obj => `/img/goods/${goodsImage}/${obj}.jpg`),
+        gender: gender,
+        brands: brands,
         additional: additional
     }
     async function postNewGoods() { //изменение/добавление нового товара и получение обновленного списка всех товаров
@@ -112,6 +116,7 @@ function Admin() {
         } catch(error) {
             alert('Помилочка! Перезавантажте сторінку.');
         }
+        console.log(goodsItem);
         setGoodsId(''); //очистка поля id
         setBestId("______"); //очистка поля рекомендованого id
         clearAll(); //очистка полей
@@ -140,6 +145,8 @@ function Admin() {
             setCheckedSizes(itemById.size);
             setGoodsImage(itemById.goodsImage[0].slice(11).slice(0, -6)); //обрезаем адрес картинки чтобы осталось только название папки для отображения картинки в примере (заморочка связана с удобством добавления)
             setImageCounter(itemById.goodsImage.length);
+            setGender(itemById.gender);
+            setBrands(itemById.brands);
             setAdditional(itemById.additional);
         } else {
             clearAll(); //очистка всех полей при отсутствии товара с указаннм id
@@ -199,6 +206,25 @@ function Admin() {
                             <p>/img/goods/</p>
                             <input className="adminPanel__goodsImage" type="text" placeholder='Назва папки' onChange={event => setGoodsImage(event.target.value)} value={goodsImage}/>
                             <input className="adminPanel__count" type="number" onChange={event => event.target.value>=1 && setImageCounter(event.target.value)} value={imageCounter}/>
+                        </div>
+                        <div className="adminPanel__categoryBlock">
+                            <h4>Стать:</h4>
+                            <select name="adminPanel__category" onChange={event => setGender(event.target.value)} value={gender}>
+                                <option value=""></option>
+                                <option value="Унісекс">Унісекс</option>
+                                <option value="Чоловіче">Чоловіче</option>
+                                <option value="Жіноче">Жіноче</option>
+                            </select>
+                        </div>
+                        <div className="adminPanel__categoryBlock">
+                            <h4>Бренд:</h4>
+                            <select name="adminPanel__category" onChange={event => setBrands(event.target.value)} value={brands}>
+                                <option value=""></option>
+                                <option value="Adidas">Adidas</option>
+                                <option value="Nike">Nike</option>
+                                <option value="Balenciaga">Balenciaga</option>
+                                <option value="Fila">Fila</option>
+                            </select>
                         </div>
                         <div className="adminPanel__categoryBlock">
                             <h4>Додтково:</h4>
