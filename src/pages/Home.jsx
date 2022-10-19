@@ -16,6 +16,8 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
 
     const [scrollTopClass, setScrollTopClass] = React.useState(true); //изменение видимости иконки скролла вверх страницы
 
+    const [category, setCategory] = React.useState(''); //фильтрация по категории Одяг/Взуття
+
     window.onscroll = () => { //отображение иконки скролла вверх страницы при прокрутке вниз на 500
         if (window.scrollY > 500) {
             setScrollTopClass(false);
@@ -28,28 +30,36 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
         window.scrollTo(0, 0);
     }
 
+    function changeAdditional(text) { //фильтр по дополнительным акциям
+        setGoodsTitle(text);
+        setCategory(''); //очистка фильтра категории
+    }
+
+    console.log(category);
+
     return (
     <div className="content">
         <NavBar 
         onChangeSearch = {(searchValue) => setGoodsTitle(searchValue)}
+        setCategory = {(category) => setCategory(category)}
         />
         <Banner />
         <div className="content__hotOffers">
             <div
             className={(goodsTitle==='розпродаж') ? 'content_activeHotOffers' : ''} 
-            onClick={() => setGoodsTitle('Розпродаж')}
+            onClick={() => changeAdditional('Розпродаж')}
             ><p>Розпродаж</p></div>
             <div
             className={(goodsTitle==='нова колекція') ? 'content_activeHotOffers' : ''}
-            onClick={() => setGoodsTitle('Нова колекція')}
+            onClick={() => changeAdditional('Нова колекція')}
             ><p>Нова колекція</p></div>
             <div
             className={(goodsTitle==='хіт продажів') ? 'content_activeHotOffers' : ''}
-            onClick={() => setGoodsTitle('Хіт продажів')}
+            onClick={() => changeAdditional('Хіт продажів')}
             ><p>Хіт продажів</p></div>
             <div
             className={(goodsTitle==='') ? 'content_activeHotOffers' : ''}
-            onClick={() => setGoodsTitle('')}
+            onClick={() => changeAdditional('')}
             ><p>Всі пропозиції</p></div>
         </div>
         <h2><div></div> {goodsTitle ? `${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
@@ -66,7 +76,7 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
                     favorites = {favorites}
                     />)
                 : //или если поиск / акции активны то грузить все товары в зависимости от поиска
-                    allGoods.filter(filterGoodsCondition).map((obj) => <GoodsItem
+                    allGoods.filter(filterGoodsCondition).filter(item => item.category.includes(category)).map((obj) => <GoodsItem
                     key = {obj.id}
                     id = {obj.id}
                     name = {obj.name}

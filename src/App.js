@@ -41,7 +41,10 @@ function App() {
 
   const filterGoodsCondition = (item) => {
     return (
-      item.additional.toLowerCase().includes(goodsTitle.toLowerCase())||item.name.toLowerCase().includes(goodsTitle.toLowerCase())); //добавить фильтр из NavBara
+      item.gender.toLowerCase().includes(goodsTitle.toLowerCase())||
+      item.brands.toLowerCase().includes(goodsTitle.toLowerCase())||
+      item.additional.toLowerCase().includes(goodsTitle.toLowerCase())||
+      item.name.toLowerCase().includes(goodsTitle.toLowerCase()));
   }  
 
   const [favorites, setFavorites] = React.useState(JSON.parse(localStorage.getItem('favorites'))||[]);

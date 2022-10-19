@@ -49,8 +49,8 @@ function Admin() {
     const [checkedSizes, setCheckedSizes] = React.useState([]);
     const [goodsImage, setGoodsImage] = React.useState("");
     const [imageCounter, setImageCounter] = React.useState(1);
-    const [gender, setGender] = React.useState(1);
-    const [brands, setBrands] = React.useState(1);
+    const [gender, setGender] = React.useState("");
+    const [brands, setBrands] = React.useState("");
     const [additional, setAdditional] = React.useState("");
 
     const [goods, setGoods] = React.useState([0]); //все товары (подгружается от сервера)

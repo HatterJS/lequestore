@@ -23,8 +23,27 @@ $transition:  all 0.2s ease-in-out;
             }
         }
         .information_description {
+            display: flex;
+            div {
+                img {
+                    width: 50%;
+                }
+            }
             p {
                 margin: 10px 0;
+                th, td {
+                    border: $borderBar;
+                    padding: 3px;
+                }
+            }
+            p:first-child {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                & > div {
+                    display: flex;
+                    justify-content: space-evenly;
+                }
                 li {
                     list-style: disc;
                     margin-left: 30px;

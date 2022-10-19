@@ -24,9 +24,6 @@ function Information() {
         getData();
     }, [informId]);
 
-    // console.log(informationData.content.split('|'));
-    // console.log(informationData.title);
-
     return (
         <div className='information'>
             {isLoad ?

@@ -8,23 +8,30 @@ function NavBar(props) {
     
     const onChangeSearchInput = (event) => {
         event.target.value ? props.onChangeSearch(event.target.value) : props.onChangeSearch('');
+        props.setCategory(""); //сброс категории для поиска по всем товарам
+    }
+
+    function goodsFilter (event, category) {
+        props.setCategory(category); //добавить в фильтр категорию Одяг/Взуття
+        props.onChangeSearch(event.target.innerText); //фильтр по бренду/гендеру
     }
 
     return(
         <nav>
             <div className="navBar">
-            <ul className="navBar__main-menu dropdown">
+            <ul className="navBar__main-menu dropdown unselectable">
                 <li>ОДЯГ{arrowSVG}
-                <ul>
+                <ul onClick={event => goodsFilter(event, 'Одяг')}>
                     <li>Унісекс</li>
-                    <li>На флісі</li>
+                    <li>Для чоловіків</li>
+                    <li>Для жінок</li>
                 </ul>
                 </li>
                 <li>ВЗУТТЯ{arrowSVG}
-                <ul>
+                <ul onClick={event => goodsFilter(event, 'Взуття')}>
                     <li>Adidas</li>
                     <li>Nike</li>
-                    <li>Off-white</li>
+                    <li>Balenciaga</li>
                     <li>Prada</li>
                     <li>Puma</li>
                     <li>Fila</li>
