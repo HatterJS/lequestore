@@ -1,0 +1,91 @@
+$borderBar: 1px solid rgba(64, 64, 64, 0.2);
+$transition:  all 0.2s ease-in-out;
+
+.filterBar {
+    display: flex;
+    max-width: 1080px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+    border: $borderBar;
+    border-radius: 20px;
+    background-color: rgba(240, 240, 240, 0.7);
+    padding: 10px;
+    h4 {
+        margin-bottom: 5px;
+    }
+    select {
+        border: $borderBar;
+        border-radius: 10px;
+        padding: 5px;
+        margin-bottom: 5px;
+        &:focus {
+            outline: none;
+        }
+    }
+    label {
+        font-size: 14px;
+    }
+    & > div {
+        max-width: 270px;
+        flex: 1 1 auto;
+        border-right: $borderBar;
+        padding: 10px;
+    }
+    .filterBar__gender {
+        display: flex;
+        flex-direction: column;
+        div {
+            display: flex;
+        }
+        label {
+            margin-left: 5px;
+        }
+    }
+    .filterBar__size {
+        p {
+            font-weight: 500;
+        }
+        .filterBar__size-option {
+            display: flex;
+            flex-wrap: wrap;
+            // width: 100%;
+            input {
+                width: 28px;
+                padding: 1px;
+                margin: 3px 3px 0 0;
+                border: $borderBar;
+                border-radius: 5px;
+                background-color: rgb(245, 245, 245);
+                text-align: center;
+                font-size: 12px;
+                appearance: none;
+                transition: $transition;
+                cursor: pointer;
+                &:hover {
+                    transform: translateY(-1px);
+                    box-shadow: 1px 1px 1px rgb(71, 71, 71);
+                }
+                &:checked {
+                    background-color: rgb(235, 255, 204);
+                    transform: translateY(-1px);
+                    box-shadow: 1px 1px 1px rgb(71, 71, 71);
+                }
+                &::before {
+                    content: attr(label);
+                }
+            }
+        }
+    }
+    .acceptButton {
+        width: fit-content;
+        margin-left: 10px;
+        font-size: 12px;
+        padding: 10px;
+        &:active {
+            background-color: rgb(242, 255, 225);
+            box-shadow: 1px 1px 2px rgb(100, 100, 100) inset;
+            color: gray;
+        }
+    }
+}

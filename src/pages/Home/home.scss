@@ -1,0 +1,196 @@
+$borderBar: 1px solid rgba(64, 64, 64, 0.2);
+$textColor: rgb(64, 64, 64);
+$borderColor: rgba(64, 64, 64, 0.2);
+$transition:  all 0.2s ease-in-out;
+$maxWidth: 1090px;
+
+@mixin bgColor ($transparancy: 0.5) {
+    background-color: rgba(64, 64, 64, $transparancy);
+}
+@mixin flexCenter {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+@mixin menuStyle {
+    @include flexCenter();
+    justify-content: space-between;
+    max-width: $maxWidth;
+    width: 100%;
+    margin: 0 auto;
+}
+
+// CONTENT
+    // BANNER SLIDER
+    .bannerBlock {
+        max-width: 1080px;
+        margin: 0 auto;
+        margin-top: 10px;
+        border: $borderBar;
+    }
+    // HOT OFFERS
+.content__hotOffers {
+    @include menuStyle();
+    max-width: $maxWidth;
+    flex-wrap: wrap;
+    div {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        flex: 1 1 auto;
+        min-width: 220px;
+        margin: 10px 5px;
+        cursor: pointer;
+        transition: $transition;
+        @include bgColor(0.1);
+        background: rgb(243, 243, 243);
+        border: $borderBar;
+        border-radius: 0 0 10px 10px;
+        p {
+            display: flex;
+            width: 200px;
+            height: 40px;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: $textColor;
+            align-items: center;
+            justify-content: center;
+        }
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
+            background: rgb(255, 245, 170);
+        }
+    }
+    .content_activeHotOffers {
+        background: rgb(255, 245, 170);
+    }
+}
+    // GOODS TITLE
+.content {
+    position: relative;
+    h2 {
+        display: flex;
+        max-width: 1080px;
+        margin: 0 auto;
+        overflow: auto;
+        div {
+            border-top: $borderBar;
+            flex: 1;
+            align-self: center;
+            margin: 0 20px;
+        }
+    }
+}
+    // GOODS
+.content__goodsBlock {
+    @include menuStyle();
+    max-width: $maxWidth;
+    flex-wrap: wrap;
+    div.content__goodsItem {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        flex: 1 1 auto;
+        background-position: center;
+        background-size: 100%;
+        height: 350px;
+        width: 270px;
+        margin: 5px;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: $transition;
+        p {
+            padding: 5px 30px;
+            text-align: center;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+            transition: $transition;
+            z-index: 9;
+        }
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 0;
+            min-height: 50px;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: rgba(255, 255, 255, 0.5);
+            transition: $transition;
+            z-index: 9;
+        }
+        img {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            transition: $transition;
+            cursor: pointer;
+        }
+        &:hover {
+            img {
+                transform: scale(110%) translateY(-50%);
+            }
+            p {
+                color: rgba(255, 255, 255, 0.9);
+            }
+            div {
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+        }
+        .content__cost {
+            flex: 1 1 auto;
+        }
+        .addedToFavoriteBtn {
+            path {
+                fill: rgba(255, 123, 123, 0.562);
+                fill-opacity: 0.8;
+                stroke: rgb(97, 97, 97);
+            }
+        }
+        .addToFavoriteBtn, .addedToFavoriteBtn {
+            z-index: 9;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            &:hover {
+                rect {
+                    fill-opacity: 0.8;
+                    stroke-opacity: 0.6;
+                }
+                path {
+                    stroke-opacity: 0.6;
+                }
+            }
+        }
+    }
+}
+    // MORE GOODS
+.moreGoods {
+    width: fit-content;
+    margin: 10px auto;
+    cursor: pointer;
+    color: rgba(64, 64, 64, 0.6);
+    P {
+        font-weight: 500;
+    }
+    &:hover {        
+        color: $textColor;
+    }
+}
+    //SCROLL TOP
+.content__scrollTop {
+    position: fixed;
+    z-index: 99;
+    right: 10px;
+    bottom: 50%;
+    cursor: pointer;
+    transition: $transition;
+    svg:hover {
+        fill: rgb(228, 255, 129);
+    }
+}
+.content__scrollTop-hidden {
+    opacity: 0;
+}

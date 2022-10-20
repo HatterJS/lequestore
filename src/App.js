@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Favorite from './pages/Favorite';
 import Order from './pages/Order';
 import GoodsCard from './pages/GoodsCard';
@@ -76,6 +76,7 @@ function App() {
             favorites = {favorites}
             setFavorites = {(item) => setFavorites(item)}
             setItemLimit = {(value) => setItemLimit(value)}
+            setGoods = {(goodsData) => setGoods(goodsData)}
           />}
         />
         <Route path = '/favorite' element = {<Favorite

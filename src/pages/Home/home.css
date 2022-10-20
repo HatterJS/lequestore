@@ -1,0 +1,240 @@
+.bannerBlock {
+  max-width: 1080px;
+  margin: 0 auto;
+  margin-top: 10px;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+}
+
+.content__hotOffers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 1090px;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1090px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.content__hotOffers div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  min-width: 220px;
+  margin: 10px 5px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background-color: rgba(64, 64, 64, 0.1);
+  background: rgb(243, 243, 243);
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  border-radius: 0 0 10px 10px;
+}
+.content__hotOffers div p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 200px;
+  height: 40px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgb(64, 64, 64);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.content__hotOffers div:hover {
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+  -webkit-box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
+          box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
+  background: rgb(255, 245, 170);
+}
+.content__hotOffers .content_activeHotOffers {
+  background: rgb(255, 245, 170);
+}
+
+.content {
+  position: relative;
+}
+.content h2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 1080px;
+  margin: 0 auto;
+  overflow: auto;
+}
+.content h2 div {
+  border-top: 1px solid rgba(64, 64, 64, 0.2);
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin: 0 20px;
+}
+
+.content__goodsBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 1090px;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1090px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.content__goodsBlock div.content__goodsItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: relative;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  background-position: center;
+  background-size: 100%;
+  height: 350px;
+  width: 270px;
+  margin: 5px;
+  border-radius: 15px;
+  overflow: hidden;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.content__goodsBlock div.content__goodsItem p {
+  padding: 5px 30px;
+  text-align: center;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  z-index: 9;
+}
+.content__goodsBlock div.content__goodsItem div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 5px 0;
+  min-height: 50px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  z-index: 9;
+}
+.content__goodsBlock div.content__goodsItem img {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 100%;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.content__goodsBlock div.content__goodsItem:hover img {
+  -webkit-transform: scale(110%) translateY(-50%);
+          transform: scale(110%) translateY(-50%);
+}
+.content__goodsBlock div.content__goodsItem:hover p {
+  color: rgba(255, 255, 255, 0.9);
+}
+.content__goodsBlock div.content__goodsItem:hover div {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.content__goodsBlock div.content__goodsItem .content__cost {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+.content__goodsBlock div.content__goodsItem .addedToFavoriteBtn path {
+  fill: rgba(255, 123, 123, 0.562);
+  fill-opacity: 0.8;
+  stroke: rgb(97, 97, 97);
+}
+.content__goodsBlock div.content__goodsItem .addToFavoriteBtn, .content__goodsBlock div.content__goodsItem .addedToFavoriteBtn {
+  z-index: 9;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.content__goodsBlock div.content__goodsItem .addToFavoriteBtn:hover rect, .content__goodsBlock div.content__goodsItem .addedToFavoriteBtn:hover rect {
+  fill-opacity: 0.8;
+  stroke-opacity: 0.6;
+}
+.content__goodsBlock div.content__goodsItem .addToFavoriteBtn:hover path, .content__goodsBlock div.content__goodsItem .addedToFavoriteBtn:hover path {
+  stroke-opacity: 0.6;
+}
+
+.moreGoods {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 10px auto;
+  cursor: pointer;
+  color: rgba(64, 64, 64, 0.6);
+}
+.moreGoods P {
+  font-weight: 500;
+}
+.moreGoods:hover {
+  color: rgb(64, 64, 64);
+}
+
+.content__scrollTop {
+  position: fixed;
+  z-index: 99;
+  right: 10px;
+  bottom: 50%;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.content__scrollTop svg:hover {
+  fill: rgb(228, 255, 129);
+}
+
+.content__scrollTop-hidden {
+  opacity: 0;
+}

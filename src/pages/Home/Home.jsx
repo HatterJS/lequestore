@@ -1,8 +1,11 @@
 import React from 'react';
-import GoodsItem from '../components/GoodsItem';
-import NavBar from '../components/NavBar';
-import Banner from '../components/Banner';
-import '../css/loader.css';
+import axios from 'axios';
+import GoodsItem from '../../components/GoodsItem';
+import NavBar from '../../components/NavBar';
+import FilterBar from '../../components/FilterBar/FilterBar';
+import Banner from '../../components/Banner';
+import './home.css';
+import '../../css/loader.css';
 
 const scrollTopSVG = <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
     <circle cx="25" cy="25" r="25" fill="#f6ff66ab"/>
@@ -12,10 +15,10 @@ const scrollTopSVG = <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
 </svg>
 
 
-function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setItemLimit}) {
+function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setItemLimit, setGoods}) {
 
     const [scrollTopClass, setScrollTopClass] = React.useState(true); //изменение видимости иконки скролла вверх страницы
-
+    const [showFilter, setShowFilter] = React.useState(false); //показать фильтр и скрыть баннер
     const [category, setCategory] = React.useState(''); //фильтрация по категории Одяг/Взуття
 
     window.onscroll = () => { //отображение иконки скролла вверх страницы при прокрутке вниз на 500
@@ -35,15 +38,37 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
         setCategory(''); //очистка фильтра категории
     }
 
-    console.log(category);
+    function onFilter() {
+        setShowFilter(!showFilter);
+    }
+    
+    async function applyFilter(filterData) {
+        try {
+            await axios.post('http://185.237.204.125:9997/filterGoods', filterData).then(res => setGoods(res.data.map(obj => ({...obj, size: JSON.parse(obj.size), goodsImage: JSON.parse(obj.goodsImage)}))));
+        } catch(err) {
+            alert('Помилочка! Перезавантажте сторінку.');
+        }
+        console.log(filterData);
+    }
 
     return (
     <div className="content">
         <NavBar 
         onChangeSearch = {(searchValue) => setGoodsTitle(searchValue)}
         setCategory = {(category) => setCategory(category)}
+        showFilter = {() => onFilter()}
+        dropFilter = {() => applyFilter({
+            cost: [0, 5000],
+            category: "",
+            size: "",
+            gender: "",
+            brands: ""
+        })}
         />
-        <Banner />
+        {showFilter && <FilterBar
+            applyFilter = {(filterData) => applyFilter(filterData)}
+        />}
+        {!showFilter && <Banner />}
         <div className="content__hotOffers">
             <div
             className={(goodsTitle==='розпродаж') ? 'content_activeHotOffers' : ''} 
