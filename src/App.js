@@ -19,25 +19,41 @@ function App() {
   const [goods, setGoods] = React.useState([]); //отображение товаров на главной (пагинация)
   const [allGoods, setAllGoods] = React.useState([]); //перечень всех товаров
   const [goodsTitle, setGoodsTitle] = React.useState(''); //заголовок блока товаров
+  const [filterData, setFilterData] = React.useState(
+    {
+        cost: [0, 5000],
+        category: "",
+        size: "",
+        gender: "",
+        brands: ""
+    });
 
   const [itemLimit, setItemLimit] = React.useState(9);
 
   const [isLoad, setIsLoad] = React.useState(false);
 
-  React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
+  React.useEffect(() => { //подгрузка товаров с учетом фильтрации и пагинации
     async function getData () {
       try {
-        await axios.get(`http://185.237.204.125:9999/goods?page=1&limit=${itemLimit}`)
-          .then(res => setGoods(res.data)); //подгрузка с бекэнда товаров с пагинацией
-          await axios.get(`http://185.237.204.125:9999/goods`)
-            .then(res => setAllGoods(res.data)); //подгрузка с бекэнда всех товаров
+        await axios.post(`http://localhost:9999/goods?page=1&limit=${itemLimit}`, filterData).then(res => setGoods(res.data));
         setIsLoad(true);
       } catch (error) {
         alert('Помилочка! Перезавантажте сторінку.');
       }
     };
     getData();
-  }, [itemLimit]);
+  }, [itemLimit, filterData]);
+
+  React.useEffect(() => { //загрузка всех товаров с бека для поиска и акционных предложений
+    async function getData () {
+      try {
+          await axios.get(`http://localhost:9999/goods`).then(res => setAllGoods(res.data));
+      } catch (error) {
+        alert('Помилочка! Перезавантажте сторінку.');
+      }
+    };
+    getData();
+  }, []);
 
   const filterGoodsCondition = (item) => {
     return (
@@ -76,7 +92,7 @@ function App() {
             favorites = {favorites}
             setFavorites = {(item) => setFavorites(item)}
             setItemLimit = {(value) => setItemLimit(value)}
-            setGoods = {(goodsData) => setGoods(goodsData)}
+            setFilterData = {(data) => setFilterData(data)}
           />}
         />
         <Route path = '/favorite' element = {<Favorite

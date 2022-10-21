@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import GoodsItem from '../../components/GoodsItem';
 import NavBar from '../../components/NavBar';
 import FilterBar from '../../components/FilterBar/FilterBar';
@@ -15,7 +14,7 @@ const scrollTopSVG = <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
 </svg>
 
 
-function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setItemLimit, setGoods}) {
+function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setItemLimit, setFilterData}) {
 
     const [scrollTopClass, setScrollTopClass] = React.useState(true); //изменение видимости иконки скролла вверх страницы
     const [showFilter, setShowFilter] = React.useState(false); //показать фильтр и скрыть баннер
@@ -41,15 +40,6 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
     function onFilter() {
         setShowFilter(!showFilter);
     }
-    
-    async function applyFilter(filterData) {
-        try {
-            await axios.post('http://185.237.204.125:9997/filterGoods', filterData).then(res => setGoods(res.data.map(obj => ({...obj, size: JSON.parse(obj.size), goodsImage: JSON.parse(obj.goodsImage)}))));
-        } catch(err) {
-            alert('Помилочка! Перезавантажте сторінку.');
-        }
-        console.log(filterData);
-    }
 
     return (
     <div className="content">
@@ -57,29 +47,30 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
         onChangeSearch = {(searchValue) => setGoodsTitle(searchValue)}
         setCategory = {(category) => setCategory(category)}
         showFilter = {() => onFilter()}
-        dropFilter = {() => applyFilter({
+        dropFilter = {() => setFilterData({
             cost: [0, 5000],
             category: "",
             size: "",
             gender: "",
             brands: ""
         })}
+        dropLimit = {() => setItemLimit(9)}
         />
         {showFilter && <FilterBar
-            applyFilter = {(filterData) => applyFilter(filterData)}
+            applyFilter = {(data) => setFilterData(data)}
         />}
         {!showFilter && <Banner />}
         <div className="content__hotOffers">
             <div
-            className={(goodsTitle==='розпродаж') ? 'content_activeHotOffers' : ''} 
+            className={(goodsTitle==='Розпродаж') ? 'content_activeHotOffers' : ''} 
             onClick={() => changeAdditional('Розпродаж')}
             ><p>Розпродаж</p></div>
             <div
-            className={(goodsTitle==='нова колекція') ? 'content_activeHotOffers' : ''}
+            className={(goodsTitle==='Нова колекція') ? 'content_activeHotOffers' : ''}
             onClick={() => changeAdditional('Нова колекція')}
             ><p>Нова колекція</p></div>
             <div
-            className={(goodsTitle==='хіт продажів') ? 'content_activeHotOffers' : ''}
+            className={(goodsTitle==='Хіт продажів') ? 'content_activeHotOffers' : ''}
             onClick={() => changeAdditional('Хіт продажів')}
             ><p>Хіт продажів</p></div>
             <div

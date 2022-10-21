@@ -19,6 +19,7 @@ function NavBar(props) {
 
     function showFilter() {
         props.showFilter();
+        onClickFilter && props.dropLimit();
         onClickFilter && props.dropFilter();
         setOnClickFilter(!onClickFilter);
     }
