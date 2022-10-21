@@ -116,7 +116,6 @@ function Admin() {
         } catch(error) {
             alert('Помилочка! Перезавантажте сторінку.');
         }
-        console.log(goodsItem);
         setGoodsId(''); //очистка поля id
         setBestId("______"); //очистка поля рекомендованого id
         clearAll(); //очистка полей
