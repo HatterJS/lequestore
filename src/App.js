@@ -16,29 +16,32 @@ import './css/App.css';
 function App() {
 
   const [quickCart, setQuickCart] = React.useState(false); //отображение/скрытие корзины
-  const [goods, setGoods] = React.useState([]); //отображение товаров на главной
+  const [goods, setGoods] = React.useState([]); //отображение товаров на главной (пагинация)
+  const [allGoods, setAllGoods] = React.useState([]); //перечень всех товаров
   const [goodsTitle, setGoodsTitle] = React.useState(''); //заголовок блока товаров
 
-  const [showMore, setShowMore] = React.useState(9);
+  const [itemLimit, setItemLimit] = React.useState(9);
 
   const [isLoad, setIsLoad] = React.useState(false);
 
   React.useEffect(() => { //необходимо для того, чтобы подгрузка с бекэнда происходила только 1 раз при загрузке страницы
     async function getData () {
       try {
-        await axios.get(`https://632db5102cfd5ccc2af512de.mockapi.io/items?p=1&l=${showMore}`)
-          .then(res => setGoods(res.data)); //подгрузка с бекэнда всех товаров
+        await axios.get(`http://localhost:9999/goods?page=1&limit=${itemLimit}`)
+          .then(res => setGoods(res.data)); //подгрузка с бекэнда товаров с пагинацией
+          await axios.get(`http://localhost:9999/goods`)
+            .then(res => setAllGoods(res.data)); //подгрузка с бекэнда всех товаров
         setIsLoad(true);
       } catch (error) {
         alert('Помилочка! Перезавантажте сторінку.');
       }
     };
     getData();
-  }, [showMore]);
+  }, [itemLimit]);
 
   const filterGoodsCondition = (item) => {
     return (
-      item.group.toLowerCase().includes(goodsTitle.toLowerCase())||item.name.toLowerCase().includes(goodsTitle.toLowerCase())); //добавить фильтр из NavBara
+      item.additional.toLowerCase().includes(goodsTitle.toLowerCase())||item.name.toLowerCase().includes(goodsTitle.toLowerCase())); //добавить фильтр из NavBara
   }  
 
   const [favorites, setFavorites] = React.useState(JSON.parse(localStorage.getItem('favorites'))||[]);
@@ -62,13 +65,14 @@ function App() {
       <Routes>
         <Route path = '/' element = {<Home 
             goods = {goods}
+            allGoods = {allGoods}
             goodsTitle = {goodsTitle}
             setGoodsTitle = {setGoodsTitle}
             filterGoodsCondition = {filterGoodsCondition}
             isLoad = {isLoad}
             favorites = {favorites}
             setFavorites = {(item) => setFavorites(item)}
-            setShowMore = {(value) => setShowMore(value)}
+            setItemLimit = {(value) => setItemLimit(value)}
           />}
         />
         <Route path = '/favorite' element = {<Favorite

@@ -12,18 +12,19 @@ const scrollTopSVG = <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
 </svg>
 
 
-function Home ({goods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setShowMore}) {
+function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setItemLimit}) {
 
-    const [scrollTopClass, setScrollTopClass] = React.useState(true);
+    const [scrollTopClass, setScrollTopClass] = React.useState(true); //изменение видимости иконки скролла вверх страницы
 
-    window.onscroll = () => {
+    window.onscroll = () => { //отображение иконки скролла вверх страницы при прокрутке вниз на 500
         if (window.scrollY > 500) {
             setScrollTopClass(false);
         } else {
             setScrollTopClass(true);
         }
     }
-    function scrollTop() {
+
+    function scrollTop() { //скроллинг вверх страницы по нажатию иконки
         window.scrollTo(0, 0);
     }
 
@@ -53,15 +54,28 @@ function Home ({goods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, 
         </div>
         <h2><div></div> {goodsTitle ? `${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
         <div className="content__goodsBlock">
-            {isLoad ? goods.filter(filterGoodsCondition).map((obj) => <GoodsItem
-            key = {obj.id}
-            id = {obj.id}
-            name = {obj.name}
-            cost = {obj.cost}
-            goodsImage = {obj.goodsImage[0]}
-            setFavorites = {setFavorites}
-            favorites = {favorites}
-            />) : 
+            {isLoad ? //лоадер пока товары загружаются
+                !goodsTitle ? //если поиск / акции не активированы то грузить товары порциями (пагинация)
+                    goods.map((obj) => <GoodsItem
+                    key = {obj.id}
+                    id = {obj.id}
+                    name = {obj.name}
+                    cost = {obj.cost}
+                    goodsImage = {obj.goodsImage[0]}
+                    setFavorites = {setFavorites}
+                    favorites = {favorites}
+                    />)
+                : //или если поиск / акции активны то грузить все товары в зависимости от поиска
+                    allGoods.filter(filterGoodsCondition).map((obj) => <GoodsItem
+                    key = {obj.id}
+                    id = {obj.id}
+                    name = {obj.name}
+                    cost = {obj.cost}
+                    goodsImage = {obj.goodsImage[0]}
+                    setFavorites = {setFavorites}
+                    favorites = {favorites}
+                    />)
+            : //лоадер
             <div className="loader02">
                 <div className="border02">
                     <div className="shapeEye01"></div>
@@ -73,7 +87,7 @@ function Home ({goods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, 
             <div className={scrollTopClass ? "content__scrollTop content__scrollTop-hidden" : "content__scrollTop"} onClick={scrollTop}>{scrollTopSVG}</div>
         </div>
         <div className="moreGoods">
-            <p onClick={() => setShowMore(prev => prev+9)}>ПОКАЗАТИ БІЛЬШЕ ...</p>
+            <p onClick={() => setItemLimit(prev => prev+9)}>ПОКАЗАТИ БІЛЬШЕ ...</p>
         </div>
     </div>
     );
