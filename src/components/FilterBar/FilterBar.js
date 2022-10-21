@@ -9,7 +9,7 @@ function FilterBar(props) {
     ];
     const [gender, setGender] = React.useState("");
     const goodsCostRangeRef = React.useRef([]);
-    const [goodsCategory, setGoodsCategory] = React.useState("Взуття");
+    const [goodsCategory, setGoodsCategory] = React.useState("");
     const [checkedSizes, setCheckedSizes] = React.useState([""]);
     const [brands, setBrands] = React.useState("");
 
@@ -51,6 +51,7 @@ function FilterBar(props) {
                     <div className="filterBar__categoryBlock">
                         <h4>Розмір:</h4>
                         <select name="filterBar__category" onChange={(event) => {setGoodsCategory(event.target.value); setCheckedSizes('')}} value={goodsCategory}>
+                            <option value=""></option>
                             <option value="Взуття">Взуття</option>
                             <option value="Одяг">Одяг</option>
                             <option value="Аксесуари">Аксесуари</option>
@@ -58,7 +59,7 @@ function FilterBar(props) {
                     </div>
                     <div className="filterBar__size">
                         <div className="filterBar__size-option">
-                            {goodsCategory!=='Аксесуари' && goodsSizesArr[goodsCategory==='Взуття' ? 1 : 0].map(obj =>
+                            {(goodsCategory!=='Аксесуари'&&goodsCategory!=='') && (goodsSizesArr[goodsCategory==='Взуття' ? 1 : 0].map(obj =>
                                 <input
                                     key = {obj}
                                     id = {obj}
@@ -66,7 +67,7 @@ function FilterBar(props) {
                                     type = "radio"
                                     name = "size"
                                     onClick = {() => setCheckedSizes(obj)}
-                                />)}
+                                />))}
                         </div>
                     </div>
                 </div>

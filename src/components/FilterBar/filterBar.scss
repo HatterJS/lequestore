@@ -29,7 +29,7 @@ $transition:  all 0.2s ease-in-out;
     & > div {
         max-width: 270px;
         flex: 1 1 auto;
-        border-right: $borderBar;
+        min-width: 130px;
         padding: 10px;
     }
     .filterBar__gender {
@@ -87,5 +87,11 @@ $transition:  all 0.2s ease-in-out;
             box-shadow: 1px 1px 2px rgb(100, 100, 100) inset;
             color: gray;
         }
+    }
+}
+
+@media (max-width: 700px) {
+    .filterBar {
+        flex-direction: column;
     }
 }

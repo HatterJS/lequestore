@@ -35,7 +35,7 @@ function App() {
   React.useEffect(() => { //подгрузка товаров с учетом фильтрации и пагинации
     async function getData () {
       try {
-        await axios.post(`http://localhost:9999/goods?page=1&limit=${itemLimit}`, filterData).then(res => setGoods(res.data));
+        await axios.post(`http://185.237.204.125:9999/goods?page=1&limit=${itemLimit}`, filterData).then(res => setGoods(res.data));
         setIsLoad(true);
       } catch (error) {
         alert('Помилочка! Перезавантажте сторінку.');
@@ -47,7 +47,7 @@ function App() {
   React.useEffect(() => { //загрузка всех товаров с бека для поиска и акционных предложений
     async function getData () {
       try {
-          await axios.get(`http://localhost:9999/goods`).then(res => setAllGoods(res.data));
+          await axios.get(`http://185.237.204.125:9999/goods`).then(res => setAllGoods(res.data));
       } catch (error) {
         alert('Помилочка! Перезавантажте сторінку.');
       }

@@ -332,6 +332,11 @@ header {
 .addressBlock {
     @include menuStyle();
     padding: 10px 0;
+    .addressBlock__contactsBlock {
+        display: flex;
+        flex: 1 1 auto;
+        justify-content: space-evenly;
+    }
     img {
         height: 70px;
     }
@@ -727,4 +732,20 @@ footer {
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
+}
+
+//Медиа запросы на ширину экрана
+@media (max-width: 900px) {
+    header, nav {
+        height: auto;
+    }
+    .topBar__mainMenu, .navBar__main-menu, .addressBlock {
+        flex-direction: column;
+    }
+    .addressBlock {
+        .addressBlock__contactsBlock {
+            margin: 10px;
+            width: 100%;
+        }
+    }
 }

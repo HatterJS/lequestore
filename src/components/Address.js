@@ -22,15 +22,17 @@ function Address(props) {
         <address>
             <div className="addressBlock">
                 <Link to = "/"><img className='addressBlock__logo' src='/img/logo.webp' alt="Lequestore"/></Link>
-                <div className="addressBlock__schedule">
-                    <p>Графік роботи:</p>
-                    <p>Пн-Пт / 10.00 - 19.00</p>
-                    <p>Сб / 11.00 - 16.00</p>
-                </div>
-                <div className="addressBlock__contacts">
-                    <p>Контакти:</p>
-                    <p>066 0469 277 - Телеграм</p>
-                    <p>067 9766 777 - Вайбер</p>
+                <div className='addressBlock__contactsBlock'>
+                    <div className="addressBlock__schedule">
+                        <p>Графік роботи:</p>
+                        <p>Пн-Пт / 10.00 - 19.00</p>
+                        <p>Сб / 11.00 - 16.00</p>
+                    </div>
+                    <div className="addressBlock__contacts">
+                        <p>Контакти:</p>
+                        <p>066 0469 277 - Телеграм</p>
+                        <p>067 9766 777 - Вайбер</p>
+                    </div>
                 </div>
                 <div className='addressBlock__favoriteCart'>
                     <div className="addressBlock__favoriteBlock">                    
