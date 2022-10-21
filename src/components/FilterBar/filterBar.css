@@ -1,0 +1,109 @@
+.filterBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 10px;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  border-radius: 20px;
+  background-color: rgba(240, 240, 240, 0.7);
+  padding: 10px;
+}
+.filterBar h4 {
+  margin-bottom: 5px;
+}
+.filterBar select {
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+.filterBar select:focus {
+  outline: none;
+}
+.filterBar label {
+  font-size: 14px;
+}
+.filterBar > div {
+  max-width: 270px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  border-right: 1px solid rgba(64, 64, 64, 0.2);
+  padding: 10px;
+}
+.filterBar .filterBar__gender {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.filterBar .filterBar__gender div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.filterBar .filterBar__gender label {
+  margin-left: 5px;
+}
+.filterBar .filterBar__size p {
+  font-weight: 500;
+}
+.filterBar .filterBar__size .filterBar__size-option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.filterBar .filterBar__size .filterBar__size-option input {
+  width: 28px;
+  padding: 1px;
+  margin: 3px 3px 0 0;
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  border-radius: 5px;
+  background-color: rgb(245, 245, 245);
+  text-align: center;
+  font-size: 12px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.filterBar .filterBar__size .filterBar__size-option input:hover {
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+  -webkit-box-shadow: 1px 1px 1px rgb(71, 71, 71);
+          box-shadow: 1px 1px 1px rgb(71, 71, 71);
+}
+.filterBar .filterBar__size .filterBar__size-option input:checked {
+  background-color: rgb(235, 255, 204);
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+  -webkit-box-shadow: 1px 1px 1px rgb(71, 71, 71);
+          box-shadow: 1px 1px 1px rgb(71, 71, 71);
+}
+.filterBar .filterBar__size .filterBar__size-option input::before {
+  content: attr(label);
+}
+.filterBar .acceptButton {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: 10px;
+  font-size: 12px;
+  padding: 10px;
+}
+.filterBar .acceptButton:active {
+  background-color: rgb(242, 255, 225);
+  -webkit-box-shadow: 1px 1px 2px rgb(100, 100, 100) inset;
+          box-shadow: 1px 1px 2px rgb(100, 100, 100) inset;
+  color: gray;
+}

@@ -8,12 +8,10 @@ function Header() {
         <header>
           <div className='topBar'>
             <ul className='topBar__mainMenu'>
-              <li><Link to='/information'>Про магазин</Link></li>
-              <li><Link to='/information'>Доставка і оплата</Link></li>
-              <li><Link to='/information'>Підібрати розмір</Link></li>
-              <li><Link to='/information'>Обмін і повернення</Link></li>
-              <li><Link to='/information'>FAQ</Link></li>
-              <li><Link to='/information'>Контакти</Link></li>
+              <li><Link to='/information' state={{id: 1}}>Про магазин</Link></li>
+              <li><Link to='/information' state={{id: 2}}>Доставка і оплата</Link></li>
+              <li><Link to='/information' state={{id: 3}}>Підібрати розмір</Link></li>
+              <li><Link to='/information' state={{id: 4}}>Обмін і повернення</Link></li>
             </ul>
             <ul className='topBar__social'>
               <li>Приєднуйтесь:</li>

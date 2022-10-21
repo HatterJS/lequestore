@@ -5,26 +5,41 @@ const arrowSVG = <svg width="12" height="7" viewBox="0 0 12 7">
 <path d="M1 1L6.26316 6L11 1" stroke="#404040" fill="none"/></svg>
 
 function NavBar(props) {
+    const [onClickFilter, setOnClickFilter] = React.useState(false);
     
     const onChangeSearchInput = (event) => {
         event.target.value ? props.onChangeSearch(event.target.value) : props.onChangeSearch('');
+        props.setCategory(""); //сброс категории для поиска по всем товарам
+    }
+
+    function goodsFilter (event, category) {
+        props.setCategory(category); //добавить в фильтр категорию Одяг/Взуття
+        props.onChangeSearch(event.target.innerText); //фильтр по бренду/гендеру
+    }
+
+    function showFilter() {
+        props.showFilter();
+        onClickFilter && props.dropLimit();
+        onClickFilter && props.dropFilter();
+        setOnClickFilter(!onClickFilter);
     }
 
     return(
         <nav>
             <div className="navBar">
-            <ul className="navBar__main-menu dropdown">
+            <ul className="navBar__main-menu dropdown unselectable">
                 <li>ОДЯГ{arrowSVG}
-                <ul>
+                <ul onClick={event => goodsFilter(event, 'Одяг')}>
                     <li>Унісекс</li>
-                    <li>На флісі</li>
+                    <li>Для чоловіків</li>
+                    <li>Для жінок</li>
                 </ul>
                 </li>
                 <li>ВЗУТТЯ{arrowSVG}
-                <ul>
+                <ul onClick={event => goodsFilter(event, 'Взуття')}>
                     <li>Adidas</li>
                     <li>Nike</li>
-                    <li>Off-white</li>
+                    <li>Balenciaga</li>
                     <li>Prada</li>
                     <li>Puma</li>
                     <li>Fila</li>
@@ -67,6 +82,7 @@ function NavBar(props) {
                     <li>Фігурки</li>
                 </ul>
                 </li>
+                <li style={onClickFilter ? {backgroundColor: "rgb(255, 245, 170)", boxShadow: "1px 1px 2px grey inset", borderRadius: "5px"} : {backgroundColor: ""}} onClick={showFilter}>ФІЛЬТР</li>
             </ul>
             <div className='navBar__searchForm'>
                 <input onChange={onChangeSearchInput} name='search' placeholder='Пошук...' type="search" maxLength={40} />

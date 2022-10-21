@@ -1,0 +1,54 @@
+$borderBar: 1px solid rgba(64, 64, 64, 0.2);
+$transition:  all 0.2s ease-in-out;
+$textColor: rgb(64, 64, 64);
+$transition:  all 0.2s ease-in-out;
+
+.information {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    max-width: 1090px;
+    width: 100%;
+    margin: 0 auto;
+    .information__content {
+        .information__title {
+            display: flex;
+            align-items: center;
+            h1 {
+                margin: 10px;
+            }
+            div {
+                flex: 1 1 auto;
+                border-bottom: $borderBar;
+            }
+        }
+        .information_description {
+            display: flex;
+            div {
+                img {
+                    width: 50%;
+                }
+            }
+            p {
+                margin: 10px 0;
+                th, td {
+                    border: $borderBar;
+                    padding: 3px;
+                }
+            }
+            p:first-child {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                & > div {
+                    display: flex;
+                    justify-content: space-evenly;
+                }
+                li {
+                    list-style: disc;
+                    margin-left: 30px;
+                }
+            }
+        }
+    }
+}

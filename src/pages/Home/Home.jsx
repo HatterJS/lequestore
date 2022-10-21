@@ -1,8 +1,10 @@
 import React from 'react';
-import GoodsItem from '../components/GoodsItem';
-import NavBar from '../components/NavBar';
-import Banner from '../components/Banner';
-import '../css/loader.css';
+import GoodsItem from '../../components/GoodsItem';
+import NavBar from '../../components/NavBar';
+import FilterBar from '../../components/FilterBar/FilterBar';
+import Banner from '../../components/Banner';
+import './home.css';
+import '../../css/loader.css';
 
 const scrollTopSVG = <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
     <circle cx="25" cy="25" r="25" fill="#f6ff66ab"/>
@@ -12,9 +14,11 @@ const scrollTopSVG = <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
 </svg>
 
 
-function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setItemLimit}) {
+function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setItemLimit, setFilterData}) {
 
     const [scrollTopClass, setScrollTopClass] = React.useState(true); //изменение видимости иконки скролла вверх страницы
+    const [showFilter, setShowFilter] = React.useState(false); //показать фильтр и скрыть баннер
+    const [category, setCategory] = React.useState(''); //фильтрация по категории Одяг/Взуття
 
     window.onscroll = () => { //отображение иконки скролла вверх страницы при прокрутке вниз на 500
         if (window.scrollY > 500) {
@@ -28,28 +32,50 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
         window.scrollTo(0, 0);
     }
 
+    function changeAdditional(text) { //фильтр по дополнительным акциям
+        setGoodsTitle(text);
+        setCategory(''); //очистка фильтра категории
+    }
+
+    function onFilter() {
+        setShowFilter(!showFilter);
+    }
+
     return (
     <div className="content">
         <NavBar 
         onChangeSearch = {(searchValue) => setGoodsTitle(searchValue)}
+        setCategory = {(category) => setCategory(category)}
+        showFilter = {() => onFilter()}
+        dropFilter = {() => setFilterData({
+            cost: [0, 5000],
+            category: "",
+            size: "",
+            gender: "",
+            brands: ""
+        })}
+        dropLimit = {() => setItemLimit(9)}
         />
-        <Banner />
+        {showFilter && <FilterBar
+            applyFilter = {(data) => setFilterData(data)}
+        />}
+        {!showFilter && <Banner />}
         <div className="content__hotOffers">
             <div
-            className={(goodsTitle==='розпродаж') ? 'content_activeHotOffers' : ''} 
-            onClick={() => setGoodsTitle('Розпродаж')}
+            className={(goodsTitle==='Розпродаж') ? 'content_activeHotOffers' : ''} 
+            onClick={() => changeAdditional('Розпродаж')}
             ><p>Розпродаж</p></div>
             <div
-            className={(goodsTitle==='нова колекція') ? 'content_activeHotOffers' : ''}
-            onClick={() => setGoodsTitle('Нова колекція')}
+            className={(goodsTitle==='Нова колекція') ? 'content_activeHotOffers' : ''}
+            onClick={() => changeAdditional('Нова колекція')}
             ><p>Нова колекція</p></div>
             <div
-            className={(goodsTitle==='хіт продажів') ? 'content_activeHotOffers' : ''}
-            onClick={() => setGoodsTitle('Хіт продажів')}
+            className={(goodsTitle==='Хіт продажів') ? 'content_activeHotOffers' : ''}
+            onClick={() => changeAdditional('Хіт продажів')}
             ><p>Хіт продажів</p></div>
             <div
             className={(goodsTitle==='') ? 'content_activeHotOffers' : ''}
-            onClick={() => setGoodsTitle('')}
+            onClick={() => changeAdditional('')}
             ><p>Всі пропозиції</p></div>
         </div>
         <h2><div></div> {goodsTitle ? `${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
@@ -66,7 +92,7 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
                     favorites = {favorites}
                     />)
                 : //или если поиск / акции активны то грузить все товары в зависимости от поиска
-                    allGoods.filter(filterGoodsCondition).map((obj) => <GoodsItem
+                    allGoods.filter(filterGoodsCondition).filter(item => item.category.includes(category)).map((obj) => <GoodsItem
                     key = {obj.id}
                     id = {obj.id}
                     name = {obj.name}

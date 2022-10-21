@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-bootstrap/Carousel';
 
 import './Admin.css';
@@ -31,6 +32,8 @@ function Admin() {
 
     const [isLoad, setIsLoad] = React.useState(false); //загрузчик на время запросов на сервер
 
+    const history = useNavigate(); //для перехода на главную в случае ошибки при загрузке данных с сервера
+
     const bookmarks = ['Товари', 'Розділіи', 'Акції', 'Банер']; //вкладки в админ. панели
     const goodsSizesArr = [ //типы размеров для одежды/обуви...
         ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
@@ -46,6 +49,8 @@ function Admin() {
     const [checkedSizes, setCheckedSizes] = React.useState([]);
     const [goodsImage, setGoodsImage] = React.useState("");
     const [imageCounter, setImageCounter] = React.useState(1);
+    const [gender, setGender] = React.useState("");
+    const [brands, setBrands] = React.useState("");
     const [additional, setAdditional] = React.useState("");
 
     const [goods, setGoods] = React.useState([0]); //все товары (подгружается от сервера)
@@ -55,14 +60,14 @@ function Admin() {
     React.useEffect(() => { //подгрузка товаров от сервера
         async function getData() {
             try {
-                await axios.get('http://localhost:9999/goods').then(res => setGoods(res.data));
+                await axios.get('http://185.237.204.125:9999/goods').then(res => setGoods(res.data));
                 setIsLoad(true); //отключение лоадера после загрузки товаров
             } catch (error) {
-                alert('Помилочка! Перезавантажте сторінку.');
+                history('/'); //переход на главную при ошибке
             }
         }
         getData();
-    }, []);
+    }, [history]);
 
     function clearAll() { //функция очистки всех полей
         setGoodsName("");
@@ -96,19 +101,22 @@ function Admin() {
         category: goodsCategory,
         size: checkedSizes,
         goodsImage: [...Array(Number(imageCounter)+1).keys()].slice(1).map(obj => `/img/goods/${goodsImage}/${obj}.jpg`),
+        gender: gender,
+        brands: brands,
         additional: additional
     }
     async function postNewGoods() { //изменение/добавление нового товара и получение обновленного списка всех товаров
         setIsLoad(false); //активация загрузчика
         try {
             goods.map(obj => obj.id).includes(Number(goodsItem.id)) ?
-                await axios.put(`http://localhost:9999/goods/${goodsItem.id}`, goodsItem) :
-                await axios.post('http://localhost:9999/goods', goodsItem);
-                await axios.get('http://localhost:9999/goods').then(res => setGoods(res.data));
+                await axios.put(`http://185.237.204.125:9999/goods/${goodsItem.id}`, goodsItem) :
+                await axios.post('http://185.237.204.125:9999/goods', goodsItem);
+                await axios.get('http://185.237.204.125:9999/goods').then(res => setGoods(res.data));
             setIsLoad(true); //отключение загрузчика
         } catch(error) {
             alert('Помилочка! Перезавантажте сторінку.');
         }
+        console.log(goodsItem);
         setGoodsId(''); //очистка поля id
         setBestId("______"); //очистка поля рекомендованого id
         clearAll(); //очистка полей
@@ -116,9 +124,9 @@ function Admin() {
     async function deleteGoods() { //удаление товара и получение обновленного списка всех товаров
         setIsLoad(false); //активация загрузчика
         try {
-            await axios.delete(`http://localhost:9999/goods/${goodsId}`);
+            await axios.delete(`http://185.237.204.125:9999/goods/${goodsId}`);
             setIsLoad(true); //отключение загрузчика
-            await axios.get('http://localhost:9999/goods').then(res => setGoods(res.data));
+            await axios.get('http://185.237.204.125:9999/goods').then(res => setGoods(res.data));
         } catch(error) {
             alert('Помилочка! Перезавантажте сторінку.');
         }
@@ -137,6 +145,8 @@ function Admin() {
             setCheckedSizes(itemById.size);
             setGoodsImage(itemById.goodsImage[0].slice(11).slice(0, -6)); //обрезаем адрес картинки чтобы осталось только название папки для отображения картинки в примере (заморочка связана с удобством добавления)
             setImageCounter(itemById.goodsImage.length);
+            setGender(itemById.gender);
+            setBrands(itemById.brands);
             setAdditional(itemById.additional);
         } else {
             clearAll(); //очистка всех полей при отсутствии товара с указаннм id
@@ -196,6 +206,25 @@ function Admin() {
                             <p>/img/goods/</p>
                             <input className="adminPanel__goodsImage" type="text" placeholder='Назва папки' onChange={event => setGoodsImage(event.target.value)} value={goodsImage}/>
                             <input className="adminPanel__count" type="number" onChange={event => event.target.value>=1 && setImageCounter(event.target.value)} value={imageCounter}/>
+                        </div>
+                        <div className="adminPanel__categoryBlock">
+                            <h4>Стать:</h4>
+                            <select name="adminPanel__category" onChange={event => setGender(event.target.value)} value={gender}>
+                                <option value=""></option>
+                                <option value="Унісекс">Унісекс</option>
+                                <option value="Чоловіче">Чоловіче</option>
+                                <option value="Жіноче">Жіноче</option>
+                            </select>
+                        </div>
+                        <div className="adminPanel__categoryBlock">
+                            <h4>Бренд:</h4>
+                            <select name="adminPanel__category" onChange={event => setBrands(event.target.value)} value={brands}>
+                                <option value=""></option>
+                                <option value="Adidas">Adidas</option>
+                                <option value="Nike">Nike</option>
+                                <option value="Balenciaga">Balenciaga</option>
+                                <option value="Fila">Fila</option>
+                            </select>
                         </div>
                         <div className="adminPanel__categoryBlock">
                             <h4>Додтково:</h4>

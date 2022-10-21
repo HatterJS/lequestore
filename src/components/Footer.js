@@ -21,11 +21,10 @@ function Footer() {
                 </ul>
                 <ul>
                     <li>Клієнтам</li>
-                    <li>Про магазин</li>
-                    <li>Доставка і оплата</li>
-                    <li>Підібрати розмір</li>
-                    <li>Обмін і повернення</li>
-                    <li>FAQ</li>
+                    <li><Link to='/information' state={{id: 1}}>Про магазин</Link></li>
+                    <li><Link to='/information' state={{id: 2}}>Доставка і оплата</Link></li>
+                    <li><Link to='/information' state={{id: 3}}>Підібрати розмір</Link></li>
+                    <li><Link to='/information' state={{id: 4}}>Обмін і повернення</Link></li>
                 </ul>
                 <ul>
                     <li>Наші бренди</li>
