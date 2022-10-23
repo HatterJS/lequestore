@@ -14,7 +14,7 @@ const scrollTopSVG = <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
 </svg>
 
 
-function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setItemLimit, setFilterData}) {
+function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition, isLoad, favorites, setFavorites, setItemLimit, setFilterData, dropFilter}) {
 
     const [scrollTopClass, setScrollTopClass] = React.useState(true); //изменение видимости иконки скролла вверх страницы
     const [showFilter, setShowFilter] = React.useState(false); //показать фильтр и скрыть баннер
@@ -39,6 +39,7 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
 
     function onFilter() {
         setShowFilter(!showFilter);
+
     }
 
     return (
@@ -47,20 +48,19 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
         onChangeSearch = {(searchValue) => setGoodsTitle(searchValue)}
         setCategory = {(category) => setCategory(category)}
         showFilter = {() => onFilter()}
-        dropFilter = {() => setFilterData({
-            cost: [0, 5000],
-            category: "",
-            size: "",
-            gender: "",
-            brands: ""
-        })}
-        dropLimit = {() => setItemLimit(9)}
         />
         {showFilter && <FilterBar
-            applyFilter = {(data) => setFilterData(data)}
+            applyFilter = {(filterData) => setFilterData(filterData)}
+            showFilter = {() => onFilter()}
+            dropFilter = {() => dropFilter()}
+            dropLimit = {() => setItemLimit(9)}
         />}
         {!showFilter && <Banner />}
         <div className="content__hotOffers">
+            <div
+            className={(goodsTitle==='') ? 'content_activeHotOffers' : ''}
+            onClick={() => changeAdditional('')}
+            ><p>Всі пропозиції</p></div>
             <div
             className={(goodsTitle==='Розпродаж') ? 'content_activeHotOffers' : ''} 
             onClick={() => changeAdditional('Розпродаж')}
@@ -73,10 +73,6 @@ function Home ({goods, allGoods, goodsTitle, setGoodsTitle, filterGoodsCondition
             className={(goodsTitle==='Хіт продажів') ? 'content_activeHotOffers' : ''}
             onClick={() => changeAdditional('Хіт продажів')}
             ><p>Хіт продажів</p></div>
-            <div
-            className={(goodsTitle==='') ? 'content_activeHotOffers' : ''}
-            onClick={() => changeAdditional('')}
-            ><p>Всі пропозиції</p></div>
         </div>
         <h2><div></div> {goodsTitle ? `${goodsTitle}` : 'Всі пропозиції'} <div></div></h2>
         <div className="content__goodsBlock">

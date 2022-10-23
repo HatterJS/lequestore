@@ -34,7 +34,7 @@ function Address(props) {
                         <p>067 9766 777 - Вайбер</p>
                     </div>
                 </div>
-                <div className='addressBlock__favoriteCart'>
+                <div className='addressBlock__favoriteCart unselectable'>
                     <div className="addressBlock__favoriteBlock">                    
                         <Link to = "/favorite">
                             <div className='addressBlock__favorite'>{addToFavoriteSVG}

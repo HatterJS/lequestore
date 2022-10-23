@@ -8,7 +8,7 @@ address {
 body {
     margin: 0;
     padding: 0;
-    min-width: 450px;
+    min-width: 390px;
 }
 
 * {
@@ -56,3 +56,12 @@ h2 {font-size: 1.4em;}
 h3 {font-size: 1.2em;}
 h4 {font-size: 1em;}
 h5 {font-size: 0.8em;}
+
+@media (max-width: 500px) {
+    h1 {font-size: 1.4em;}
+    h2 {font-size: 1.2em;}
+    h3 {font-size: 1em;}
+    h4 {font-size: 0.8em;}
+    h5 {font-size: 0.6em;}
+    p {line-height: 1.1;}
+}

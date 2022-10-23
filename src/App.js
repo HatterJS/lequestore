@@ -14,23 +14,33 @@ import Footer from './components/Footer';
 import './css/App.css';
 
 function App() {
+  
+  const defaultFilterData = { //установка фильтра по умолчанию
+    cost: [0, 5000],
+    category: "",
+    size: "",
+    gender: "",
+    brands: ""
+  };
 
   const [quickCart, setQuickCart] = React.useState(false); //отображение/скрытие корзины
   const [goods, setGoods] = React.useState([]); //отображение товаров на главной (пагинация)
   const [allGoods, setAllGoods] = React.useState([]); //перечень всех товаров
   const [goodsTitle, setGoodsTitle] = React.useState(''); //заголовок блока товаров
-  const [filterData, setFilterData] = React.useState(
-    {
-        cost: [0, 5000],
-        category: "",
-        size: "",
-        gender: "",
-        brands: ""
-    });
+  const [filterData, setFilterData] = React.useState(defaultFilterData); //параметры фильтрации
 
   const [itemLimit, setItemLimit] = React.useState(9);
 
   const [isLoad, setIsLoad] = React.useState(false);
+  
+  const [favorites, setFavorites] = React.useState(JSON.parse(localStorage.getItem('favorites'))||[]); //получение избранного из локалсторедж или создание пустого массива
+  const [cartItems, setCartItems] = React.useState(JSON.parse(localStorage.getItem('cart'))||[]); //получение корзины из локалсторедж или создание пустого массива
+
+  React.useEffect(() => {
+    localStorage.setItem('filter', JSON.stringify(filterData)); //создание в локалсторедж фильтра по умолчанию
+    localStorage.setItem('favorites', JSON.stringify(favorites)); //запись избранного в локалсторедж
+    localStorage.setItem('cart', JSON.stringify(cartItems)); //запись корзины в локалсторедж
+  }, [filterData, favorites, cartItems]);
 
   React.useEffect(() => { //подгрузка товаров с учетом фильтрации и пагинации
     async function getData () {
@@ -61,12 +71,7 @@ function App() {
       item.brands.toLowerCase().includes(goodsTitle.toLowerCase())||
       item.additional.toLowerCase().includes(goodsTitle.toLowerCase())||
       item.name.toLowerCase().includes(goodsTitle.toLowerCase()));
-  }  
-
-  const [favorites, setFavorites] = React.useState(JSON.parse(localStorage.getItem('favorites'))||[]);
-  const [cartItems, setCartItems] = React.useState(JSON.parse(localStorage.getItem('cart'))||[]);
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-  localStorage.setItem('cart', JSON.stringify(cartItems));
+  }
 
   return (
     <div className='wrapper'>
@@ -92,7 +97,8 @@ function App() {
             favorites = {favorites}
             setFavorites = {(item) => setFavorites(item)}
             setItemLimit = {(value) => setItemLimit(value)}
-            setFilterData = {(data) => setFilterData(data)}
+            setFilterData = {(filterData) => setFilterData(filterData)}
+            dropFilter = {() => setFilterData(defaultFilterData)}
           />}
         />
         <Route path = '/favorite' element = {<Favorite

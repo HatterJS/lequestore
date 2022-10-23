@@ -8,9 +8,12 @@ $transition:  all 0.2s ease-in-out;
     margin: 0 auto;
     margin-top: 10px;
     border: $borderBar;
-    border-radius: 20px;
+    // border-radius: 20px;
     background-color: rgba(240, 240, 240, 0.7);
     padding: 10px;
+    position: sticky;
+    top: 45px;
+    z-index: 15;
     h4 {
         margin-bottom: 5px;
     }
@@ -77,15 +80,22 @@ $transition:  all 0.2s ease-in-out;
             }
         }
     }
-    .acceptButton {
-        width: fit-content;
-        margin-left: 10px;
-        font-size: 12px;
-        padding: 10px;
-        &:active {
-            background-color: rgb(242, 255, 225);
-            box-shadow: 1px 1px 2px rgb(100, 100, 100) inset;
-            color: gray;
+    .filterBar__buttonsBlock {
+        display: flex;
+        flex-direction: column;
+        flex: 0;
+        min-width: fit-content;
+        padding: 0;
+        // margin-left: 10px;
+        .acceptButton, .cancelButton {
+            flex: 1 1 auto;
+            font-size: 12px;
+            padding: 10px;
+            &:active {
+                background-color: rgb(242, 255, 225);
+                box-shadow: 1px 1px 2px rgb(100, 100, 100) inset;
+                color: gray;
+            }
         }
     }
 }

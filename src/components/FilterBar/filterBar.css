@@ -7,9 +7,11 @@
   margin: 0 auto;
   margin-top: 10px;
   border: 1px solid rgba(64, 64, 64, 0.2);
-  border-radius: 20px;
   background-color: rgba(240, 240, 240, 0.7);
   padding: 10px;
+  position: sticky;
+  top: 45px;
+  z-index: 15;
 }
 .filterBar h4 {
   margin-bottom: 5px;
@@ -93,15 +95,30 @@
 .filterBar .filterBar__size .filterBar__size-option input::before {
   content: attr(label);
 }
-.filterBar .acceptButton {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin-left: 10px;
+.filterBar .filterBar__buttonsBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 0;
+      -ms-flex: 0;
+          flex: 0;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  padding: 0;
+}
+.filterBar .filterBar__buttonsBlock .acceptButton, .filterBar .filterBar__buttonsBlock .cancelButton {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
   font-size: 12px;
   padding: 10px;
 }
-.filterBar .acceptButton:active {
+.filterBar .filterBar__buttonsBlock .acceptButton:active, .filterBar .filterBar__buttonsBlock .cancelButton:active {
   background-color: rgb(242, 255, 225);
   -webkit-box-shadow: 1px 1px 2px rgb(100, 100, 100) inset;
           box-shadow: 1px 1px 2px rgb(100, 100, 100) inset;

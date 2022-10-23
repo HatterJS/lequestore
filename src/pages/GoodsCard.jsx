@@ -102,7 +102,7 @@ function GoodsCard(props) {
                         </div>
                         <div className="goodsCard__order">
                             <div className="goodsCard__name">
-                                <h2>{goodsItem.name}</h2>
+                                <h1>{goodsItem.name}</h1>
                             </div>
                             <div className="goodsCard__cost">
                                 <p>Ціна: {goodsItem.cost} грн.</p>

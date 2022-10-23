@@ -586,6 +586,26 @@ nav {
 .navBar ul.dropdown svg {
   margin-left: 5px;
 }
+.navBar .navBar__filterButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 15px;
+  border-radius: 5px;
+  border-right: 1px solid rgba(64, 64, 64, 0.2);
+  border-left: 1px solid rgba(64, 64, 64, 0.2);
+  font-weight: 500;
+  cursor: pointer;
+}
+.navBar .navBar__filterButton:hover {
+  background-color: rgba(64, 64, 64, 0.1);
+  -webkit-box-shadow: 1px 1px 2px rgba(64, 64, 64, 0.2) inset;
+          box-shadow: 1px 1px 2px rgba(64, 64, 64, 0.2) inset;
+}
 
 .navBar__searchForm {
   display: -webkit-box;
@@ -853,6 +873,8 @@ footer .footer__ovner a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   margin-top: 5px;
 }
 .goodsCard__content .goodsCard__size .goodsCard__size-option input {
@@ -1006,20 +1028,100 @@ footer .footer__ovner a {
           flex: 1 1 auto;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 910px) {
   header, nav {
     height: auto;
   }
 
-  .topBar__mainMenu, .navBar__main-menu, .addressBlock {
+  .topBar__mainMenu, .navBar__main-menu {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
   }
 
+  .addressBlock {
+    padding: 5px;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+  }
   .addressBlock .addressBlock__contactsBlock {
-    margin: 10px;
-    width: 100%;
+    display: none;
+  }
+
+  .topBar {
+    padding: 5px;
+  }
+  .topBar .topBar__mainMenu {
+    display: none;
+  }
+
+  .navBar {
+    min-height: 40px;
+  }
+  .navBar ul.dropdown {
+    display: none;
+  }
+
+  .bannerBlock {
+    margin-top: 2px;
+  }
+  .bannerBlock .carousel-caption {
+    padding: 0;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: end;
+    bottom: 0;
+  }
+  .bannerBlock .carousel-caption p {
+    display: none;
+  }
+
+  .content__hotOffers div {
+    margin: 2px;
+    border-radius: 0;
+  }
+
+  .filterBar {
+    margin-top: 3px;
+  }
+  .filterBar .filterBar__buttonsBlock {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .filterBar .filterBar__buttonsBlock .acceptButton, .filterBar .filterBar__buttonsBlock .cancelButton {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    margin: 5px;
+  }
+
+  .goodsCard__content {
+    margin-top: 10px;
+    padding: 5px;
+  }
+  .goodsCard__content .goodsCard__image {
+    margin-right: 10px;
+  }
+  .goodsCard__content .goodsCard__size {
+    margin-top: 20px;
+  }
+  .goodsCard__content .goodsCard__size-option input {
+    margin: 3px;
+  }
+  .goodsCard__content .goodsCard__accept {
+    margin-top: 20px;
+  }
+  .goodsCard__content .goodsCard__accept button {
+    margin-right: 10px;
+    padding: 5px;
+    line-height: 1.1;
+    font-size: 14px;
   }
 }

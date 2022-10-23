@@ -5,7 +5,14 @@ const arrowSVG = <svg width="12" height="7" viewBox="0 0 12 7">
 <path d="M1 1L6.26316 6L11 1" stroke="#404040" fill="none"/></svg>
 
 function NavBar(props) {
-    const [onClickFilter, setOnClickFilter] = React.useState(false);
+    
+    const defaultFilterData = { //установка фильтра по умолчанию
+        cost: [0, 5000],
+        category: "",
+        size: "",
+        gender: "",
+        brands: ""
+    };
     
     const onChangeSearchInput = (event) => {
         event.target.value ? props.onChangeSearch(event.target.value) : props.onChangeSearch('');
@@ -19,9 +26,10 @@ function NavBar(props) {
 
     function showFilter() {
         props.showFilter();
-        onClickFilter && props.dropLimit();
-        onClickFilter && props.dropFilter();
-        setOnClickFilter(!onClickFilter);
+    }
+
+    function filterStatus() {
+        return localStorage.getItem('filter')===JSON.stringify(defaultFilterData);
     }
 
     return(
@@ -82,8 +90,8 @@ function NavBar(props) {
                     <li>Фігурки</li>
                 </ul>
                 </li>
-                <li style={onClickFilter ? {backgroundColor: "rgb(255, 245, 170)", boxShadow: "1px 1px 2px grey inset", borderRadius: "5px"} : {backgroundColor: ""}} onClick={showFilter}>ФІЛЬТР</li>
             </ul>
+            <div className='navBar__filterButton unselectable' style={!filterStatus() ? {backgroundColor: "rgb(255, 245, 170)"} : {backgroundColor: ""}} onClick={showFilter}>ФІЛЬТР</div>
             <div className='navBar__searchForm'>
                 <input onChange={onChangeSearchInput} name='search' placeholder='Пошук...' type="search" maxLength={40} />
                 <div className='navBar__searchIco'>
