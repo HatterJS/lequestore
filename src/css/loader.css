@@ -120,33 +120,33 @@
 }
 @-webkit-keyframes renderEye02 {
   0% {
-    -webkit-box-shadow: 1px 1px 2x rgb(120, 120, 120);
-            box-shadow: 1px 1px 2x rgb(120, 120, 120);
+    -webkit-box-shadow: 1px 1px 2px rgb(120, 120, 120);
+            box-shadow: 1px 1px 2px rgb(120, 120, 120);
     border-radius: 10px;
   }
   25% {
-    -webkit-box-shadow: 1px -1px 2x rgb(120, 120, 120);
-            box-shadow: 1px -1px 2x rgb(120, 120, 120);
+    -webkit-box-shadow: 1px -1px 2px rgb(120, 120, 120);
+            box-shadow: 1px -1px 2px rgb(120, 120, 120);
     border-radius: 10px;
     left: 30px;
   }
   50% {
-    -webkit-box-shadow: -1px -1px 2x rgb(120, 120, 120);
-            box-shadow: -1px -1px 2x rgb(120, 120, 120);
+    -webkit-box-shadow: -1px -1px 2px rgb(120, 120, 120);
+            box-shadow: -1px -1px 2px rgb(120, 120, 120);
     -webkit-transform: rotate(180deg);
             transform: rotate(180deg);
     border-radius: 50%;
     left: 35px;
   }
   75% {
-    -webkit-box-shadow: -1px 1px 2x rgb(120, 120, 120);
-            box-shadow: -1px 1px 2x rgb(120, 120, 120);
+    -webkit-box-shadow: -1px 1px 2px rgb(120, 120, 120);
+            box-shadow: -1px 1px 2px rgb(120, 120, 120);
     border-radius: 10px;
     left: 30px;
   }
   100% {
-    -webkit-box-shadow: 1px 1px 2x rgb(120, 120, 120);
-            box-shadow: 1px 1px 2x rgb(120, 120, 120);
+    -webkit-box-shadow: 1px 1px 2px rgb(120, 120, 120);
+            box-shadow: 1px 1px 2px rgb(120, 120, 120);
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
     border-radius: 10px;
@@ -154,33 +154,33 @@
 }
 @keyframes renderEye02 {
   0% {
-    -webkit-box-shadow: 1px 1px 2x rgb(120, 120, 120);
-            box-shadow: 1px 1px 2x rgb(120, 120, 120);
+    -webkit-box-shadow: 1px 1px 2px rgb(120, 120, 120);
+            box-shadow: 1px 1px 2px rgb(120, 120, 120);
     border-radius: 10px;
   }
   25% {
-    -webkit-box-shadow: 1px -1px 2x rgb(120, 120, 120);
-            box-shadow: 1px -1px 2x rgb(120, 120, 120);
+    -webkit-box-shadow: 1px -1px 2px rgb(120, 120, 120);
+            box-shadow: 1px -1px 2px rgb(120, 120, 120);
     border-radius: 10px;
     left: 30px;
   }
   50% {
-    -webkit-box-shadow: -1px -1px 2x rgb(120, 120, 120);
-            box-shadow: -1px -1px 2x rgb(120, 120, 120);
+    -webkit-box-shadow: -1px -1px 2px rgb(120, 120, 120);
+            box-shadow: -1px -1px 2px rgb(120, 120, 120);
     -webkit-transform: rotate(180deg);
             transform: rotate(180deg);
     border-radius: 50%;
     left: 35px;
   }
   75% {
-    -webkit-box-shadow: -1px 1px 2x rgb(120, 120, 120);
-            box-shadow: -1px 1px 2x rgb(120, 120, 120);
+    -webkit-box-shadow: -1px 1px 2px rgb(120, 120, 120);
+            box-shadow: -1px 1px 2px rgb(120, 120, 120);
     border-radius: 10px;
     left: 30px;
   }
   100% {
-    -webkit-box-shadow: 1px 1px 2x rgb(120, 120, 120);
-            box-shadow: 1px 1px 2x rgb(120, 120, 120);
+    -webkit-box-shadow: 1px 1px 2px rgb(120, 120, 120);
+            box-shadow: 1px 1px 2px rgb(120, 120, 120);
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
     border-radius: 10px;
