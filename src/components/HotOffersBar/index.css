@@ -1,0 +1,45 @@
+.content__hotOffers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 1090px;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1090px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.content__hotOffers li {
+  text-align: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  font-weight: 500;
+  text-transform: uppercase;
+  background: rgb(243, 243, 243);
+  border: 1px solid rgba(64, 64, 64, 0.2);
+  border-radius: 0 0 10px 10px;
+  min-width: 220px;
+  margin: 10px 5px;
+  padding: 8px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.content__hotOffers li:hover {
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+  -webkit-box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
+          box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
+  background: rgb(255, 245, 170);
+}
+.content__hotOffers .content_activeHotOffers {
+  background: rgb(255, 245, 170);
+}

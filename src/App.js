@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Home from './pages/Home/Home';
 import Favorite from './pages/Favorite';
@@ -15,20 +16,11 @@ import NotFound from './pages/NonFound';
 import './css/App.css';
 
 function App() {
-  const defaultFilterData = {
-    //установка фильтра по умолчанию
-    cost: [0, 5000],
-    category: '',
-    size: '',
-    gender: '',
-    brands: ''
-  };
-
   const [quickCart, setQuickCart] = React.useState(false); //отображение/скрытие корзины
   const [goods, setGoods] = React.useState([]); //отображение товаров на главной (пагинация)
   const [allGoods, setAllGoods] = React.useState([]); //перечень всех товаров
-  const [goodsTitle, setGoodsTitle] = React.useState(''); //заголовок блока товаров
-  const [filterData, setFilterData] = React.useState(defaultFilterData); //параметры фильтрации
+  //get filter from Redux
+  const { filter } = useSelector((state) => state.filter);
 
   const [itemLimit, setItemLimit] = React.useState(9);
 
@@ -40,17 +32,20 @@ function App() {
   const [cartItems, setCartItems] = React.useState(JSON.parse(localStorage.getItem('cart')) || []); //получение корзины из локалсторедж или создание пустого массива
 
   React.useEffect(() => {
-    localStorage.setItem('filter', JSON.stringify(filterData)); //создание в локалсторедж фильтра по умолчанию
     localStorage.setItem('favorites', JSON.stringify(favorites)); //запись избранного в локалсторедж
     localStorage.setItem('cart', JSON.stringify(cartItems)); //запись корзины в локалсторедж
-  }, [filterData, favorites, cartItems]);
+  }, [
+    // filterData,
+    favorites,
+    cartItems
+  ]);
 
   React.useEffect(() => {
     //подгрузка товаров с учетом фильтрации и пагинации
     async function getData() {
       try {
         await axios
-          .post(`http://185.237.204.125:9999/goods?page=1&limit=${itemLimit}`, filterData)
+          .post(`http://185.237.204.125:9999/goods?page=1&limit=${itemLimit}`, filter)
           .then((res) => setGoods(res.data));
         setIsLoad(true);
       } catch (error) {
@@ -58,7 +53,7 @@ function App() {
       }
     }
     getData();
-  }, [itemLimit, filterData]);
+  }, [itemLimit, filter]);
 
   React.useEffect(() => {
     //загрузка всех товаров с бека для поиска и акционных предложений
@@ -72,14 +67,14 @@ function App() {
     getData();
   }, []);
 
-  const filterGoodsCondition = (item) => {
-    return (
-      item.gender.toLowerCase().includes(goodsTitle.toLowerCase()) ||
-      item.brands.toLowerCase().includes(goodsTitle.toLowerCase()) ||
-      item.additional.toLowerCase().includes(goodsTitle.toLowerCase()) ||
-      item.name.toLowerCase().includes(goodsTitle.toLowerCase())
-    );
-  };
+  // const filterGoodsCondition = (item) => {
+  //   return (
+  //     item.gender.toLowerCase().includes(goodsTitle.toLowerCase()) ||
+  //     item.brands.toLowerCase().includes(goodsTitle.toLowerCase()) ||
+  //     item.additional.toLowerCase().includes(goodsTitle.toLowerCase()) ||
+  //     item.name.toLowerCase().includes(goodsTitle.toLowerCase())
+  //   );
+  // };
 
   return (
     <div className="wrapper">
@@ -99,15 +94,13 @@ function App() {
             <Home
               goods={goods}
               allGoods={allGoods}
-              goodsTitle={goodsTitle}
-              setGoodsTitle={setGoodsTitle}
-              filterGoodsCondition={filterGoodsCondition}
+              // goodsTitle={goodsTitle}
+              // setGoodsTitle={setGoodsTitle}
+              // filterGoodsCondition={filterGoodsCondition}
               isLoad={isLoad}
               favorites={favorites}
               setFavorites={(item) => setFavorites(item)}
               setItemLimit={(value) => setItemLimit(value)}
-              setFilterData={(filterData) => setFilterData(filterData)}
-              dropFilter={() => setFilterData(defaultFilterData)}
             />
           }
         />

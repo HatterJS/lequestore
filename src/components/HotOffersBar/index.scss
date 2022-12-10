@@ -1,0 +1,45 @@
+$borderBar: 1px solid rgba(64, 64, 64, 0.2);
+$transition:  all 0.2s ease-in-out;
+$maxWidth: 1090px;
+
+@mixin flexCenter {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+@mixin menuStyle {
+    @include flexCenter();
+    justify-content: space-between;
+    max-width: $maxWidth;
+    width: 100%;
+    margin: 0 auto;
+}
+
+// HOT OFFERS
+.content__hotOffers {
+    @include menuStyle();
+    max-width: $maxWidth;
+    flex-wrap: wrap;
+    li {
+        text-align: center;
+        flex: 1;
+        font-weight: 500;
+        text-transform: uppercase;
+        background: rgb(243, 243, 243);
+        border: $borderBar;
+        border-radius: 0 0 10px 10px;
+        min-width: 220px;
+        margin: 10px 5px;
+        padding: 8px;
+        transition: $transition;
+        cursor: pointer;
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 1px 1px 1px rgba(64, 64, 64, 0.5);
+            background: rgb(255, 245, 170);
+        }
+    }
+    .content_activeHotOffers {
+        background: rgb(255, 245, 170);
+    }
+}
