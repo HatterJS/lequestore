@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+export const initialState = {
   search: 'Всі пропозиції',
   filter: {
     cost: [0, 5000],
@@ -17,7 +17,6 @@ const filterSlice = createSlice({
   reducers: {
     setSearch: (state, action) => {
       state.search = action.payload || 'Всі пропозиції';
-      console.log(action.payload);
     },
     setFilter: (state, action) => {
       state.filter = action.payload;

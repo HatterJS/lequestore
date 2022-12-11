@@ -40,7 +40,6 @@ function Home({
   const { search } = useSelector((state) => state.filter);
   const [scrollTopClass, setScrollTopClass] = React.useState(true); //изменение видимости иконки скролла вверх страницы
   const [showFilter, setShowFilter] = React.useState(false); //показать фильтр и скрыть баннер
-  const [category, setCategory] = React.useState(''); //фильтрация по категории Одяг/Взуття
 
   window.onscroll = () => {
     //отображение иконки скролла вверх страницы при прокрутке вниз на 500
@@ -54,12 +53,6 @@ function Home({
   function scrollTop() {
     //скроллинг вверх страницы по нажатию иконки
     window.scrollTo(0, 0);
-  }
-
-  function changeAdditional(text) {
-    //фильтр по дополнительным акциям
-    // setGoodsTitle(text);
-    setCategory(''); //очистка фильтра категории
   }
 
   function onFilter() {
@@ -77,7 +70,7 @@ function Home({
 
   return (
     <div className="content">
-      <NavBar setCategory={(category) => setCategory(category)} showFilter={() => onFilter()} />
+      <NavBar showFilter={() => onFilter()} />
       {showFilter && <FilterBar />}
       {!showFilter && <Banner />}
       <HotOffersBar />
@@ -102,7 +95,6 @@ function Home({
             //или если поиск / акции активны то грузить все товары в зависимости от поиска
             allGoods
               .filter(filterGoodsCondition)
-              .filter((item) => item.category.includes(category))
               .map((obj) => (
                 <GoodsItem
                   key={obj.id}

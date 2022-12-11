@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setSearch } from '../redux/slices/filterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { initialState, setFilter, setSearch } from '../redux/slices/filterSlice';
 
 const arrowSVG = (
   <svg width="12" height="7" viewBox="0 0 12 7">
@@ -11,24 +11,25 @@ const arrowSVG = (
 function NavBar(props) {
   //create dispatch for redux
   const dispatch = useDispatch();
-
-  const defaultFilterData = {
-    //установка фильтра по умолчанию
-    cost: [0, 5000],
-    category: '',
-    size: '',
-    gender: '',
-    brands: ''
-  };
+  //get filter from Redux
+  const { filter } = useSelector((state) => state.filter);
+  let filterData = JSON.parse(JSON.stringify(filter));
 
   const onChangeSearchInput = (event) => {
-    props.setCategory(''); //сброс категории для поиска по всем товарам
-    dispatch(setSearch(event.target.value)); //Redux
+    dispatch(setSearch(event.target.value));
   };
 
-  function goodsFilter(event, category) {
-    props.setCategory(category); //добавить в фильтр категорию Одяг/Взуття
-    dispatch(setSearch(event.target.innerText));
+  function goodsFilterGender(event, category) {
+    filterData = JSON.parse(JSON.stringify(initialState.filter));
+    filterData.category = category;
+    filterData.gender = event.target.innerText;
+    dispatch(setFilter(filterData));
+  }
+  function goodsFilterBrand(event, gender) {
+    filterData = JSON.parse(JSON.stringify(initialState.filter));
+    filterData.gender = gender;
+    filterData.brands = event.target.innerText;
+    dispatch(setFilter(filterData));
   }
 
   function showFilter() {
@@ -36,16 +37,15 @@ function NavBar(props) {
   }
 
   function filterStatus() {
-    return localStorage.getItem('filter') === JSON.stringify(defaultFilterData);
+    return JSON.stringify(filter) === JSON.stringify(initialState.filter);
   }
-
   return (
     <nav>
       <div className="navBar">
         <ul className="navBar__main-menu dropdown unselectable">
           <li>
             ОДЯГ{arrowSVG}
-            <ul onClick={(event) => goodsFilter(event, 'Одяг')}>
+            <ul onClick={(event) => goodsFilterGender(event, 'Одяг')}>
               <li>Унісекс</li>
               <li>Для чоловіків</li>
               <li>Для жінок</li>
@@ -53,21 +53,15 @@ function NavBar(props) {
           </li>
           <li>
             ВЗУТТЯ{arrowSVG}
-            <ul onClick={(event) => goodsFilter(event, 'Взуття')}>
-              <li>Adidas</li>
-              <li>Nike</li>
-              <li>Balenciaga</li>
-              <li>Prada</li>
-              <li>Puma</li>
-              <li>Fila</li>
-              <li>Reebok</li>
-              <li>Alexander Mcqueen</li>
-              <li>Native</li>
+            <ul onClick={(event) => goodsFilterGender(event, 'Взуття')}>
+              <li>Унісекс</li>
+              <li>Для чоловіків</li>
+              <li>Для жінок</li>
             </ul>
           </li>
           <li>
             ДЛЯ ЧОЛОВІКІВ{arrowSVG}
-            <ul>
+            <ul onClick={(event) => goodsFilterBrand(event, 'Для чоловіків')}>
               <li>Adidas</li>
               <li>Nike</li>
               <li>Off-white</li>
@@ -81,8 +75,10 @@ function NavBar(props) {
           </li>
           <li>
             ДЛЯ ЖІНОК{arrowSVG}
-            <ul>
+            <ul onClick={(event) => goodsFilterBrand(event, 'Для жінок')}>
               <li>Adidas</li>
+              <li>Balenciaga</li>
+              <li>Black Green</li>
               <li>Nike</li>
               <li>Off-white</li>
               <li>Prada</li>
