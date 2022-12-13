@@ -16,7 +16,6 @@ import NotFound from './pages/NonFound';
 import './css/App.css';
 
 function App() {
-  const [quickCart, setQuickCart] = React.useState(false); //отображение/скрытие корзины
   const [goods, setGoods] = React.useState([]); //отображение товаров на главной (пагинация)
   const [allGoods, setAllGoods] = React.useState([]); //перечень всех товаров
   //get filter from Redux
@@ -29,15 +28,14 @@ function App() {
   const [favorites, setFavorites] = React.useState(
     JSON.parse(localStorage.getItem('favorites')) || []
   ); //получение избранного из локалсторедж или создание пустого массива
-  const [cartItems, setCartItems] = React.useState(JSON.parse(localStorage.getItem('cart')) || []); //получение корзины из локалсторедж или создание пустого массива
 
   React.useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites)); //запись избранного в локалсторедж
-    localStorage.setItem('cart', JSON.stringify(cartItems)); //запись корзины в локалсторедж
+    // localStorage.setItem('cart', JSON.stringify(cartItems)); //запись корзины в локалсторедж
   }, [
     // filterData,
-    favorites,
-    cartItems
+    favorites
+    // cartItems
   ]);
 
   React.useEffect(() => {
@@ -67,26 +65,11 @@ function App() {
     getData();
   }, []);
 
-  // const filterGoodsCondition = (item) => {
-  //   return (
-  //     item.gender.toLowerCase().includes(goodsTitle.toLowerCase()) ||
-  //     item.brands.toLowerCase().includes(goodsTitle.toLowerCase()) ||
-  //     item.additional.toLowerCase().includes(goodsTitle.toLowerCase()) ||
-  //     item.name.toLowerCase().includes(goodsTitle.toLowerCase())
-  //   );
-  // };
-
   return (
     <div className="wrapper">
-      {quickCart && (
-        <QuickCart
-          onClose={() => setQuickCart(false)}
-          cartItems={cartItems}
-          setCartItems={setCartItems}
-        />
-      )}
+      <QuickCart />
       <Header />
-      <Address onClickCart={() => setQuickCart(true)} favorites={favorites} cartItems={cartItems} />
+      <Address favorites={favorites} />
       <Routes>
         <Route
           path="/"
@@ -94,9 +77,6 @@ function App() {
             <Home
               goods={goods}
               allGoods={allGoods}
-              // goodsTitle={goodsTitle}
-              // setGoodsTitle={setGoodsTitle}
-              // filterGoodsCondition={filterGoodsCondition}
               isLoad={isLoad}
               favorites={favorites}
               setFavorites={(item) => setFavorites(item)}
@@ -109,12 +89,8 @@ function App() {
           element={
             <Favorite favorites={favorites} setFavorites={(item) => setFavorites(item)} />
           }></Route>
-        <Route
-          path="/order"
-          element={<Order cartItems={cartItems} setCartItems={setCartItems} />}></Route>
-        <Route
-          path="/goods-card/:id"
-          element={<GoodsCard cartItems={cartItems} setCartItems={setCartItems} />}></Route>
+        <Route path="/order" element={<Order />}></Route>
+        <Route path="/goods-card/:id" element={<GoodsCard />}></Route>
         <Route path="/information/:id" element={<Information />}></Route>
         <Route path="/admin" element={<Admin />}></Route>
         <Route path="*" element={<NotFound />} />

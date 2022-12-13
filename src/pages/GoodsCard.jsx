@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Carousel from 'react-bootstrap/Carousel';
+import { useDispatch } from 'react-redux';
+import { addToCart, clearCart } from '../redux/slices/cartSlice';
 
 const sizeSVG = (
   <svg width="30" height="30" viewBox="0 0 37 37" fill="none">
@@ -14,7 +16,10 @@ const sizeSVG = (
   </svg>
 );
 
-function GoodsCard(props) {
+function GoodsCard() {
+  //dispatch for redux
+  const dispatch = useDispatch();
+
   const itemId = useParams().id; //получение id товара по ссылке
 
   const [goodsItem, setGoodsItem] = React.useState([]); //данные товара
@@ -44,7 +49,7 @@ function GoodsCard(props) {
 
   const addedToCart = () => {
     //функция добавления в корзину
-    const addToCart = {
+    const cartItem = {
       id: goodsItem.id,
       name: goodsItem.name,
       cost: goodsItem.cost,
@@ -52,24 +57,7 @@ function GoodsCard(props) {
       goodsImage: goodsItem.goodsImage[0],
       amount: goodsAmount
     };
-
-    //проверка наличия товара в корзине
-    if (
-      props.cartItems.map((obj) => obj.id).includes(goodsItem.id) &&
-      props.cartItems.map((obj) => obj.size).includes(checkedSize)
-    ) {
-      //проверка товара по id и size
-      props.setCartItems(
-        props.cartItems.map((obj) =>
-          obj.id === goodsItem.id && obj.size === checkedSize
-            ? { ...obj, amount: obj.amount + goodsAmount }
-            : obj
-        )
-      ); //если объект с совпадающими id и size есть в корзине то при добавлении увеличить счетчик товара в корзине
-    } else {
-      props.setCartItems((prev) => [...prev, addToCart]); //если объекта с совпадающими id и size нет в корзине то добавить как новый товар в корзину
-    }
-
+    dispatch(addToCart(cartItem));
     //таймер задержки после нажатия кнопки "Додати в кошик"
     setTimeCounter(3); // сек. до отключения блокировки кнопки "Додати в кошик" после нажатия
     let counter = 3; // счеьчик отключения setInterval (менять в паре со значением в setTimeCounter)
@@ -83,16 +71,8 @@ function GoodsCard(props) {
   };
 
   const oneClick = () => {
-    //покупка в один клик
-    const addToCart = {
-      id: goodsItem.id,
-      name: goodsItem.name,
-      cost: goodsItem.cost,
-      size: checkedSize,
-      goodsImage: goodsItem.goodsImage[0],
-      amount: goodsAmount
-    };
-    props.setCartItems([addToCart]);
+    dispatch(clearCart());
+    addedToCart();
   };
 
   function buttonTitle() {

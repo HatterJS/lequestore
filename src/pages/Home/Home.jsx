@@ -25,17 +25,7 @@ const scrollTopSVG = (
   </svg>
 );
 
-function Home({
-  goods,
-  allGoods,
-  // goodsTitle,
-  // setGoodsTitle,
-  // filterGoodsCondition,
-  isLoad,
-  favorites,
-  setFavorites,
-  setItemLimit
-}) {
+function Home({ goods, allGoods, isLoad, favorites, setFavorites, setItemLimit }) {
   //get search condition from Redux
   const { search } = useSelector((state) => state.filter);
   const [scrollTopClass, setScrollTopClass] = React.useState(true); //изменение видимости иконки скролла вверх страницы
