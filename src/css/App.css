@@ -1032,14 +1032,12 @@ footer .footer__ovner a {
   header, nav {
     height: auto;
   }
-
   .topBar__mainMenu, .navBar__main-menu {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
   }
-
   .addressBlock {
     padding: 5px;
     -webkit-box-pack: space-evenly;
@@ -1049,21 +1047,18 @@ footer .footer__ovner a {
   .addressBlock .addressBlock__contactsBlock {
     display: none;
   }
-
   .topBar {
     padding: 5px;
   }
   .topBar .topBar__mainMenu {
     display: none;
   }
-
   .navBar {
     min-height: 40px;
   }
   .navBar ul.dropdown {
     display: none;
   }
-
   .bannerBlock {
     margin-top: 2px;
   }
@@ -1077,12 +1072,10 @@ footer .footer__ovner a {
   .bannerBlock .carousel-caption p {
     display: none;
   }
-
   .content__hotOffers div {
     margin: 2px;
     border-radius: 0;
   }
-
   .filterBar {
     margin-top: 3px;
   }
@@ -1101,7 +1094,6 @@ footer .footer__ovner a {
             flex: 1 1 auto;
     margin: 5px;
   }
-
   .goodsCard__content {
     margin-top: 10px;
     padding: 5px;

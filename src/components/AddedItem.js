@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteFromCart, increaseAmount, decreaseAmount } from '../redux/slices/cartSlice';
+import { deleteFromFavorite } from '../redux/slices/favoriteSlice';
 
 const deleteFromCartSvg = (
   <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -17,9 +18,15 @@ const deleteFromCartSvg = (
   </svg>
 );
 
-function AddedItem({ id, name, cost, goodsImage, size, amount }) {
+function AddedItem({ id, name, cost, goodsImage, size, amount, location }) {
   //dispatch for redux
   const dispatch = useDispatch();
+
+  function deleteItem() {
+    location === 'favorite'
+      ? dispatch(deleteFromFavorite({ id }))
+      : dispatch(deleteFromCart({ id: id, size: size }));
+  }
 
   return (
     <div className="addedItem">
@@ -47,9 +54,7 @@ function AddedItem({ id, name, cost, goodsImage, size, amount }) {
           )}
         </div>
       </div>
-      <div
-        className="addedItem__deleteItemBtn"
-        onClick={() => dispatch(deleteFromCart({ id: id, size: size }))}>
+      <div className="addedItem__deleteItemBtn" onClick={deleteItem}>
         {deleteFromCartSvg}
       </div>
     </div>

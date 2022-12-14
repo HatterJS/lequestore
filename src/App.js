@@ -25,19 +25,6 @@ function App() {
 
   const [isLoad, setIsLoad] = React.useState(false);
 
-  const [favorites, setFavorites] = React.useState(
-    JSON.parse(localStorage.getItem('favorites')) || []
-  ); //получение избранного из локалсторедж или создание пустого массива
-
-  React.useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites)); //запись избранного в локалсторедж
-    // localStorage.setItem('cart', JSON.stringify(cartItems)); //запись корзины в локалсторедж
-  }, [
-    // filterData,
-    favorites
-    // cartItems
-  ]);
-
   React.useEffect(() => {
     //подгрузка товаров с учетом фильтрации и пагинации
     async function getData() {
@@ -69,7 +56,7 @@ function App() {
     <div className="wrapper">
       <QuickCart />
       <Header />
-      <Address favorites={favorites} />
+      <Address />
       <Routes>
         <Route
           path="/"
@@ -78,17 +65,11 @@ function App() {
               goods={goods}
               allGoods={allGoods}
               isLoad={isLoad}
-              favorites={favorites}
-              setFavorites={(item) => setFavorites(item)}
               setItemLimit={(value) => setItemLimit(value)}
             />
           }
         />
-        <Route
-          path="/favorite"
-          element={
-            <Favorite favorites={favorites} setFavorites={(item) => setFavorites(item)} />
-          }></Route>
+        <Route path="/favorite" element={<Favorite />}></Route>
         <Route path="/order" element={<Order />}></Route>
         <Route path="/goods-card/:id" element={<GoodsCard />}></Route>
         <Route path="/information/:id" element={<Information />}></Route>

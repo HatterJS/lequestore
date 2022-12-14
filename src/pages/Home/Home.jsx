@@ -25,7 +25,7 @@ const scrollTopSVG = (
   </svg>
 );
 
-function Home({ goods, allGoods, isLoad, favorites, setFavorites, setItemLimit }) {
+function Home({ goods, allGoods, isLoad, setItemLimit }) {
   //get search condition from Redux
   const { search } = useSelector((state) => state.filter);
   const [scrollTopClass, setScrollTopClass] = React.useState(true); //изменение видимости иконки скролла вверх страницы
@@ -70,32 +70,12 @@ function Home({ goods, allGoods, isLoad, favorites, setFavorites, setItemLimit }
       <div className="content__goodsBlock">
         {isLoad ? ( //лоадер пока товары загружаются
           search === 'Всі пропозиції' ? ( //если поиск / акции не активированы то грузить товары порциями (пагинация)
-            goods.map((obj) => (
-              <GoodsItem
-                key={obj.id}
-                id={obj.id}
-                name={obj.name}
-                cost={obj.cost}
-                goodsImage={obj.goodsImage[0]}
-                setFavorites={setFavorites}
-                favorites={favorites}
-              />
-            ))
+            goods.map((obj) => <GoodsItem key={obj.id} {...obj} goodsImage={obj.goodsImage[0]} />)
           ) : (
             //или если поиск / акции активны то грузить все товары в зависимости от поиска
             allGoods
               .filter(filterGoodsCondition)
-              .map((obj) => (
-                <GoodsItem
-                  key={obj.id}
-                  id={obj.id}
-                  name={obj.name}
-                  cost={obj.cost}
-                  goodsImage={obj.goodsImage[0]}
-                  setFavorites={setFavorites}
-                  favorites={favorites}
-                />
-              ))
+              .map((obj) => <GoodsItem key={obj.id} {...obj} goodsImage={obj.goodsImage[0]} />)
           )
         ) : (
           //лоадер

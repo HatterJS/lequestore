@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { openCart } from '../redux/slices/cartSlice';
 
-function Address(props) {
+function Address() {
   //connect dispatch for redux
   const dispatch = useDispatch();
   //get cart items from redux
   const { cart } = useSelector((state) => state.cart);
+  //get favorites from redux
+  const { favorite } = useSelector((state) => state.favorite);
 
   const addToFavoriteSVG = (
     <svg width="50" height="50" viewBox="0 0 40 40" fill="none">
@@ -91,7 +93,7 @@ function Address(props) {
               <div className="addressBlock__favorite">
                 {addToFavoriteSVG}
                 <div className="addressBlock__favoriteCounter">
-                  <p>{props.favorites.length}</p>
+                  <p>{favorite.length}</p>
                 </div>
               </div>
             </Link>

@@ -1,5 +1,7 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addToFavorite, deleteFromFavorite } from '../redux/slices/favoriteSlice';
 
 const addToFavoriteSVG = (
   <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -18,46 +20,41 @@ const addToFavoriteSVG = (
   </svg>
 );
 
-export default React.memo(function GoodsItem(props) {
+export default React.memo(function GoodsItem({ id, name, cost, goodsImage }) {
+  //dispatch for redux
+  const dispatch = useDispatch();
+  //get favorite from redux
+  const { favorite } = useSelector((state) => state.favorite);
+
   const [isFavorite, setIsFavorite] = React.useState(false);
 
   React.useEffect(() => {
-    JSON.parse(localStorage.getItem('favorites')) &&
-      setIsFavorite(
-        JSON.parse(localStorage.getItem('favorites'))
-          .map((obj) => obj.id)
-          .includes(props.id)
-      );
-  }, [props.id]);
+    setIsFavorite(favorite.some((obj) => obj.id === id));
+  }, [favorite, id]);
 
-  const addToFavorite = () => {
-    const addToFavorite = {
-      id: props.id,
-      name: props.name,
-      cost: props.cost,
-      goodsImage: props.goodsImage
+  const favoriteHandle = () => {
+    const favoriteItem = {
+      id,
+      name,
+      cost,
+      goodsImage
     };
-    !isFavorite
-      ? props.setFavorites((prev) => [...prev, addToFavorite])
-      : props.setFavorites(
-          JSON.parse(localStorage.getItem('favorites')).filter((obj) => obj.id !== props.id)
-        );
-    setIsFavorite(!isFavorite);
+    dispatch(!isFavorite ? addToFavorite(favoriteItem) : deleteFromFavorite(favoriteItem));
   };
 
   return (
     <div className="content__goodsItem">
       <div>
-        <p>{props.name}</p>
+        <p>{name}</p>
       </div>
-      <Link to={`/goods-card/${props.id}`}>
-        <img src={props.goodsImage} alt="sorry" />
+      <Link to={`/goods-card/${id}`}>
+        <img src={goodsImage} alt="sorry" />
       </Link>
       <div>
-        <p className="content__cost">{props.cost} грн.</p>
+        <p className="content__cost">{cost} грн.</p>
         <button
           className={isFavorite ? 'addedToFavoriteBtn' : 'addToFavoriteBtn'}
-          onClick={addToFavorite}>
+          onClick={favoriteHandle}>
           {addToFavoriteSVG}
         </button>
       </div>
