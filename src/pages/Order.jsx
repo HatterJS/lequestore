@@ -19,16 +19,18 @@ function Order() {
         return sum + elem;
       }, 0);
 
-  const [surname, setSurname] = React.useState('');
-  const [name, setName] = React.useState('');
-  const [phoneNumber, setPhoneNumber] = React.useState('');
-  const [deliveryType, setDeliveryType] = React.useState('');
-  const [town, setTown] = React.useState('');
-  const [department, setDepartment] = React.useState('');
-  const [address, setAddress] = React.useState('');
-  const [paymentType, setPaymentType] = React.useState('');
-  const [discontCode, setDiscontCode] = React.useState('');
-  const [message, setMessage] = React.useState('');
+  const [orderData, setOrderData] = React.useState({
+    surname: '',
+    name: '',
+    phoneNumber: '',
+    deliveryType: '',
+    town: '',
+    department: '',
+    address: '',
+    paymentType: '',
+    discontCode: '',
+    message: ''
+  });
 
   //Начало блока отправки информации в Telegram канал
   const messageToTelegram =
@@ -44,15 +46,17 @@ function Order() {
     `<b>Загальна сума: </b>${totalCost} грн.\n` +
     `<b>_______________________________</b>\n` +
     `\n` +
-    `<b>ПІБ: </b>${surname} ${name}\n` +
-    `<b>Телефон: </b>${phoneNumber}\n` +
-    `<b>Спосіб доставки: </b>${deliveryType}\n` +
-    `<b>Адреса: </b>м.${town}, ${
-      deliveryType === 'НОВА ПОШТА (до відділення)' ? '<b>№ </b>' + department : address
+    `<b>ПІБ: </b>${orderData.surname} ${orderData.name}\n` +
+    `<b>Телефон: </b>${orderData.phoneNumber}\n` +
+    `<b>Спосіб доставки: </b>${orderData.deliveryType}\n` +
+    `<b>Адреса: </b>м.${orderData.town}, ${
+      orderData.deliveryType === 'НОВА ПОШТА (до відділення)'
+        ? '<b>№ </b>' + orderData.department
+        : orderData.address
     }\n` +
-    `<b>Спосіб оплати: </b>${paymentType}\n` +
-    (discontCode && `<b>Дисконт: </b>${discontCode}\n`) +
-    (message && `<b>Повідомлення: </b>${message}\n`);
+    `<b>Спосіб оплати: </b>${orderData.paymentType}\n` +
+    (orderData.discontCode && `<b>Дисконт: </b>${orderData.discontCode}\n`) +
+    (orderData.message && `<b>Повідомлення: </b>${orderData.message}\n`);
 
   const token = '5668730868:AAFhDF_gIJiwC_yLdidxA5FN8YfGsUbq1nE';
   const chatId = '-1001657685862';
@@ -68,13 +72,18 @@ function Order() {
     } catch (error) {
       alert('Помилочка! Перезавантажте сторінку.');
     }
-    setSurname('');
-    setName('');
-    setPhoneNumber('');
-    setTown('');
-    setDepartment('');
-    setAddress('');
-    setDiscontCode('');
+    setOrderData({
+      surname: '',
+      name: '',
+      phoneNumber: '',
+      deliveryType: '',
+      town: '',
+      department: '',
+      address: '',
+      paymentType: '',
+      discontCode: '',
+      message: ''
+    });
     dispatch(clearCart());
   }
   //Конец блока отправки информации в Telegram канал
@@ -93,17 +102,17 @@ function Order() {
               className="orderContent__surname"
               type="text"
               placeholder="Прізвище"
-              onChange={(event) => setSurname(event.target.value)}
-              style={!surname ? { borderColor: '#FF824C' } : { borderColor: '' }}
-              value={surname}
+              onChange={(event) => setOrderData({ ...orderData, surname: event.target.value })}
+              style={!orderData.surname ? { borderColor: '#FF824C' } : { borderColor: '' }}
+              value={orderData.surname}
             />
             <input
               className="orderContent__name"
               type="text"
               placeholder="Ім'я"
-              onChange={(event) => setName(event.target.value)}
-              style={!name ? { borderColor: '#FF824C' } : { borderColor: '' }}
-              value={name}
+              onChange={(event) => setOrderData({ ...orderData, name: event.target.value })}
+              style={!orderData.name ? { borderColor: '#FF824C' } : { borderColor: '' }}
+              value={orderData.name}
             />
           </div>
           <h5>Телефон (по можливості з Telegram) *</h5>
@@ -112,10 +121,12 @@ function Order() {
               className="orderContent__phone"
               type="tel"
               placeholder="+38(xxx)xxx-xx-xx"
-              onChange={(event) => setPhoneNumber(event.target.value)}
-              style={phoneNumber.length < 10 ? { borderColor: '#FF824C' } : { borderColor: '' }}
+              onChange={(event) => setOrderData({ ...orderData, phoneNumber: event.target.value })}
+              style={
+                orderData.phoneNumber.length < 10 ? { borderColor: '#FF824C' } : { borderColor: '' }
+              }
               maxLength={20}
-              value={phoneNumber}
+              value={orderData.phoneNumber}
             />
           </div>
           <h5>Спосіб доставки *</h5>
@@ -123,14 +134,17 @@ function Order() {
             <select
               name="orderContent__deliveryType"
               onChange={(event) =>
-                setDeliveryType(event.target.options[event.target.selectedIndex].text)
+                setOrderData({
+                  ...orderData,
+                  deliveryType: event.target.options[event.target.selectedIndex].text
+                })
               }
-              style={!deliveryType ? { borderColor: '#FF824C' } : { borderColor: '' }}>
+              style={!orderData.deliveryType ? { borderColor: '#FF824C' } : { borderColor: '' }}>
               <option value="1"></option>
               <option value="2">НОВА ПОШТА (до відділення)</option>
               <option value="3">НОВА ПОШТА (адресна доставка)</option>
             </select>
-            {deliveryType && (
+            {orderData.deliveryType && (
               <div className="orderContent__deliveryAddress">
                 <div className="orderContent__townBlock">
                   {/* <h5>Місто</h5> */}
@@ -138,34 +152,40 @@ function Order() {
                     className="orderContent__town"
                     type="text"
                     placeholder="Місто"
-                    onChange={(event) => setTown(event.target.value)}
-                    style={!town ? { borderColor: '#FF824C' } : { borderColor: '' }}
-                    value={town}
+                    onChange={(event) => setOrderData({ ...orderData, town: event.target.value })}
+                    style={!orderData.town ? { borderColor: '#FF824C' } : { borderColor: '' }}
+                    value={orderData.town}
                   />
                 </div>
-                {deliveryType === 'НОВА ПОШТА (до відділення)' && (
+                {orderData.deliveryType === 'НОВА ПОШТА (до відділення)' && (
                   <div className="orderContent__departmentBlock">
                     {/* <h5>Відділення</h5> */}
                     <input
                       className="orderContent__department"
                       type="text"
                       placeholder="Відділення"
-                      onChange={(event) => setDepartment(event.target.value)}
-                      style={!department ? { borderColor: '#FF824C' } : { borderColor: '' }}
-                      value={department}
+                      onChange={(event) =>
+                        setOrderData({ ...orderData, department: event.target.value })
+                      }
+                      style={
+                        !orderData.department ? { borderColor: '#FF824C' } : { borderColor: '' }
+                      }
+                      value={orderData.department}
                     />
                   </div>
                 )}
-                {deliveryType === 'НОВА ПОШТА (адресна доставка)' && (
+                {orderData.deliveryType === 'НОВА ПОШТА (адресна доставка)' && (
                   <div className="orderContent__addressBlock">
                     {/* <h5>Відділення</h5> */}
                     <input
                       className="orderContent__address"
                       type="text"
                       placeholder="Адреса: вул., буд., кв."
-                      onChange={(event) => setAddress(event.target.value)}
-                      style={!address ? { borderColor: '#FF824C' } : { borderColor: '' }}
-                      value={address}
+                      onChange={(event) =>
+                        setOrderData({ ...orderData, address: event.target.value })
+                      }
+                      style={!orderData.address ? { borderColor: '#FF824C' } : { borderColor: '' }}
+                      value={orderData.address}
                     />
                   </div>
                 )}
@@ -177,9 +197,12 @@ function Order() {
             <select
               className="orderContent__paymentType"
               onChange={(event) =>
-                setPaymentType(event.target.options[event.target.selectedIndex].text)
+                setOrderData({
+                  ...orderData,
+                  paymentType: event.target.options[event.target.selectedIndex].text
+                })
               }
-              style={!paymentType ? { borderColor: '#FF824C' } : { borderColor: '' }}>
+              style={!orderData.paymentType ? { borderColor: '#FF824C' } : { borderColor: '' }}>
               <option value="1"></option>
               <option value="2">Оплата при отриманні</option>
               <option value="3">Оплата на картку PrivatBank</option>
@@ -192,34 +215,38 @@ function Order() {
               className="orderContent__discontCode"
               type="text"
               placeholder="Вкажіть код знижки"
-              onChange={(event) => setDiscontCode(event.target.value)}
-              value={discontCode}
+              onChange={(event) => setOrderData({ ...orderData, discontCode: event.target.value })}
+              value={orderData.discontCode}
             />
           </div>
           <h5>Примітка до замовлення</h5>
-          <div
-            className="orderContent__noteBlock"
-            onChange={(event) => setMessage(event.target.value)}>
+          <div className="orderContent__noteBlock">
             <textarea
               placeholder="Вкажіть додаткові побажання щодо замовлення"
               maxLength={300}
-              rows={4}></textarea>
+              rows={4}
+              onChange={(event) => setOrderData({ ...orderData, message: event.target.value })}
+              value={orderData.message}></textarea>
           </div>
           <button
             className="acceptButton"
             disabled={
               cart.length &&
-              surname &&
-              name &&
-              phoneNumber.length > 9 &&
-              deliveryType &&
-              paymentType
+              orderData.surname &&
+              orderData.name &&
+              orderData.phoneNumber.length > 9 &&
+              orderData.deliveryType &&
+              orderData.paymentType
                 ? false
                 : true
             }
             onClick={acceptOrder}>
             {cart.length
-              ? surname && name && phoneNumber.length > 9 && deliveryType && paymentType
+              ? orderData.surname &&
+                orderData.name &&
+                orderData.phoneNumber.length > 9 &&
+                orderData.deliveryType &&
+                orderData.paymentType
                 ? 'Підтвердити замовлення'
                 : 'Вкажіть дані для відправки'
               : 'Відсутні товари'}
